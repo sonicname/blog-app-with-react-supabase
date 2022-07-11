@@ -1,5 +1,5 @@
 import React from "react";
-import CommonLayout from "./components/Layouts/CommonLayout";
+import CommonLayout from "./components/layouts/CommonLayout";
 
 const App = () => {
   return (
