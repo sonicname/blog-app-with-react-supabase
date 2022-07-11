@@ -38,7 +38,9 @@ const Header = () => {
       }
     };
 
-    getUserInfo();
+    if (session) {
+      getUserInfo();
+    }
   }, []);
 
   const handleOpenMenu = () => setOpen(!open);
@@ -89,7 +91,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <NavLink to={`/${session.user?.id}`}>{user.username}</NavLink>
+              <NavLink to={`/profile/${session.user?.id}`}>Tài khoản</NavLink>
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => supabase.auth.signOut()}

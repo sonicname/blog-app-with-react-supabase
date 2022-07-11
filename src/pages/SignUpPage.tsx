@@ -1,7 +1,6 @@
 import React from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
@@ -9,17 +8,7 @@ import ErrorInput from "../components/error/ErrorInput";
 import { supabase } from "../supabase/supabase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .required("Email không được để trống!")
-    .email("Email không hợp lệ"),
-  password: yup
-    .string()
-    .required("Mật khẩu không được để trống")
-    .min(8, "Mật khẩu phải dài hơn 8 kí tự"),
-});
+import { schema } from "../utils/schema";
 
 interface IAccount {
   email?: string;

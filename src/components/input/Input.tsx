@@ -7,13 +7,21 @@ interface IProps {
   placeholder: string;
   control: Control;
   className: string;
+  defaultValue?: string;
 }
 
-const Input = ({ control, type, placeholder, name, className }: IProps) => {
+const Input = ({
+  control,
+  type,
+  placeholder,
+  name,
+  className,
+  defaultValue,
+}: IProps) => {
   const { field } = useController({
     control,
     name,
-    defaultValue: "",
+    defaultValue: defaultValue,
   });
 
   return (
