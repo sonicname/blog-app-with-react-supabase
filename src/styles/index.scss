@@ -76,8 +76,6 @@ a {
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 2rem 0;
-    text-align: center;
     opacity: 0;
     transition: right 0.2s linear, opacity 0.2s linear;
 
@@ -85,10 +83,20 @@ a {
       right: 0;
       opacity: 1;
     }
+
+    &-heading {
+      text-align: center;
+      padding: 1rem;
+    }
   }
 
   &__link {
+    text-align: center;
     padding: 2rem;
+  }
+
+  &__account {
+    margin-top: auto;
   }
 
   &__overlay {
@@ -113,5 +121,36 @@ a {
 .icon {
   &__menu {
     width: 2.4rem;
+  }
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background-color: #010101;
+  opacity: 0.8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__spinner {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    border: 4px solid white;
+    border-top: 4px solid transparent;
+
+    animation: spinner 0.5s linear infinite;
+  }
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(360deg);
   }
 }

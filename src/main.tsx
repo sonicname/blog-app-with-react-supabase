@@ -1,12 +1,22 @@
-import React from "react";
+import { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from "./App";
 import "./styles/index.scss";
+import SuspenseLoading from "./components/loading/SuspenseLoading";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Suspense fallback={<SuspenseLoading />}>
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<HomePage />} />
+        <Route path={"/signup"} element={<SignUpPage />} />
+        <Route path={"/signin"} element={<SignInPage />} />
+      </Routes>
+    </BrowserRouter>
+  </Suspense>,
 );
