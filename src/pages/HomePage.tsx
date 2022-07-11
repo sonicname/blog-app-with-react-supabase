@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
-import { supabase } from "../supabase/supabase";
 
 const HomePage = () => {
-  useEffect(() => {
-    console.log(supabase.auth.user());
-  }, []);
+  useEffect(() => {}, []);
   return (
     <CommonLayout>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad,

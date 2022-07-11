@@ -8,6 +8,7 @@ import Input from "../components/input/Input";
 import ErrorInput from "../components/error/ErrorInput";
 import { supabase } from "../supabase/supabase";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   email: yup
@@ -26,6 +27,7 @@ interface IAccount {
 }
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -37,27 +39,37 @@ const SignUpPage = () => {
 
   const handleSignUp = async (values: IAccount) => {
     if (!values.email || !values.password) return;
-    const { user, error } = await supabase.auth.signUp({
+    const { error, user } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
     });
 
+    const { error: errorUpdate } = await supabase.from("users").upsert(
+      {
+        id: user?.id,
+        username: user?.email?.split("@")[0],
+        email: user?.email,
+      },
+      {
+        returning: "minimal",
+      },
+    );
+
     if (error) {
-      toast.error("Đăng ký tài khoản thất bại! Vui lòng thử lại sau!");
+      toast.error(error.message);
     } else {
       toast.success("Đăng ký tài khoản thành công!");
+      navigate("/");
     }
-
-    console.log(user);
   };
 
   return (
     <CommonLayout>
-      <div className="signup">
-        <h3 className="signup__heading">Đăng ký tài khoản</h3>
-        <form className="signup__form" onSubmit={handleSubmit(handleSignUp)}>
-          <div className="signup__field">
-            <Label htmlFor={"email"} className={"signup__label"}>
+      <div className="auth">
+        <h3 className="auth__heading">Đăng ký tài khoản</h3>
+        <form className="auth__form" onSubmit={handleSubmit(handleSignUp)}>
+          <div className="auth__field">
+            <Label htmlFor={"email"} className={"auth__label"}>
               Email
             </Label>
 
@@ -66,7 +78,7 @@ const SignUpPage = () => {
               type={"email"}
               placeholder={"Điền email của bạn"}
               control={control}
-              className={"signup__input"}
+              className={"auth__input"}
             />
 
             {errors?.email?.message && (
@@ -74,8 +86,8 @@ const SignUpPage = () => {
             )}
           </div>
 
-          <div className="signup__field">
-            <Label htmlFor={"password"} className={"signup__label"}>
+          <div className="auth__field">
+            <Label htmlFor={"password"} className={"auth__label"}>
               Mật khẩu
             </Label>
 
@@ -84,7 +96,7 @@ const SignUpPage = () => {
               type={"password"}
               placeholder={"Điền mật khẩu của bạn"}
               control={control}
-              className={"signup__input"}
+              className={"auth__input"}
             />
             {errors?.password?.message && (
               <ErrorInput
@@ -93,10 +105,10 @@ const SignUpPage = () => {
             )}
           </div>
 
-          <div className="signup__wrapper">
+          <div className="auth__wrapper">
             <button
               type="submit"
-              className="signup__submit"
+              className="auth__submit"
               disabled={isSubmitting}
             >
               Đăng Ký
