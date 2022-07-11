@@ -7,18 +7,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { supabase } from "../supabase/supabase";
 import { toast } from "react-toastify";
-import * as yup from "yup";
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .required("Email không được để trống!")
-    .email("Email không hợp lệ"),
-  password: yup
-    .string()
-    .required("Mật khẩu không được để trống")
-    .min(8, "Mật khẩu phải dài hơn 8 kí tự"),
-});
+import { useNavigate } from "react-router-dom";
+import { schema } from "../utils/schema";
 
 interface IAccount {
   email?: string;
@@ -26,6 +16,7 @@ interface IAccount {
 }
 
 const SignInPage = () => {
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -43,10 +34,10 @@ const SignInPage = () => {
     });
 
     if (error) {
-      console.log(error);
       toast.error("Sai mật khẩu và tài khoản!");
     } else {
       toast.success("Đăng nhập thành công!");
+      navigate("/");
     }
   };
   return (
