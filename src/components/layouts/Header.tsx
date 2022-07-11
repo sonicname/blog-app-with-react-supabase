@@ -1,9 +1,13 @@
 import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import IconMenu from "../Icons/IconMenu";
+import IconMenu from "../icons/IconMenu";
 import { useOnClickOutside } from "../../hooks/useClickOutSide";
+import { useAuth } from "../../context/auth-context";
+import { supabase } from "../../supabase/supabase";
 
 const Header = () => {
+  const { session } = useAuth();
+
   const [open, setOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(menuRef, () => {
@@ -42,11 +46,26 @@ const Header = () => {
           <div className="header__link">
             <NavLink to={"/search"}>Tìm Kiếm</NavLink>
           </div>
+
+          {session && (
+            <div className="header__link">
+              <NavLink to={"/upload"}>Đăng Bài</NavLink>
+            </div>
+          )}
         </div>
 
         <div className="header__link header__account">
-          <NavLink to={"/signin"}>Đăng Nhập</NavLink> /{" "}
-          <NavLink to={"/signup"}>Đăng Ký</NavLink>
+          {!session ? (
+            <>
+              <NavLink to={"/signin"}>Đăng Nhập</NavLink> /{" "}
+              <NavLink to={"/signup"}>Đăng Ký</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to={`/${session.user?.id}`}>Thông tin</NavLink> /{" "}
+              <span onClick={() => supabase.auth.signOut()}>Đăng xuất</span>
+            </>
+          )}
         </div>
       </div>
 
