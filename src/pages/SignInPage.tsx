@@ -51,11 +51,11 @@ const SignInPage = () => {
   };
   return (
     <CommonLayout>
-      <div className="signup">
-        <h3 className="signup__heading">Đăng Nhập</h3>
-        <form className="signup__form" onSubmit={handleSubmit(handleSignIn)}>
-          <div className="signup__field">
-            <Label htmlFor={"email"} className={"signup__label"}>
+      <div className="auth">
+        <h3 className="auth__heading">Đăng Nhập</h3>
+        <form className="auth__form" onSubmit={handleSubmit(handleSignIn)}>
+          <div className="auth__field">
+            <Label htmlFor={"email"} className={"auth__label"}>
               Email
             </Label>
 
@@ -64,7 +64,7 @@ const SignInPage = () => {
               type={"email"}
               placeholder={"Điền email của bạn"}
               control={control}
-              className={"signup__input"}
+              className={"auth__input"}
             />
 
             {errors?.email?.message && (
@@ -72,8 +72,8 @@ const SignInPage = () => {
             )}
           </div>
 
-          <div className="signup__field">
-            <Label htmlFor={"password"} className={"signup__label"}>
+          <div className="auth__field">
+            <Label htmlFor={"password"} className={"auth__label"}>
               Mật khẩu
             </Label>
 
@@ -82,7 +82,7 @@ const SignInPage = () => {
               type={"password"}
               placeholder={"Điền mật khẩu của bạn"}
               control={control}
-              className={"signup__input"}
+              className={"auth__input"}
             />
             {errors?.password?.message && (
               <ErrorInput
@@ -91,10 +91,10 @@ const SignInPage = () => {
             )}
           </div>
 
-          <div className="signup__wrapper">
+          <div className="auth__wrapper">
             <button
               type="submit"
-              className="signup__submit"
+              className="auth__submit"
               disabled={isSubmitting}
             >
               Đăng Nhập

@@ -1,18 +1,45 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import IconMenu from "../icons/IconMenu";
 import { useOnClickOutside } from "../../hooks/useClickOutSide";
 import { useAuth } from "../../context/auth-context";
 import { supabase } from "../../supabase/supabase";
 
+interface IUser {
+  username?: string;
+  user_avatar?: string;
+}
+
 const Header = () => {
   const { session } = useAuth();
-
   const [open, setOpen] = useState<boolean>(false);
+  const [user, setUser] = useState<IUser>({
+    username: undefined,
+    user_avatar: undefined,
+  });
+
   const menuRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(menuRef, () => {
     setOpen(false);
   });
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const { data: user, error } = await supabase
+        .from("users")
+        .select("username, user_avatar")
+        .eq("id", session?.user?.id);
+
+      if (user) {
+        setUser({
+          username: user[0].username,
+          user_avatar: user[0].user_avatar,
+        });
+      }
+    };
+
+    getUserInfo();
+  }, []);
 
   const handleOpenMenu = () => setOpen(!open);
   return (
@@ -62,8 +89,13 @@ const Header = () => {
             </>
           ) : (
             <>
-              <NavLink to={`/${session.user?.id}`}>Thông tin</NavLink> /{" "}
-              <span onClick={() => supabase.auth.signOut()}>Đăng xuất</span>
+              <NavLink to={`/${session.user?.id}`}>{user.username}</NavLink>
+              <span
+                style={{ cursor: "pointer" }}
+                onClick={() => supabase.auth.signOut()}
+              >
+                Đăng xuất
+              </span>
             </>
           )}
         </div>
