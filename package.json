@@ -17,6 +17,9 @@
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.5",
+    "remark-align": "^1.2.14",
+    "remark-gfm": "^3.0.1",
+    "remark-utf8": "^1.1.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -14,6 +14,7 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const UploadPage = lazy(() => import("./pages/UploadPage"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Suspense fallback={<SuspenseLoading />}>
@@ -37,6 +38,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={
               <PrivateRouter>
                 <ProfilePage />
+              </PrivateRouter>
+            }
+          />
+
+          <Route
+            path={"/upload"}
+            element={
+              <PrivateRouter>
+                <UploadPage />
               </PrivateRouter>
             }
           />
