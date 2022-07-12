@@ -1,4 +1,3 @@
-import React from "react";
 import { Control, useController } from "react-hook-form";
 
 interface IProps {
@@ -11,12 +10,12 @@ interface IProps {
 }
 
 const Input = ({
-  control,
-  type,
-  placeholder,
   name,
-  className,
+  type = "text",
+  placeholder,
+  className = "auth__input",
   defaultValue,
+  control,
 }: IProps) => {
   const { field } = useController({
     control,

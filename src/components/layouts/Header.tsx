@@ -1,49 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import IconMenu from "../icons/IconMenu";
 import { useOnClickOutside } from "../../hooks/useClickOutSide";
 import { useAuth } from "../../context/auth-context";
 import { supabase } from "../../supabase/supabase";
-
-interface IUser {
-  username?: string;
-  user_avatar?: string;
-}
+import { toast } from "react-toastify";
 
 const Header = () => {
   const { session } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
-  const [user, setUser] = useState<IUser>({
-    username: undefined,
-    user_avatar: undefined,
-  });
+
+  const handleOpenMenu = () => setOpen(!open);
 
   const menuRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(menuRef, () => {
     setOpen(false);
   });
 
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const { data: user, error } = await supabase
-        .from("users")
-        .select("username, user_avatar")
-        .eq("id", session?.user?.id);
+  const handleLogOut = async () => {
+    await supabase.auth.signOut();
+    toast.success("Bạn đã đăng xuất thành công!");
+  };
 
-      if (user) {
-        setUser({
-          username: user[0].username,
-          user_avatar: user[0].user_avatar,
-        });
-      }
-    };
-
-    if (session) {
-      getUserInfo();
-    }
-  }, []);
-
-  const handleOpenMenu = () => setOpen(!open);
   return (
     <header className="header">
       <NavLink to={"/"}>
@@ -91,11 +69,8 @@ const Header = () => {
             </>
           ) : (
             <>
-              <NavLink to={`/profile/${session.user?.id}`}>Tài khoản</NavLink>
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => supabase.auth.signOut()}
-              >
+              <NavLink to="/profile">Tài khoản</NavLink>
+              <span style={{ cursor: "pointer" }} onClick={handleLogOut}>
                 Đăng xuất
               </span>
             </>

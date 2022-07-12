@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../context/auth-context";
 import { toast } from "react-toastify";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import { useForm } from "react-hook-form";
-import { getUserInfo } from "../utils/getUserInfo";
 import { supabase } from "../supabase/supabase";
+import useProfile from "../hooks/useProfile";
 
 type UpdateValue = {
   username: string;
   user_avatar: string;
 };
 
-type ProfileParams = {
-  userID: string;
-};
-
-type UserInfo = {
-  username: string;
-  email: string;
-  user_avatar: string;
-  createTime: Date | undefined;
-  numberPost: number;
-};
-
 const ProfilePage = () => {
-  const navigate = useNavigate();
-  const { session } = useAuth();
-  const { userID } = useParams<ProfileParams>();
-  const [user, setUser] = useState<UserInfo>({
-    email: "",
-    createTime: undefined,
-    numberPost: 0,
-    user_avatar: "",
-    username: "",
-  });
+  const [user, setUser] = useProfile();
 
   const {
     control,
@@ -54,7 +30,7 @@ const ProfilePage = () => {
         username: values.username,
         user_avatar: values.user_avatar,
       })
-      .eq("id", userID);
+      .eq("id", supabase.auth.user()?.id);
 
     if (error) {
       toast.error(error.message);
@@ -67,28 +43,6 @@ const ProfilePage = () => {
       });
     }
   };
-
-  useEffect(() => {
-    if (session?.user?.id !== userID) {
-      toast.warning("Bạn không có quyền truy cập vào thông tin người khác!");
-      return navigate("/");
-    }
-    const fetchUserData = async () => {
-      const data = await getUserInfo(userID as string);
-
-      if (data) {
-        setUser({
-          username: data[0].username,
-          user_avatar: data[0].user_avatar,
-          numberPost: data[0].number_post,
-          createTime: data[0].create_at,
-          email: data[0].email,
-        });
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   return (
     <CommonLayout>

@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path={"/signin"} element={<SignInPage />} />
 
           <Route
-            path={"/profile/:userID"}
+            path={"/profile"}
             element={
               <PrivateRouter>
                 <ProfilePage />

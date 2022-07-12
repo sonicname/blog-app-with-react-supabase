@@ -1,11 +1,19 @@
-const IconMenu = () => {
+interface IProps {
+  className?: string;
+  colorStroke?: string;
+}
+
+const IconMenu = ({
+  className = "icon__menu",
+  colorStroke = "currentColor",
+}: IProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="icon__menu"
+      className={className}
       fill="none"
       viewBox="0 0 24 24"
-      stroke="currentColor"
+      stroke={colorStroke}
       strokeWidth="2"
     >
       <path
