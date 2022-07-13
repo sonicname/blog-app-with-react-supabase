@@ -1,4 +1,7 @@
-# blog-app-with-react-supabase
+# Project: Blog App
+
+#### Frontend: React + Tailwindcss
+#### Backend: Supabase
 
 ## 1. Trang đăng nhập
 ![img.png](assets/img.png)
