@@ -19,7 +19,7 @@ const Input = ({ type, control, name, placeholder }: IProps) => {
     <input
       id={name}
       type={type}
-      className="border border-[#F1F1F3] rounded-md w-full p-[15px] shadow outline-none text-[#171725] font-medium text-[14px] placeholder:text-[#B2B3BD]"
+      className="border border-[#3A3A43] rounded-md w-full p-[15px] shadow outline-none text-white font-medium text-[14px] placeholder:text-[#4B5264] bg-transparent"
       placeholder={placeholder}
       {...field}
     />

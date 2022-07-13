@@ -5,11 +5,11 @@ import SubHeading from "../components/heading/SubHeading";
 import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
-import { useForm } from "react-hook-form";
-import Button from "../components/button/Button";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../utils/schema";
 import ErrorInput from "../components/errors/ErrorInput";
+import Button from "../components/button/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { schema } from "../utils/schema";
 import { supabase } from "../supabase/supabase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ type SignUpValue = {
   password: string;
 };
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
   const {
     control,
@@ -30,8 +30,8 @@ const SignUpPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleSignUp = async (values: SignUpValue) => {
-    const { error } = await supabase.auth.signUp({
+  const handleSignIn = async (values: SignUpValue) => {
+    const { error } = await supabase.auth.signIn({
       email: values.email,
       password: values.password,
     });
@@ -39,7 +39,7 @@ const SignUpPage = () => {
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success("Tạo tài khoản thành công!");
+      toast.success("Đăng nhập thành công!");
       navigate("/");
     }
   };
@@ -47,17 +47,17 @@ const SignUpPage = () => {
   return (
     <AuthLayout>
       <div className="max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px] bg-[#1C1C24] rounded-lg">
-        <Heading content={"Đăng ký tài khoản"}>
+        <Heading content={"Đăng Nhập"}>
           <SubHeading
-            content={"Đã có tài khoản rồi?"}
-            hrefText={"Đăng nhập"}
-            to={"/signin"}
+            content={"Chưa có tài khoản?"}
+            hrefText={"Đăng ký ngay"}
+            to={"/signup"}
           />
         </Heading>
 
         <form
           // @ts-ignore
-          onSubmit={handleSubmit(handleSignUp)}
+          onSubmit={handleSubmit(handleSignIn)}
           className="mt-[20px] flex flex-col gap-y-[20px] lg:gap-y-[20px]"
         >
           <Field>
@@ -93,7 +93,7 @@ const SignUpPage = () => {
             type={"submit"}
             disabled={isSubmitting}
           >
-            Tạo tài khoản
+            Đăng Nhập
           </Button>
         </form>
       </div>
@@ -101,4 +101,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
