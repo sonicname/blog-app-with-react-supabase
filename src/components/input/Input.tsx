@@ -2,32 +2,24 @@ import React from "react";
 import { Control, useController } from "react-hook-form";
 
 interface IProps {
-  name: string;
   type: string;
-  placeholder: string;
   control: Control;
-  className: string;
-  defaultValue?: string;
+  name: string;
+  placeholder?: string;
 }
 
-const Input = ({
-  control,
-  type,
-  placeholder,
-  name,
-  className,
-  defaultValue,
-}: IProps) => {
+const Input = ({ type, control, name, placeholder }: IProps) => {
   const { field } = useController({
-    control,
-    name,
-    defaultValue: defaultValue,
+    control: control,
+    name: name,
+    defaultValue: "",
   });
 
   return (
     <input
+      id={name}
       type={type}
-      className={className}
+      className="border border-[#3A3A43] rounded-md w-full p-[15px] shadow outline-none text-white font-medium text-[14px] placeholder:text-[#4B5264] bg-transparent"
       placeholder={placeholder}
       {...field}
     />

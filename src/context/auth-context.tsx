@@ -2,13 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase/supabase";
 import { Session } from "@supabase/supabase-js";
 
-interface IContext {
-  session: Session | null;
-}
-
-const AuthContext = createContext<IContext>({
-  session: null,
-});
+const AuthContext = createContext<Session | null>(null);
 
 export const AuthProvider = (props: any) => {
   const [session, setSession] = useState<Session | null>(null);
@@ -21,9 +15,7 @@ export const AuthProvider = (props: any) => {
     });
   }, []);
 
-  const value = { session };
-
-  return <AuthContext.Provider value={value} {...props} />;
+  return <AuthContext.Provider value={session} {...props} />;
 };
 
 export const useAuth = () => {
