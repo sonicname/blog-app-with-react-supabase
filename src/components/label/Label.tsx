@@ -1,15 +1,14 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 interface IProps {
+  text: string;
   htmlFor: string;
-  children: ReactNode;
-  className: string;
 }
 
-const Label = ({ htmlFor, children, className }: IProps) => {
+const Label = ({ text, htmlFor }: IProps) => {
   return (
-    <label className={className} htmlFor={htmlFor}>
-      {children}
+    <label htmlFor={htmlFor} className="text-[#4B5264] font-medium text-[14px]">
+      {text}
     </label>
   );
 };

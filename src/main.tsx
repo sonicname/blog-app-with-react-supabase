@@ -2,57 +2,25 @@ import { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import "./styles/index.scss";
 import "react-toastify/dist/ReactToastify.css";
+import "./index.scss";
 
-import SuspenseLoading from "./components/loading/SuspenseLoading";
 import { ToastContainer } from "react-toastify";
-import { AuthProvider } from "./context/auth-context";
-import PrivateRouter from "./router/PrivateRouter";
+import ScreenLoading from "./components/loading/ScreenLoading";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
-const SignInPage = lazy(() => import("./pages/SignInPage"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage"));
-const UploadPage = lazy(() => import("./pages/UploadPage"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Suspense fallback={<SuspenseLoading />}>
-    <AuthProvider>
+  <>
+    <Suspense fallback={<ScreenLoading />}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={"/"}
-            element={
-              <PrivateRouter>
-                <HomePage />
-              </PrivateRouter>
-            }
-          />
-
+          <Route path={"/"} element={<HomePage />} />
           <Route path={"/signup"} element={<SignUpPage />} />
-          <Route path={"/signin"} element={<SignInPage />} />
-
-          <Route
-            path={"/profile"}
-            element={
-              <PrivateRouter>
-                <ProfilePage />
-              </PrivateRouter>
-            }
-          />
-
-          <Route
-            path={"/upload"}
-            element={
-              <PrivateRouter>
-                <UploadPage />
-              </PrivateRouter>
-            }
-          />
         </Routes>
       </BrowserRouter>
-      <ToastContainer pauseOnHover={false} position={"top-center"} />
-    </AuthProvider>
-  </Suspense>,
+      <ToastContainer pauseOnHover={false} position={"top-right"} />
+    </Suspense>
+  </>,
 );

@@ -1,111 +1,86 @@
 import React from "react";
-import CommonLayout from "../components/layouts/CommonLayout";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import AuthLayout from "../components/layouts/AuthLayout";
+import Heading from "../components/heading/Heading";
+import SubHeading from "../components/heading/SubHeading";
+import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
-import ErrorInput from "../components/error/ErrorInput";
-import { supabase } from "../supabase/supabase";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { FieldValue, useForm } from "react-hook-form";
+import Button from "../components/button/Button";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../utils/schema";
+import ErrorInput from "../components/errors/ErrorInput";
+import { toast } from "react-toastify";
+import { log } from "util";
 
-interface IAccount {
-  email?: string;
-  password?: string;
-}
+type SignUpValue = {
+  email: string;
+  password: string;
+};
 
 const SignUpPage = () => {
-  const navigate = useNavigate();
   const {
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     handleSubmit,
   } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
 
-  const handleSignUp = async (values: IAccount) => {
-    if (!values.email || !values.password) return;
-    const { error, user } = await supabase.auth.signUp({
-      email: values.email,
-      password: values.password,
-    });
-
-    const { error: errorUpdate } = await supabase.from("users").upsert(
-      {
-        id: user?.id,
-        username: user?.email?.split("@")[0],
-        email: user?.email,
-      },
-      {
-        returning: "minimal",
-      },
-    );
-
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Đăng ký tài khoản thành công!");
-      navigate("/");
-    }
+  const handleSignUp = async (values: FieldValue<SignUpValue>) => {
+    console.log(values);
   };
 
   return (
-    <CommonLayout>
-      <div className="auth">
-        <h3 className="auth__heading">Đăng ký tài khoản</h3>
-        <form className="auth__form" onSubmit={handleSubmit(handleSignUp)}>
-          <div className="auth__field">
-            <Label htmlFor={"email"} className={"auth__label"}>
-              Email
-            </Label>
+    <AuthLayout>
+      <div className="max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px]">
+        <Heading content={"Sign Up"}>
+          <SubHeading
+            content={"Already have an account?"}
+            hrefText={"Sign In"}
+            to={"/signin"}
+          />
+        </Heading>
 
+        <form
+          onSubmit={handleSubmit(handleSignUp)}
+          className="mt-[20px] flex flex-col gap-y-[20px] lg:gap-y-[20px]"
+        >
+          <Field>
+            <Label text={"Email"} htmlFor={"email"} />
             <Input
-              name={"email"}
               type={"email"}
-              placeholder={"Điền email của bạn"}
               control={control}
-              className={"auth__input"}
+              name={"email"}
+              placeholder="Enter your email"
             />
+            {
+              // @ts-ignore
+              errors.email && <ErrorInput>{errors?.email?.message}</ErrorInput>
+            }
+          </Field>
 
-            {errors?.email?.message && (
-              <ErrorInput message={errors.email.message as unknown as string} />
-            )}
-          </div>
-
-          <div className="auth__field">
-            <Label htmlFor={"password"} className={"auth__label"}>
-              Mật khẩu
-            </Label>
-
+          <Field>
+            <Label text={"Password"} htmlFor={"password"} />
             <Input
-              name={"password"}
               type={"password"}
-              placeholder={"Điền mật khẩu của bạn"}
               control={control}
-              className={"auth__input"}
+              name={"password"}
+              placeholder="Enter your password"
             />
-            {errors?.password?.message && (
-              <ErrorInput
-                message={errors.password.message as unknown as string}
-              />
+            {errors.password && (
+              // @ts-ignore
+              <ErrorInput>{errors?.password?.message}</ErrorInput>
             )}
-          </div>
+          </Field>
 
-          <div className="auth__wrapper">
-            <button
-              type="submit"
-              className="auth__submit"
-              disabled={isSubmitting}
-            >
-              Đăng Ký
-            </button>
-          </div>
+          <Button type={"submit"} disabled={isSubmitting}>
+            Sign Up
+          </Button>
         </form>
       </div>
-    </CommonLayout>
+    </AuthLayout>
   );
 };
 

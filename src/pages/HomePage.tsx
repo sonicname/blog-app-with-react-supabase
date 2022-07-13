@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import CommonLayout from "../components/layouts/CommonLayout";
+import React from "react";
 
 const HomePage = () => {
-  useEffect(() => {}, []);
   return (
-    <CommonLayout>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad,
-      assumenda atque consequuntur cum debitis eaque error fuga illo ipsa iste
-      nesciunt officiis quas quidem repudiandae sapiente suscipit totam
-      voluptas.
-    </CommonLayout>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
+      blanditiis consequuntur cum eligendi eos excepturi id incidunt laudantium
+      minus, nam, nisi nostrum officia, quaerat recusandae tempora unde veniam!
+      Asperiores, culpa.
+    </div>
   );
 };
 

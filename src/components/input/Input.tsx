@@ -1,32 +1,25 @@
+import React from "react";
 import { Control, useController } from "react-hook-form";
 
 interface IProps {
-  name: string;
   type: string;
-  placeholder: string;
   control: Control;
-  className: string;
-  defaultValue?: string;
+  name: string;
+  placeholder?: string;
 }
 
-const Input = ({
-  name,
-  type = "text",
-  placeholder,
-  className = "auth__input",
-  defaultValue,
-  control,
-}: IProps) => {
+const Input = ({ type, control, name, placeholder }: IProps) => {
   const { field } = useController({
-    control,
-    name,
-    defaultValue: defaultValue,
+    control: control,
+    name: name,
+    defaultValue: "",
   });
 
   return (
     <input
+      id={name}
       type={type}
-      className={className}
+      className="border border-[#F1F1F3] rounded-md w-full p-[15px] shadow outline-none text-[#171725] font-medium text-[14px] placeholder:text-[#B2B3BD]"
       placeholder={placeholder}
       {...field}
     />
