@@ -12,9 +12,10 @@ import { schema } from "../utils/schema";
 import ErrorInput from "../components/errors/ErrorInput";
 import { useAuth } from "../context/supabase-context";
 import { IAuthValue } from "../types/IAuth";
+import { Navigate } from "react-router-dom";
 
 const SignUpPage = () => {
-  const { signUp } = useAuth();
+  const { signUp, session } = useAuth();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -35,6 +36,8 @@ const SignUpPage = () => {
       console.log(e);
     }
   };
+
+  if (session?.user) return <Navigate to={"/"} />;
 
   return (
     <AuthLayout>
