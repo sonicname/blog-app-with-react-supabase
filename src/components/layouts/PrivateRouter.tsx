@@ -1,4 +1,4 @@
-import { useAuth } from "../context/auth-context";
+import { useAuth } from "../../context/supabase-context";
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRouter = () => {

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
 
 const HomePage = () => {
+  useEffect(() => {
+    document.title = "Trang chủ blog";
+  }, []);
+
   return (
     <CommonLayout>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam

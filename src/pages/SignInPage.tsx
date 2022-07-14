@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import AuthLayout from "../components/layouts/AuthLayout";
 import Heading from "../components/heading/Heading";
 import SubHeading from "../components/heading/SubHeading";
@@ -10,17 +10,11 @@ import Button from "../components/button/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { schema } from "../utils/schema";
-import { supabase } from "../supabase/supabase";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
-type SignUpValue = {
-  email: string;
-  password: string;
-};
+import { useAuth } from "../context/supabase-context";
+import { IAuthValue } from "../types/IAuth";
 
 const SignInPage = () => {
-  const navigate = useNavigate();
+  const { signIn, session } = useAuth();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -30,17 +24,15 @@ const SignInPage = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleSignIn = async (values: SignUpValue) => {
-    const { error } = await supabase.auth.signIn({
-      email: values.email,
-      password: values.password,
-    });
+  useEffect(() => {
+    document.title = "Đăng nhập";
+  }, []);
 
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Đăng nhập thành công!");
-      navigate("/");
+  const handleSignIn = async (values: IAuthValue) => {
+    try {
+      await signIn(values);
+    } catch (e) {
+      console.log(e);
     }
   };
 
