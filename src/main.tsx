@@ -7,8 +7,7 @@ import "./index.scss";
 
 import { ToastContainer } from "react-toastify";
 import ScreenLoading from "./components/loading/ScreenLoading";
-import { AuthProvider } from "./context/auth-context";
-import PrivateRouter from "./router/PrivateRouter";
+import { AuthProvider } from "./context/supabase-context";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
@@ -16,20 +15,18 @@ const SignInPage = lazy(() => import("./pages/SignInPage"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
-    <AuthProvider>
-      <Suspense fallback={<ScreenLoading />}>
-        <BrowserRouter>
+    <Suspense fallback={<ScreenLoading />}>
+      <BrowserRouter>
+        <AuthProvider>
           <Routes>
             {/*{private route}*/}
-            <Route path={"/"} element={<PrivateRouter />}>
-              <Route path={""} element={<HomePage />} />
-            </Route>
+            <Route path={"/"} element={<HomePage />} />
             <Route path={"/signup"} element={<SignUpPage />} />
             <Route path={"/signin"} element={<SignInPage />} />
           </Routes>
-        </BrowserRouter>
-        <ToastContainer pauseOnHover={false} position={"top-right"} />
-      </Suspense>
-    </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
+      <ToastContainer pauseOnHover={false} position={"top-right"} />
+    </Suspense>
   </>,
 );
