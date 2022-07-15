@@ -1,43 +1,30 @@
-import React, { useEffect, useState } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
 import PostItem from "../modules/Post/PostItem";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { IPost } from "../types/IPost";
-import { supabase } from "../supabase/supabase";
+import { useNewestPost } from "../hooks/usePost";
 
 const HomePage = () => {
-  const [posts, setPosts] = useState<IPost[] | null>([]);
-  useEffect(() => {
-    const getPosts = async () => {
-      const { data: posts, error } = await supabase
-        .from<IPost>("posts")
-        .select("*")
-        .limit(10);
-
-      setPosts(posts);
-    };
-
-    getPosts();
-  }, []);
+  const newestPost = useNewestPost();
 
   return (
     <CommonLayout>
       <div className="flex flex-col gap-y-5 lg:gap-y-10 mt-4">
         <section className="flex flex-col gap-y-5">
-          <h2 className="font-semibold text-[18px]">Bài viết mới nhất</h2>
-          <Swiper spaceBetween={30} slidesPerView={"auto"} grabCursor={true}>
-            {posts?.map((post) => (
-              <SwiperSlide key={post.id}>
-                <PostItem
-                  title={post.title}
-                  description={post.description}
-                  author={post.author}
-                  slug={`/post/${post.slug}`}
-                  thumbnail={post.thumbnail}
-                />
-              </SwiperSlide>
+          <h2 className="font-semibold text-[16px] lg:text-[24px]">
+            Bài viết mới nhất
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-5 lg:grid-cols-5 gap-y-5 lg:gap-x-5">
+            {newestPost?.map((post) => (
+              <PostItem
+                key={post.id}
+                title={post.title}
+                description={post.description}
+                author={post.user.username}
+                slug={`/post/${post.slug}`}
+                thumbnail={post.thumbnail}
+              />
             ))}
-          </Swiper>
+          </div>
         </section>
       </div>
     </CommonLayout>

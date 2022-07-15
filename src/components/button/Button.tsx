@@ -14,7 +14,7 @@ const Button = ({ type, children, disabled, className = "" }: IProps) => {
   return (
     <button
       className={classNames(
-        "text-white font-semibold text-[16px] w-full py-[13px] bg-[#1DC071] rounded-lg shadow-md",
+        "text-white font-semibold text-[16px] w-full py-[13px] bg-[#1DC071] rounded-lg shadow-md hover:opacity-75 active:scale-90 duration-300",
         className,
       )}
       type={type}
