@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/ghost.png";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/supabase-context";
-import { supabase } from "../../supabase/supabase";
+import NavItem from "../navbar/NavItem";
+import IconMenu from "../icons/IconMenu";
+import classNames from "classnames";
+import Overlay from "../overlays/Overlay";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 const Header = () => {
-  const { session } = useAuth();
+  const { session, signOut } = useAuth();
+  const [toggle, setToggle] = useState(false);
+
   return (
     <div className="flex items-center justify-between">
       <NavLink to={"/"}>
@@ -16,36 +23,35 @@ const Header = () => {
         />
       </NavLink>
 
-      <div className="flex gap-x-5 items-center">
-        <NavLink
-          className="bg-[#8C6DFD] px-[20px] py-[9px] lg:px-[26px] lg:py-3 rounded-md text-white font-semibold hover:opacity-75"
-          to={"/post"}
-        >
-          Bài viết
-        </NavLink>
+      <IconMenu
+        className="lg:hidden h-10 w-10"
+        onClick={() => setToggle(!toggle)}
+      />
 
-        {session ? (
-          <NavLink
-            className="bg-[#8C6DFD] px-[20px] py-[9px] lg:px-[26px] lg:py-3 rounded-md text-white font-semibold hover:opacity-75"
-            to={"/upload"}
-          >
-            Tạo bài viết mới
-          </NavLink>
-        ) : (
-          <NavLink
-            className="bg-[#8C6DFD] px-[20px] py-[9px] lg:px-[26px] lg:py-3 rounded-md text-white font-semibold hover:opacity-75"
-            to={"/signin"}
-          >
-            Đăng nhập
-          </NavLink>
+      <Overlay toggle={toggle} setToggle={setToggle} />
+
+      <div
+        className={classNames(
+          "flex gap-x-5 items-center fixed flex-col w-[60%] top-0 bottom-0 justify-between p-4 bg-black text-center -right-full duration-200 lg:static lg:bg-transparent lg:flex-row lg:gap-x-5 lg:max-w-full lg:justify-end z-[10]",
+          toggle && "!right-0",
         )}
+      >
+        <div className="flex flex-col gap-y-10 lg:flex-row lg:gap-x-5">
+          <NavItem to={"/post"}>Bài viết</NavItem>
+
+          {session ? (
+            <NavItem to={"/create"}>Tạo bài viết mới</NavItem>
+          ) : (
+            <NavItem to={"/signin"}>Đăng nhập</NavItem>
+          )}
+        </div>
 
         <div className="flex items-center">
           {session && (
             <p>
               {session?.user?.email?.split("@")[0]},{" "}
               <span
-                onClick={() => supabase.auth.signOut()}
+                onClick={() => signOut()}
                 className="font-medium text-[#4ACD8D] underline cursor-pointer"
               >
                 đăng xuất
@@ -58,4 +64,6 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withErrorBoundary(Header, {
+  FallbackComponent: ErrorComponent,
+});

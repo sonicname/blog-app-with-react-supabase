@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { schema } from "../utils/schema";
 import { useAuth } from "../context/supabase-context";
 import { IAuthValue } from "../types/IAuth";
+import { Navigate } from "react-router-dom";
 
 const SignInPage = () => {
   const { signIn, session } = useAuth();
@@ -35,6 +36,8 @@ const SignInPage = () => {
       console.log(e);
     }
   };
+
+  if (session?.user) return <Navigate to={"/"} />;
 
   return (
     <AuthLayout>

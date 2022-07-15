@@ -1,5 +1,8 @@
 import React from "react";
 import { Control, useController } from "react-hook-form";
+import classNames from "classnames";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   type: string;
@@ -19,11 +22,15 @@ const Input = ({ type, control, name, placeholder }: IProps) => {
     <input
       id={name}
       type={type}
-      className="border border-[#3A3A43] rounded-md w-full p-[15px] shadow outline-none text-white font-medium text-[14px] placeholder:text-[#4B5264] bg-transparent"
+      className={classNames(
+        "border border-[#3A3A43] rounded-md max-w-full w-full p-[15px] shadow outline-none text-white font-medium text-[14px] placeholder:text-[#4B5264] bg-transparent",
+      )}
       placeholder={placeholder}
       {...field}
     />
   );
 };
 
-export default Input;
+export default withErrorBoundary(Input, {
+  FallbackComponent: ErrorComponent,
+});

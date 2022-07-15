@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   children: ReactNode;
@@ -14,4 +16,6 @@ const CommonLayout = ({ children }: IProps) => {
   );
 };
 
-export default CommonLayout;
+export default withErrorBoundary(CommonLayout, {
+  FallbackComponent: ErrorComponent,
+});

@@ -1,4 +1,7 @@
 import { ReactNode } from "react";
+import classNames from "classnames";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   type: "button" | "submit" | "reset" | undefined;
@@ -10,7 +13,10 @@ interface IProps {
 const Button = ({ type, children, disabled, className = "" }: IProps) => {
   return (
     <button
-      className={`text-white font-semibold text-[16px] w-full py-[13px] bg-[#1DC071] rounded-lg shadow-md ${className}`}
+      className={classNames(
+        "text-white font-semibold text-[16px] w-full py-[13px] bg-[#1DC071] rounded-lg shadow-md",
+        className,
+      )}
       type={type}
       disabled={disabled}
     >
@@ -19,4 +25,6 @@ const Button = ({ type, children, disabled, className = "" }: IProps) => {
   );
 };
 
-export default Button;
+export default withErrorBoundary(Button, {
+  FallbackComponent: ErrorComponent,
+});

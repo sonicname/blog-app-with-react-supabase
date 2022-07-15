@@ -11,6 +11,8 @@ const SupabaseContext = createContext<IAuthContext>({
     new Promise((resolve, reject) => reject("Sign in method is empty!")),
   signUp: () =>
     new Promise((resolve, reject) => reject("Sign up method is empty!")),
+  signOut: () =>
+    new Promise((resolve, reject) => reject("Sign out method is empty!")),
 });
 
 export const AuthProvider = (props: any) => {
@@ -45,6 +47,14 @@ export const AuthProvider = (props: any) => {
     }
   };
 
+  const signOut = async (): Promise<void> => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      toast.error(error.message);
+    }
+  };
+
   useEffect(() => {
     setSession(supabase.auth.session());
     const { data: listener } = supabase.auth.onAuthStateChange(
@@ -62,6 +72,7 @@ export const AuthProvider = (props: any) => {
     session,
     signIn,
     signUp,
+    signOut,
   };
 
   return <SupabaseContext.Provider value={value} {...props} />;
