@@ -17,4 +17,11 @@ body {
 
 #root {
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.swiper-slide {
+  max-width: 300px;
+  z-index: 1;
+  height: auto !important;
 }

@@ -10,13 +10,16 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.5",
     "@supabase/supabase-js": "^1.35.4",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "classnames": "^2.3.1",
     "dotenv": "^16.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.33.1",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.5",
+    "swiper": "^8.3.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -5,6 +5,9 @@ import { useAuth } from "../../context/supabase-context";
 import NavItem from "../navbar/NavItem";
 import IconMenu from "../icons/IconMenu";
 import classNames from "classnames";
+import Overlay from "../overlays/Overlay";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 const Header = () => {
   const { session, signOut } = useAuth();
@@ -25,17 +28,11 @@ const Header = () => {
         onClick={() => setToggle(!toggle)}
       />
 
-      <div
-        className={classNames(
-          "fixed inset-0 bg-black bg-opacity-70 opacity-0 invisible duration-200 lg:hidden",
-          toggle && "!opacity-70 !visible",
-        )}
-        onClick={() => setToggle(false)}
-      />
+      <Overlay toggle={toggle} setToggle={setToggle} />
 
       <div
         className={classNames(
-          "flex gap-x-5 items-center fixed flex-col max-w-[60%] top-0 bottom-0 justify-between p-4 bg-black text-center -right-full duration-200 lg:static lg:bg-transparent lg:flex-row lg:gap-x-5 lg:max-w-full",
+          "flex gap-x-5 items-center fixed flex-col w-[60%] top-0 bottom-0 justify-between p-4 bg-black text-center -right-full duration-200 lg:static lg:bg-transparent lg:flex-row lg:gap-x-5 lg:max-w-full lg:justify-end z-[10]",
           toggle && "!right-0",
         )}
       >
@@ -67,4 +64,6 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withErrorBoundary(Header, {
+  FallbackComponent: ErrorComponent,
+});

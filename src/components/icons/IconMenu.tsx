@@ -1,5 +1,7 @@
 import React from "react";
 import classNames from "classnames";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   className?: string;
@@ -27,4 +29,6 @@ const IconMenu = ({ className, onClick }: IProps) => {
   );
 };
 
-export default IconMenu;
+export default withErrorBoundary(IconMenu, {
+  FallbackComponent: ErrorComponent,
+});

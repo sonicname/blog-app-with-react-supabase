@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import logo from "../../../assets/ghost.png";
 import { NavLink } from "react-router-dom";
+import { withErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   children: ReactNode;
@@ -21,4 +23,6 @@ const AuthLayout = ({ children }: IProps) => {
   );
 };
 
-export default AuthLayout;
+export default withErrorBoundary(AuthLayout, {
+  FallbackComponent: ErrorComponent,
+});

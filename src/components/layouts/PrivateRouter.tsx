@@ -1,9 +1,16 @@
 import { useAuth } from "../../context/supabase-context";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
 
-const PrivateRouter = () => {
+interface IProps {
+  children: ReactNode;
+}
+
+const PrivateRouter = ({ children }: IProps) => {
   const session = useAuth();
-  return session ? <Outlet /> : <Navigate to={"/signin"} />;
+
+  if (!session) return <Navigate to={"/signin"} />;
+  return <>{children}</>;
 };
 
 export default PrivateRouter;
