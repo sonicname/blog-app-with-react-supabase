@@ -10,8 +10,8 @@ export const useNewestPost = (): IPost[] | null => {
       const { data: posts, error } = await supabase
         .from("posts")
         .select(`*, user:users(username)`)
-        .limit(6);
-      console.log(posts);
+        .order("created_at", { ascending: false })
+        .limit(5);
 
       if (error) {
         toast.error(error.message);
