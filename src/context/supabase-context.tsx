@@ -4,6 +4,7 @@ import { Session } from "@supabase/supabase-js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IAuthContext, IAuthValue } from "../types/IAuth";
+import { IUser } from "../types/IUser";
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
@@ -34,9 +35,15 @@ export const AuthProvider = (props: any) => {
   };
 
   const signUp = async ({ email, password }: IAuthValue): Promise<void> => {
-    const { error } = await supabase.auth.signUp({
+    const { error, user } = await supabase.auth.signUp({
       email,
       password,
+    });
+
+    await supabase.from<IUser>("users").insert({
+      id: user?.id,
+      email: user?.email,
+      username: user?.email?.split("@")[0],
     });
 
     if (error) {

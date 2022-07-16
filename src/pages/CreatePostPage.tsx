@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,18 +6,19 @@ import { schemaCreatePost } from "../utils/schema";
 import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
-import TextArea from "../components/input/TextArea";
 import Button from "../components/button/Button";
 import ErrorInput from "../components/errors/ErrorInput";
 import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
-import { supabase } from "../supabase/supabase";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { createPost } from "../utils/createPost";
+import PostEditor from "../components/editor/PostEditor";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
   const navigate = useNavigate();
+  const editorRef = useRef(null);
+
   const {
     control,
     formState: { errors },
@@ -28,20 +29,7 @@ const CreatePostPage = () => {
   });
 
   const handleCreatePost = async (values: IPost) => {
-    const { error } = await supabase.from<IPost>("posts").insert({
-      author: session?.user?.id,
-      content: values.content,
-      thumbnail: values.thumbnail,
-      title: values.title,
-      description: values.description,
-    });
-
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Tạo bài viết thành công!");
-      navigate("/");
-    }
+    await createPost(values, session, navigate);
   };
 
   return (
@@ -102,16 +90,13 @@ const CreatePostPage = () => {
 
           <Field>
             <Label text={"Nội dung"} htmlFor={"content"} />
-            <TextArea
-              row={6}
-              name={"content"}
-              control={control}
-              placeholder={"Nhập nội dung bài viết"}
+
+            <PostEditor
+              editorRef={editorRef}
+              initialValue={"<h1>Nhập nội dung bài viết</h1>"}
+              height={500}
+              menubar={true}
             />
-            {errors.content && (
-              // @ts-ignore
-              <ErrorInput>{errors?.content?.message}</ErrorInput>
-            )}
           </Field>
 
           <div className="max-w-[200px] flex items-center justify-center">
