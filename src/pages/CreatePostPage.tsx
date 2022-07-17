@@ -11,8 +11,9 @@ import ErrorInput from "../components/errors/ErrorInput";
 import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
 import { useNavigate } from "react-router-dom";
-import { createPost } from "../utils/createPost";
 import PostEditor from "../components/editor/PostEditor";
+import { supabase } from "../supabase/supabase";
+import { toast } from "react-toastify";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
@@ -29,7 +30,21 @@ const CreatePostPage = () => {
   });
 
   const handleCreatePost = async (values: IPost) => {
-    await createPost(values, session, navigate);
+    const { error } = await supabase.from<IPost>("posts").insert({
+      title: values.title,
+      thumbnail: values.thumbnail,
+      description: values.description,
+      // @ts-ignore
+      content: editorRef.current.getContent(),
+      author_id: session?.user?.id,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Tạo bài viết thành công!");
+      navigate("/");
+    }
   };
 
   return (

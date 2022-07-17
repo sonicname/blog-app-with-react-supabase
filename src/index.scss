@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   font-family: 'Poppins', sans-serif;
 }
@@ -20,6 +26,11 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .swiper-slide {
   max-width: 300px;
   z-index: 1;
@@ -28,4 +39,43 @@ body {
 
 .slider .swiper-slide:last-child {
   margin-right: calc(100% - (100% / 3));
+}
+
+.content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+
+  h1 {
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 25px;
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #A2A2A8;
+    line-height: 24px;
+    text-align: justify;
+  }
+
+  img {
+    max-width: 100%;
+    object-fit: cover;
+  }
 }
