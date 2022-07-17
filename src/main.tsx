@@ -15,6 +15,7 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const CreatePostPage = lazy(() => import("./pages/CreatePostPage"));
+const PostDetailPage = lazy(() => import("./pages/PostDetailPage"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 </PrivateRouter>
               }
             />
+            <Route path={"/post/:postID"} element={<PostDetailPage />} />
             <Route path={"/signup"} element={<SignUpPage />} />
             <Route path={"/signin"} element={<SignInPage />} />
           </Routes>

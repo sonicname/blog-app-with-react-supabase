@@ -3,6 +3,10 @@ import { IPost } from "../types/IPost";
 import { supabase } from "../supabase/supabase";
 import { toast } from "react-toastify";
 
+interface IExtentPost extends IPost {
+  user: { username: string };
+}
+
 export const useNewestPost = (): IPost[] | null => {
   const [posts, setPosts] = useState<IPost[] | null>([]);
   useEffect(() => {
@@ -11,7 +15,7 @@ export const useNewestPost = (): IPost[] | null => {
         .from("posts")
         .select(`*, user:users(username)`)
         .order("created_at", { ascending: false })
-        .limit(5);
+        .limit(10);
 
       if (error) {
         toast.error(error.message);
@@ -24,4 +28,30 @@ export const useNewestPost = (): IPost[] | null => {
   }, []);
 
   return posts;
+};
+
+export const useGetPostById = (id: string) => {
+  const [post, setPost] = useState<IExtentPost | null>(null);
+
+  useEffect(() => {
+    const getPostByID = async () => {
+      try {
+        const { data: post, error } = await supabase
+          .from<IExtentPost>("posts")
+          .select("*, user:users(username)")
+          .eq("slug", id)
+          .limit(1)
+          .single();
+        if (post) {
+          setPost(post);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    getPostByID();
+  }, []);
+
+  return post;
 };
