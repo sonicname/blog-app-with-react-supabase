@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
 import CommonLayout from "../components/layouts/CommonLayout";
 import parser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import { supabase } from "../supabase/supabase";
-import { IPost } from "../types/IPost";
 import Container from "../components/layouts/Container";
 import { useGetPostById } from "../hooks/usePost";
-
-interface IExtentPost extends IPost {
-  user: { username: string };
-}
 
 const PostDetailPage = () => {
   const { postID } = useParams<string>();
@@ -17,13 +10,16 @@ const PostDetailPage = () => {
 
   return (
     <CommonLayout>
-      <Container>
-        <h1 className="font-semibold text-3xl mb-10">
-          {post?.title} by{" "}
+      <Container className="md:relative">
+        <h1 className="font-semibold text-3xl mb-2">{post?.title}</h1>
+
+        <div className="mb-10 text-sm font-medium">
+          {new Date(post?.created_at as Date).toLocaleDateString()} - by -{" "}
           <span className="font-bold !text-md text-purple-500">
             {post?.user.username}
           </span>
-        </h1>
+        </div>
+
         <div className="content-box">
           {parser(`${post?.content as string}`)}
         </div>
