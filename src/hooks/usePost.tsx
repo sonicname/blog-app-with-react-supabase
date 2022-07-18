@@ -7,8 +7,36 @@ interface IExtentPost extends IPost {
   user: { username: string };
 }
 
-export const useNewestPost = (): IPost[] | null => {
-  const [posts, setPosts] = useState<IPost[] | null>([]);
+export const useGetPosts = (): [
+  IExtentPost[] | null,
+  React.Dispatch<React.SetStateAction<number>>,
+] => {
+  const [posts, setPosts] = useState<IExtentPost[] | null>([]);
+  const [limit, setLimit] = useState<number>(5);
+
+  useEffect(() => {
+    const getPosts = async (limit: number) => {
+      const { data: posts, error } = await supabase
+        .from("posts")
+        .select(`*, user:users(username)`)
+        .order("created_at", { ascending: false })
+        .limit(limit);
+
+      if (error) {
+        toast.error(error.message);
+      } else {
+        setPosts(posts);
+      }
+    };
+
+    getPosts(limit);
+  }, [limit]);
+
+  return [posts, setLimit];
+};
+
+export const useNewestPost = (): IExtentPost[] | null => {
+  const [posts, setPosts] = useState<IExtentPost[] | null>([]);
   useEffect(() => {
     const getPosts = async () => {
       const { data: posts, error } = await supabase
