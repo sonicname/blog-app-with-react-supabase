@@ -6,6 +6,8 @@ export interface IPost {
   description: string;
   id?: string;
   slug?: string;
+  post_likes: number;
+  created_at: Date;
 
   user: { username: string };
 }

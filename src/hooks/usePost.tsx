@@ -35,18 +35,16 @@ export const useGetPostById = (id: string) => {
 
   useEffect(() => {
     const getPostByID = async () => {
-      try {
-        const { data: post, error } = await supabase
-          .from<IExtentPost>("posts")
-          .select("*, user:users(username)")
-          .eq("slug", id)
-          .limit(1)
-          .single();
-        if (post) {
-          setPost(post);
-        }
-      } catch (e) {
-        console.log(e);
+      const { data: post, error } = await supabase
+        .from<IExtentPost>("posts")
+        .select("*, user:users(username)")
+        .eq("slug", id)
+        .limit(1)
+        .single();
+      if (error) {
+        toast.error(error.message);
+      } else {
+        setPost(post);
       }
     };
 
