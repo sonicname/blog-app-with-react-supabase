@@ -1,19 +1,18 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from "../supabase/supabase";
 import { Session } from "@supabase/supabase-js";
 import { toast } from "react-toastify";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IAuthContext, IAuthValue } from "../types/IAuth";
+
 import { IUser } from "../types/IUser";
+import { supabase } from "../supabase/supabase";
+import { IAuthContext, IAuthValue } from "../types/IAuth";
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
-  signIn: () =>
-    new Promise((resolve, reject) => reject("Sign in method is empty!")),
-  signUp: () =>
-    new Promise((resolve, reject) => reject("Sign up method is empty!")),
+  signIn: () => new Promise((_, reject) => reject("Sign in method is empty!")),
+  signUp: () => new Promise((_, reject) => reject("Sign up method is empty!")),
   signOut: () =>
-    new Promise((resolve, reject) => reject("Sign out method is empty!")),
+    new Promise((_, reject) => reject("Sign out method is empty!")),
 });
 
 export const AuthProvider = (props: any) => {

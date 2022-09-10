@@ -1,18 +1,20 @@
 import { useEffect } from "react";
-import AuthLayout from "../components/layouts/AuthLayout";
-import Heading from "../components/heading/Heading";
-import SubHeading from "../components/heading/SubHeading";
+import { useForm } from "react-hook-form";
+import { Navigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
-import ErrorInput from "../components/errors/ErrorInput";
 import Button from "../components/button/Button";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import Heading from "../components/heading/Heading";
+import ErrorInput from "../components/errors/ErrorInput";
+import SubHeading from "../components/heading/SubHeading";
+import AuthLayout from "../components/layouts/AuthLayout";
+
 import { schema } from "../utils/schema";
 import { useAuth } from "../context/supabase-context";
 import { IAuthValue } from "../types/IAuth";
-import { Navigate } from "react-router-dom";
 
 const SignInPage = () => {
   const { signIn, session } = useAuth();
@@ -84,7 +86,7 @@ const SignInPage = () => {
           </Field>
 
           <Button
-            className="active:scale-90 duration-75"
+            className="duration-75 active:scale-90"
             type={"submit"}
             disabled={isSubmitting}
           >

@@ -5,7 +5,7 @@ interface IProps {
   color?: string;
 }
 
-export default function IconHeart({ className, color }: IProps) {
+const IconHeart = ({ className, color }: IProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,4 +20,6 @@ export default function IconHeart({ className, color }: IProps) {
       />
     </svg>
   );
-}
+};
+
+export default IconHeart;

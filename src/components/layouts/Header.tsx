@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import logo from "../../../assets/ghost.png";
+import { useState } from "react";
+import classNames from "classnames";
 import { NavLink } from "react-router-dom";
+import { withErrorBoundary } from "react-error-boundary";
+
 import { useAuth } from "../../context/supabase-context";
+
 import NavItem from "../navbar/NavItem";
 import IconMenu from "../icons/IconMenu";
-import classNames from "classnames";
 import Overlay from "../overlays/Overlay";
-import { withErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "../errors/ErrorComponent";
+
+import logo from "../../../assets/ghost.png";
 
 const Header = () => {
   const { session, signOut } = useAuth();
@@ -24,7 +27,7 @@ const Header = () => {
       </NavLink>
 
       <IconMenu
-        className="lg:hidden h-10 w-10"
+        className="w-10 h-10 lg:hidden"
         onClick={() => setToggle(!toggle)}
       />
 

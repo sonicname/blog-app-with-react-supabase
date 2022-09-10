@@ -1,19 +1,21 @@
 import { useRef } from "react";
-import CommonLayout from "../components/layouts/CommonLayout";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaCreatePost } from "../utils/schema";
+
 import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
+import PostEditor from "../components/editor/PostEditor";
 import ErrorInput from "../components/errors/ErrorInput";
+import CommonLayout from "../components/layouts/CommonLayout";
+
 import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
-import { useNavigate } from "react-router-dom";
-import PostEditor from "../components/editor/PostEditor";
 import { supabase } from "../supabase/supabase";
-import { toast } from "react-toastify";
+import { schemaCreatePost } from "../utils/schema";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
@@ -50,14 +52,14 @@ const CreatePostPage = () => {
   return (
     <CommonLayout>
       <div className="flex flex-col gap-y-5">
-        <h2 className="font-semibold text-xl text-center md:text-left">
+        <h2 className="text-xl font-semibold text-center md:text-left">
           Tạo bài viết mới
         </h2>
 
         <form
           // @ts-ignore
           onSubmit={handleSubmit(handleCreatePost)}
-          className="w-full flex flex-col gap-y-5"
+          className="flex flex-col w-full gap-y-5"
         >
           <div className="flex flex-col gap-y-5 lg:flex-row lg:gap-x-10">
             <Field>

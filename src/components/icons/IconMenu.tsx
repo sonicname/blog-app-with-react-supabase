@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 import { withErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "../errors/ErrorComponent";
