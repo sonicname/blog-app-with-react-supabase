@@ -1,7 +1,9 @@
-import CommonLayout from "../components/layouts/CommonLayout";
 import parser from "html-react-parser";
 import { useParams } from "react-router-dom";
+
+import CommonLayout from "../components/layouts/CommonLayout";
 import Container from "../components/layouts/Container";
+
 import { useGetPostById } from "../hooks/usePost";
 
 const PostDetailPage = () => {
@@ -11,7 +13,7 @@ const PostDetailPage = () => {
   return (
     <CommonLayout>
       <Container className="md:relative">
-        <h1 className="font-semibold text-3xl mb-2">{post?.title}</h1>
+        <h1 className="mb-2 text-3xl font-semibold">{post?.title}</h1>
 
         <div className="mb-10 text-sm font-medium">
           {new Date(post?.created_at as Date).toLocaleDateString()} - by -{" "}

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import Header from "./Header";
 import { withErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "../errors/ErrorComponent";
