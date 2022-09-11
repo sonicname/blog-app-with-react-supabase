@@ -1,8 +1,8 @@
-import React from "react";
+import { MutableRefObject, memo } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 interface IProps {
-  editorRef: React.MutableRefObject<null>;
+  editorRef: MutableRefObject<null>;
   initialValue: string;
   height?: number | string | undefined;
   menubar: boolean;
@@ -12,7 +12,7 @@ const PostEditor = ({ editorRef, initialValue, height, menubar }: IProps) => {
   return (
     <Editor
       // @ts-ignore
-      onInit={(evt, editor) => (editorRef.current = editor)}
+      onInit={(_, editor) => (editorRef.current = editor)}
       initialValue={initialValue}
       init={{
         height,
@@ -34,4 +34,4 @@ const PostEditor = ({ editorRef, initialValue, height, menubar }: IProps) => {
   );
 };
 
-export default PostEditor;
+export default memo(PostEditor);

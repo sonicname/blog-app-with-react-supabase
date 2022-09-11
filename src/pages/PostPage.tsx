@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 
-import PostItem from "../modules/Post/PostItem";
+import PostItem from "../components/post/PostItem";
 import CommonLayout from "../components/layouts/CommonLayout";
 
 import { useGetPosts } from "../hooks/usePost";

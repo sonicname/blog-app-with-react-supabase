@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { withErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "../errors/ErrorComponent";
@@ -24,6 +24,8 @@ const AuthLayout = ({ children }: IProps) => {
   );
 };
 
-export default withErrorBoundary(AuthLayout, {
-  FallbackComponent: ErrorComponent,
-});
+export default memo(
+  withErrorBoundary(AuthLayout, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

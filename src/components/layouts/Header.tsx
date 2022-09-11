@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import { withErrorBoundary } from "react-error-boundary";
@@ -67,6 +67,8 @@ const Header = () => {
   );
 };
 
-export default withErrorBoundary(Header, {
-  FallbackComponent: ErrorComponent,
-});
+export default memo(
+  withErrorBoundary(Header, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

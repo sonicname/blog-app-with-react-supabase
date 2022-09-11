@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { memo } from "react";
 
 interface IProps {
   className?: string;
@@ -22,4 +23,4 @@ const IconHeart = ({ className, color }: IProps) => {
   );
 };
 
-export default IconHeart;
+export default memo(IconHeart);

@@ -1,11 +1,16 @@
 import { NavLink } from "react-router-dom";
 
-import PostItem from "../modules/Post/PostItem";
+import PostItem from "../components/post/PostItem";
 import { useNewestPost } from "../hooks/usePost";
 import CommonLayout from "../components/layouts/CommonLayout";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
-  const newestPost = useNewestPost();
+  const { data, error, isLoading } = useNewestPost();
+
+  if (error) {
+    toast.error("Có lỗi xảy ra vui lòng thử lại!");
+  }
 
   return (
     <CommonLayout>
@@ -21,18 +26,20 @@ const HomePage = () => {
             </NavLink>
           </h2>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2 md:gap-x-5 lg:grid-cols-4 lg:gap-y-10 lg:gap-x-10">
-            {newestPost?.map((post) => (
-              <PostItem
-                key={post.id}
-                title={post.title}
-                description={post.description}
-                author={post.user.username}
-                slug={`/post/${post.slug}`}
-                thumbnail={post.thumbnail}
-              />
-            ))}
-          </div>
+          {!isLoading && (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2 md:gap-x-5 lg:grid-cols-4 lg:gap-y-10 lg:gap-x-10">
+              {data?.map((post) => (
+                <PostItem
+                  key={post.id}
+                  title={post.title}
+                  description={post.description}
+                  author={post.user.username}
+                  slug={`/post/${post.slug}`}
+                  thumbnail={post.thumbnail}
+                />
+              ))}
+            </div>
+          )}
         </section>
       </div>
     </CommonLayout>

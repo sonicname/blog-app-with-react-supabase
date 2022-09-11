@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;
@@ -19,4 +19,4 @@ const Container = ({ children, className }: IProps) => {
   );
 };
 
-export default Container;
+export default memo(Container);

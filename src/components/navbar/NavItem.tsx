@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 interface IProps {
@@ -17,4 +17,4 @@ const NavItem = ({ children, to }: IProps) => {
   );
 };
 
-export default NavItem;
+export default memo(NavItem);

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
 interface IProps {
   content: string;
@@ -16,4 +16,4 @@ const Heading = ({ content, children }: IProps) => {
   );
 };
 
-export default Heading;
+export default memo(Heading);

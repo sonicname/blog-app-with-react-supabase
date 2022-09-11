@@ -1,5 +1,7 @@
 import classNames from "classnames";
+import { memo } from "react";
 import { withErrorBoundary } from "react-error-boundary";
+
 import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
@@ -28,6 +30,4 @@ const IconMenu = ({ className, onClick }: IProps) => {
   );
 };
 
-export default withErrorBoundary(IconMenu, {
-  FallbackComponent: ErrorComponent,
-});
+export default memo(IconMenu);

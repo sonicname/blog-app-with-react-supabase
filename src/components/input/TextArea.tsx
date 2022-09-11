@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Control, useController } from "react-hook-form";
 
 interface IProps {
@@ -23,4 +24,4 @@ const TextArea = ({ name, control, row, placeholder }: IProps) => {
   );
 };
 
-export default TextArea;
+export default memo(TextArea);

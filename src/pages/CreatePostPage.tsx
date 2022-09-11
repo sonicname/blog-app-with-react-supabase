@@ -8,7 +8,6 @@ import Field from "../components/field/Field";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
-import PostEditor from "../components/editor/PostEditor";
 import ErrorInput from "../components/errors/ErrorInput";
 import CommonLayout from "../components/layouts/CommonLayout";
 
@@ -16,6 +15,7 @@ import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
 import { supabase } from "../supabase/supabase";
 import { schemaCreatePost } from "../utils/schema";
+import PostEditor from "../components/editor/PostEditor";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
@@ -51,7 +51,7 @@ const CreatePostPage = () => {
 
   return (
     <CommonLayout>
-      <div className="flex flex-col gap-y-5">
+      <div className="container flex flex-col gap-y-5">
         <h2 className="text-xl font-semibold text-center md:text-left">
           Tạo bài viết mới
         </h2>
