@@ -14,6 +14,7 @@ import { AuthProvider } from "./context/supabase-context";
 import PrivateRouter from "./components/layouts/PrivateRouter";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+// @ts-ignore
 const PostPage = lazy(() => import("./pages/PostPage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));

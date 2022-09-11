@@ -9,9 +9,16 @@ interface IProps {
   children: ReactNode;
   disabled?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
-const Button = ({ type, children, disabled, className = "" }: IProps) => {
+const Button = ({
+  type,
+  children,
+  disabled,
+  className = "",
+  onClick,
+}: IProps) => {
   return (
     <button
       className={classNames(
@@ -20,6 +27,7 @@ const Button = ({ type, children, disabled, className = "" }: IProps) => {
       )}
       type={type}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>

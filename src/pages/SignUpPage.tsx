@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,10 +25,6 @@ const SignUpPage = () => {
     mode: "onSubmit",
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-    document.title = "Đăng ký";
-  }, []);
 
   const handleSignUp = async (values: IAuthValue) => {
     try {

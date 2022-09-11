@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PostItem from "../components/post/PostItem";
-import { useNewestPost } from "../hooks/usePost";
 import CommonLayout from "../components/layouts/CommonLayout";
-import { toast } from "react-toastify";
+
+import { useNewestPost } from "../hooks/usePost";
 
 const HomePage = () => {
   const { data, error, isLoading } = useNewestPost();
