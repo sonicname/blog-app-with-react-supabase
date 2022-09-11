@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 interface IProps {
@@ -17,4 +18,4 @@ const SubHeading = ({ content, to, hrefText }: IProps) => {
   );
 };
 
-export default SubHeading;
+export default memo(SubHeading);

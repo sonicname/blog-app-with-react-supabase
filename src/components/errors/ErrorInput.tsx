@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;
@@ -10,4 +10,4 @@ const ErrorInput = ({ children }: IProps) => {
   );
 };
 
-export default ErrorInput;
+export default memo(ErrorInput);

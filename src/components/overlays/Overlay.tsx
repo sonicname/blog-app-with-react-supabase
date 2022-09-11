@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { memo } from "react";
 import { withErrorBoundary } from "react-error-boundary";
 
 import ErrorComponent from "../errors/ErrorComponent";
@@ -20,6 +21,8 @@ const Overlay = ({ toggle, setToggle }: IProps) => {
   );
 };
 
-export default withErrorBoundary(Overlay, {
-  FallbackComponent: ErrorComponent,
-});
+export default memo(
+  withErrorBoundary(Overlay, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

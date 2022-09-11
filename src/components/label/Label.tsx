@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 interface IProps {
   text: string;
   htmlFor: string;
@@ -14,4 +16,4 @@ const Label = ({ text, htmlFor }: IProps) => {
   );
 };
 
-export default Label;
+export default memo(Label);

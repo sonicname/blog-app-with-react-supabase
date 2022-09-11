@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { memo } from "react";
 
 interface IProps {
   className?: string;
@@ -17,4 +18,4 @@ const IconShare = ({ className }: IProps) => {
   );
 };
 
-export default IconShare;
+export default memo(IconShare);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 interface IProps {
@@ -40,4 +41,4 @@ const PostItem = ({ author, description, title, slug, thumbnail }: IProps) => {
   );
 };
 
-export default PostItem;
+export default memo(PostItem);

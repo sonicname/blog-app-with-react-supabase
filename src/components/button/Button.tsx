@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import classNames from "classnames";
 import { withErrorBoundary } from "react-error-boundary";
+
 import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
@@ -25,6 +26,8 @@ const Button = ({ type, children, disabled, className = "" }: IProps) => {
   );
 };
 
-export default withErrorBoundary(Button, {
-  FallbackComponent: ErrorComponent,
-});
+export default memo(
+  withErrorBoundary(Button, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

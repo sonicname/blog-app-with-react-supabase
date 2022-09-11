@@ -19,5 +19,9 @@ export const schemaCreatePost = yup.object({
     .max(255, "Tiêu đề không được quá 255 kí tự"),
   thumbnail: yup.string().required("Thumbnail không được để trống"),
   content: yup.string().min(5, "Nội dung phải dài hơn 5 kí tự!"),
-  description: yup.string().required("Mô tả không được để trống!"),
+  description: yup
+    .string()
+    .min(3, "Mô tả phải ngắn hơn 3 kí tự!")
+    .max(60, "Mô tả không được dài hơn 60 kí tự!")
+    .required("Mô tả không được để trống!"),
 });

@@ -1,7 +1,7 @@
-import { Session } from "@supabase/supabase-js";
 import { toast } from "react-toastify";
-import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Session } from "@supabase/supabase-js";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { IUser } from "../types/IUser";
 import { supabase } from "../supabase/supabase";

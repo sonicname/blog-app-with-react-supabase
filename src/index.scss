@@ -33,6 +33,12 @@ a {
   color: inherit;
 }
 
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .swiper-slide {
   max-width: 300px;
   z-index: 1;
@@ -79,5 +85,59 @@ a {
   img {
     max-width: 100%;
     object-fit: cover;
+  }
+}
+
+.ProseMirror {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+}
+
+.bubble-menu {
+  display: flex;
+  background-color: #0d0d0d;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  button {
+    border: none;
+    background: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
+  }
+}
+
+.floating-menu {
+  display: flex;
+  background-color: #0d0d0d10;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  button {
+    border: none;
+    background: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
   }
 }
