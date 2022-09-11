@@ -27,10 +27,6 @@ const SignInPage = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    document.title = "Đăng nhập";
-  }, []);
-
   const handleSignIn = async (values: IAuthValue) => {
     try {
       await signIn(values);

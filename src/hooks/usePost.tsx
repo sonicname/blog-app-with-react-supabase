@@ -6,13 +6,13 @@ interface IExtentPost extends IPost {
   user: { username: string };
 }
 
-export const useGetPosts = (limit: number) => {
-  const getPosts = async (limit: number) => {
+export const useGetPosts = (skip: number, limit: number) => {
+  const getPosts = async (skip: number, limit: number) => {
     const { data, error } = await supabase
       .from("posts")
       .select(`*, user:users(username)`)
       .order("created_at", { ascending: false })
-      .limit(limit);
+      .range(skip, limit);
 
     if (error) {
       throw error;
@@ -21,7 +21,9 @@ export const useGetPosts = (limit: number) => {
     return data;
   };
 
-  return useQuery<IPost[]>(["posts"], () => getPosts(limit));
+  return useQuery<IPost[]>([`posts_from_${skip}_to_${limit}`], () =>
+    getPosts(skip, limit),
+  );
 };
 
 export const useNewestPost = () => {
@@ -30,7 +32,7 @@ export const useNewestPost = () => {
       .from("posts")
       .select(`*, user:users(username)`)
       .order("created_at", { ascending: false })
-      .limit(10);
+      .limit(4);
 
     if (error) {
       throw error;
@@ -50,6 +52,7 @@ export const useGetPostById = (id: string) => {
       .eq("slug", id)
       .limit(1)
       .single();
+
     if (error) {
       throw error;
     }

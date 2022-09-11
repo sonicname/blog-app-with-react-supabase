@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PostItem from "../components/post/PostItem";
-import { useNewestPost } from "../hooks/usePost";
 import CommonLayout from "../components/layouts/CommonLayout";
-import { toast } from "react-toastify";
+
+import { useNewestPost } from "../hooks/usePost";
 
 const HomePage = () => {
   const { data, error, isLoading } = useNewestPost();
@@ -27,7 +28,7 @@ const HomePage = () => {
           </h2>
 
           {!isLoading && (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2 md:gap-x-5 lg:grid-cols-4 lg:gap-y-10 lg:gap-x-10">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-x-5 lg:grid-cols-4 lg:gap-10">
               {data?.map((post) => (
                 <PostItem
                   key={post.id}

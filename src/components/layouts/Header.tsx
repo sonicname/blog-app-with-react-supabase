@@ -40,7 +40,7 @@ const Header = () => {
         )}
       >
         <div className="flex flex-col gap-y-10 lg:flex-row lg:gap-x-5">
-          <NavItem to={"/post"}>Bài viết</NavItem>
+          <NavItem to={"/posts"}>Bài viết</NavItem>
 
           {session ? (
             <NavItem to={"/create"}>Tạo bài viết mới</NavItem>

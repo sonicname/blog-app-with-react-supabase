@@ -7,8 +7,8 @@ import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   type: string;
-  control: Control;
   name: string;
+  control?: Control;
   placeholder?: string;
 }
 
