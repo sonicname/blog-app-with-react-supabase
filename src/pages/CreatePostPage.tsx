@@ -10,12 +10,12 @@ import Input from "../components/input/Input";
 import Button from "../components/button/Button";
 import ErrorInput from "../components/errors/ErrorInput";
 import CommonLayout from "../components/layouts/CommonLayout";
+import PostEditor from "../components/editor/PostEditor";
 
 import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
 import { supabase } from "../supabase/supabase";
 import { schemaCreatePost } from "../utils/schema";
-import PostEditor from "../components/editor/PostEditor";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
