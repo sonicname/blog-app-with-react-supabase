@@ -1,13 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { IPost } from "../types/IPost";
 import { supabase } from "../supabase/supabase";
-import { useQuery } from "@tanstack/react-query";
 
 interface IExtentPost extends IPost {
   user: { username: string };
 }
 
 export const useGetPosts = (skip: number, limit: number) => {
-  const getPosts = async (skip: number, limit: number) => {
+  return useQuery<IPost[]>([`posts_from_${skip}_to_${limit}`], async () => {
     const { data, error } = await supabase
       .from("posts")
       .select(`*, user:users(username)`)
@@ -15,19 +16,15 @@ export const useGetPosts = (skip: number, limit: number) => {
       .range(skip, limit);
 
     if (error) {
-      throw error;
+      throw new Error(error.message);
     }
 
     return data;
-  };
-
-  return useQuery<IPost[]>([`posts_from_${skip}_to_${limit}`], () =>
-    getPosts(skip, limit),
-  );
+  });
 };
 
 export const useNewestPost = () => {
-  const getNewestPosts = async () => {
+  return useQuery<IExtentPost[]>(["newest_posts"], async () => {
     const { data, error } = await supabase
       .from("posts")
       .select(`*, user:users(username)`)
@@ -35,17 +32,15 @@ export const useNewestPost = () => {
       .limit(4);
 
     if (error) {
-      throw error;
+      throw new Error(error.message);
     }
 
     return data;
-  };
-
-  return useQuery<IExtentPost[]>(["newest_posts"], () => getNewestPosts());
+  });
 };
 
 export const useGetPostById = (id: string) => {
-  const getPostByID = async (id: string) => {
+  return useQuery([`post_${id}`], async () => {
     const { data, error } = await supabase
       .from<IExtentPost>("posts")
       .select("*, user:users(username)")
@@ -54,11 +49,9 @@ export const useGetPostById = (id: string) => {
       .single();
 
     if (error) {
-      throw error;
+      throw new Error(error.message);
     }
 
     return data;
-  };
-
-  return useQuery([`post_${id}`], () => getPostByID(id));
+  });
 };

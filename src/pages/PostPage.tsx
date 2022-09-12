@@ -1,31 +1,13 @@
-import { useState } from "react";
 import classNames from "classnames";
-import { toast } from "react-toastify";
 
-import PostItem from "../components/post/PostItem";
-import CommonLayout from "../components/layouts/CommonLayout";
 import Button from "../components/button/Button";
+import CommonLayout from "../components/layouts/CommonLayout";
+import PostLayoutGrid from "../components/post/PostLayoutGrid";
 
-import { useGetPosts } from "../hooks/usePost";
-
-const LIMIT = 7;
+import useNextPage from "../hooks/useNextPage";
 
 const PostPage = () => {
-  const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(LIMIT);
-  const { data, isLoading, isError } = useGetPosts(skip, limit);
-
-  if (isError) {
-    toast.error("Có lỗi xảy ra vui lòng thử lại!");
-  }
-
-  if (!isLoading && data?.length === 0) {
-    toast.info("Bạn đã xem hết bài đăng rồi!");
-    setLimit((preVal) => (preVal -= LIMIT));
-    setSkip((preVal) => (preVal -= LIMIT));
-    return;
-  }
-
+  const { postList, isLoading, nextPage } = useNextPage(7, "/posts");
   return (
     <CommonLayout>
       <div className="flex flex-col mt-4 gap-y-5 lg:gap-y-10">
@@ -44,30 +26,10 @@ const PostPage = () => {
             />
           </div>
 
-          {!isLoading && (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2 md:gap-x-5 lg:grid-cols-4 lg:gap-y-10 lg:gap-x-10">
-              {data &&
-                data.map((post) => (
-                  <PostItem
-                    key={post.id}
-                    title={post.title}
-                    description={post.description}
-                    author={post.user.username}
-                    slug={`/post/${post.slug}`}
-                    thumbnail={post.thumbnail}
-                  />
-                ))}
-            </div>
-          )}
+          {!isLoading && <PostLayoutGrid postList={postList} />}
 
           <div className="max-w-[500px] w-full mx-auto">
-            <Button
-              onClick={() => {
-                setSkip((preVal) => (preVal += LIMIT + 1));
-                setLimit((preVal) => (preVal += LIMIT));
-              }}
-              type="button"
-            >
+            <Button onClick={nextPage} type="button">
               Xem thêm
             </Button>
           </div>
