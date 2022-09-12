@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useQuery from "./useQuery";
 import { useGetPosts } from "./usePost";
 
-const useNextPage = (limit = 7, slug: string = "") => {
+const useNextPage = (slug: string = "", limit = 7) => {
   let query = useQuery();
   const navigate = useNavigate();
 

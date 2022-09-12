@@ -1,8 +1,5 @@
 import classNames from "classnames";
 import { memo } from "react";
-import { withErrorBoundary } from "react-error-boundary";
-
-import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   className?: string;

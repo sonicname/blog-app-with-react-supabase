@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,8 +12,8 @@ import SubHeading from "../components/heading/SubHeading";
 import AuthLayout from "../components/layouts/AuthLayout";
 
 import { schema } from "../utils/schema";
-import { useAuth } from "../context/supabase-context";
 import { IAuthValue } from "../types/IAuth";
+import { useAuth } from "../context/supabase-context";
 
 const SignInPage = () => {
   const { signIn, session } = useAuth();
