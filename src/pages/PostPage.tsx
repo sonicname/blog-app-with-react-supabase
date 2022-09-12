@@ -7,7 +7,7 @@ import PostLayoutGrid from "../components/post/PostLayoutGrid";
 import useNextPage from "../hooks/useNextPage";
 
 const PostPage = () => {
-  const { postList, isLoading, nextPage } = useNextPage(7, "/posts");
+  const { postList, isLoading, nextPage } = useNextPage("/posts");
   return (
     <CommonLayout>
       <div className="flex flex-col mt-4 gap-y-5 lg:gap-y-10">

@@ -8,6 +8,5 @@ export interface IPost {
   slug?: string;
   post_likes: number;
   created_at: Date;
-
   user: { username: string };
 }
