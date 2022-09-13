@@ -2,21 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 
 import { IPost } from "../types/IPost";
 import { supabase } from "../supabase/supabase";
+import { toast } from "react-toastify";
 
 interface IExtentPost extends IPost {
   user: { username: string };
 }
 
 export const useGetPosts = (page: number, limit: number = 7) => {
-  return useQuery<IPost[]>([`posts_page_${page}`], async () => {
+  return useQuery([`posts_page_${page}`], async () => {
     const { data, error } = await supabase
-      .from("posts")
+      .from<IPost>("posts")
       .select(`*, user:users(username)`)
       .order("created_at", { ascending: false })
       .range((page - 1) * limit, limit * page);
 
     if (error) {
-      throw new Error(error.message);
+      toast.error("Có lỗi xảy ra vui lòng thử lại!");
     }
 
     return data;
@@ -24,15 +25,15 @@ export const useGetPosts = (page: number, limit: number = 7) => {
 };
 
 export const useNewestPost = () => {
-  return useQuery<IExtentPost[]>(["newest_posts"], async () => {
+  return useQuery(["newest_posts"], async () => {
     const { data, error } = await supabase
-      .from("posts")
+      .from<IExtentPost>("posts")
       .select(`*, user:users(username)`)
       .order("created_at", { ascending: false })
       .limit(4);
 
     if (error) {
-      throw new Error(error.message);
+      toast.error("Có lỗi xảy ra vui lòng thử lại!");
     }
 
     return data;
@@ -49,7 +50,7 @@ export const useGetPostById = (id: string) => {
       .single();
 
     if (error) {
-      throw new Error(error.message);
+      toast.error("Có lỗi xảy ra vui lòng thử lại!");
     }
 
     return data;
