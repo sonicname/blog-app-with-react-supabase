@@ -1,9 +1,10 @@
 import { memo, ReactNode } from "react";
-import Header from "./Header";
 import { withErrorBoundary } from "react-error-boundary";
-import ErrorComponent from "../errors/ErrorComponent";
 import classNames from "classnames";
+
+import Header from "./Header";
 import Footer from "./Footer";
+import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
   children: ReactNode;

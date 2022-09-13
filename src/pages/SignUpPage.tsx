@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,7 +31,7 @@ const SignUpPage = () => {
     try {
       await signUp(values);
     } catch (e) {
-      console.log(e);
+      toast.error("Có lỗi xảy ra! vui lòng thử lại!");
     }
   };
 
@@ -40,11 +41,7 @@ const SignUpPage = () => {
     <AuthLayout>
       <div className="max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px] bg-[#1C1C24] rounded-lg">
         <Heading content={"Đăng ký tài khoản"}>
-          <SubHeading
-            content={"Đã có tài khoản rồi?"}
-            hrefText={"Đăng nhập"}
-            to={"/signin"}
-          />
+          <SubHeading content={"Đã có tài khoản rồi?"} hrefText={"Đăng nhập"} to={"/signin"} />
         </Heading>
 
         <form
@@ -54,12 +51,7 @@ const SignUpPage = () => {
         >
           <Field>
             <Label text={"Email"} htmlFor={"email"} />
-            <Input
-              type={"email"}
-              control={control}
-              name={"email"}
-              placeholder="Nhập địa chỉ email của bạn"
-            />
+            <Input type={"email"} control={control} name={"email"} placeholder="Nhập địa chỉ email của bạn" />
             {
               // @ts-ignore
               errors.email && <ErrorInput>{errors?.email?.message}</ErrorInput>
@@ -68,23 +60,14 @@ const SignUpPage = () => {
 
           <Field>
             <Label text={"Password"} htmlFor={"password"} />
-            <Input
-              type={"password"}
-              control={control}
-              name={"password"}
-              placeholder="Điền mật khẩu của bạn"
-            />
+            <Input type={"password"} control={control} name={"password"} placeholder="Điền mật khẩu của bạn" />
             {errors.password && (
               // @ts-ignore
               <ErrorInput>{errors?.password?.message}</ErrorInput>
             )}
           </Field>
 
-          <Button
-            className="duration-75 active:scale-90"
-            type={"submit"}
-            disabled={isSubmitting}
-          >
+          <Button className="duration-75 active:scale-90" type={"submit"} disabled={isSubmitting}>
             Tạo tài khoản
           </Button>
         </form>

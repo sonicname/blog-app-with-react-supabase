@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import PostItem from "../components/post/PostItem";
 import CommonLayout from "../components/layouts/CommonLayout";
@@ -7,11 +6,7 @@ import CommonLayout from "../components/layouts/CommonLayout";
 import { useNewestPost } from "../hooks/usePost";
 
 const HomePage = () => {
-  const { data, error, isLoading } = useNewestPost();
-
-  if (error) {
-    toast.error("Có lỗi xảy ra vui lòng thử lại!");
-  }
+  const { data, isLoading } = useNewestPost();
 
   return (
     <CommonLayout>
@@ -19,10 +14,7 @@ const HomePage = () => {
         <section className="flex flex-col gap-y-5">
           <h2 className="font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-3">
             Bài viết mới nhất{" "}
-            <NavLink
-              to={"/posts"}
-              className="font-bold text-green-500 text-[14px] lg:text-[16px]"
-            >
+            <NavLink to={"/posts"} className="font-bold text-green-500 text-[14px] lg:text-[16px]">
               xem thêm
             </NavLink>
           </h2>

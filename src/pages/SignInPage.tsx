@@ -1,5 +1,6 @@
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Field from "../components/field/Field";
@@ -17,6 +18,7 @@ import { useAuth } from "../context/supabase-context";
 
 const SignInPage = () => {
   const { signIn, session } = useAuth();
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors, isSubmitting },
@@ -30,7 +32,8 @@ const SignInPage = () => {
     try {
       await signIn(values);
     } catch (e) {
-      console.log(e);
+      toast.error("Có lỗi xảy ra! vui lòng thử lại!");
+      return navigate("/");
     }
   };
 
@@ -40,11 +43,7 @@ const SignInPage = () => {
     <AuthLayout>
       <div className="max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px] bg-[#1C1C24] rounded-lg">
         <Heading content={"Đăng Nhập"}>
-          <SubHeading
-            content={"Chưa có tài khoản?"}
-            hrefText={"Đăng ký ngay"}
-            to={"/signup"}
-          />
+          <SubHeading content={"Chưa có tài khoản?"} hrefText={"Đăng ký ngay"} to={"/signup"} />
         </Heading>
 
         <form
@@ -54,12 +53,7 @@ const SignInPage = () => {
         >
           <Field>
             <Label text={"Email"} htmlFor={"email"} />
-            <Input
-              type={"email"}
-              control={control}
-              name={"email"}
-              placeholder="Nhập địa chỉ email của bạn"
-            />
+            <Input type={"email"} control={control} name={"email"} placeholder="Nhập địa chỉ email của bạn" />
             {
               // @ts-ignore
               errors.email && <ErrorInput>{errors?.email?.message}</ErrorInput>
@@ -68,23 +62,14 @@ const SignInPage = () => {
 
           <Field>
             <Label text={"Password"} htmlFor={"password"} />
-            <Input
-              type={"password"}
-              control={control}
-              name={"password"}
-              placeholder="Điền mật khẩu của bạn"
-            />
+            <Input type={"password"} control={control} name={"password"} placeholder="Điền mật khẩu của bạn" />
             {errors.password && (
               // @ts-ignore
               <ErrorInput>{errors?.password?.message}</ErrorInput>
             )}
           </Field>
 
-          <Button
-            className="duration-75 active:scale-90"
-            type={"submit"}
-            disabled={isSubmitting}
-          >
+          <Button className="duration-75 active:scale-90" type={"submit"} disabled={isSubmitting}>
             Đăng Nhập
           </Button>
         </form>

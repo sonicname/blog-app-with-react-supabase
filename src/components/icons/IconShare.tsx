@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { memo } from "react";
+import classNames from "classnames";
 
 interface IProps {
   className?: string;

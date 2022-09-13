@@ -5,7 +5,7 @@ import PostLayoutGrid from "../components/post/PostLayoutGrid";
 import useNextPage from "../hooks/useNextPage";
 
 const PostPage = () => {
-  const { postList, isLoading, nextPage, page } = useNextPage("/posts");
+  const { postList, isLoading, page, nextPage } = useNextPage("/posts");
 
   return (
     <CommonLayout>
@@ -15,8 +15,7 @@ const PostPage = () => {
             {`Danh sách bài viết trang ${page}`}
           </h2>
 
-          {!isLoading && <PostLayoutGrid postList={postList} />}
-
+          {!isLoading && postList && <PostLayoutGrid postList={postList} />}
           <div className="max-w-[500px] w-full mx-auto">
             <Button onClick={nextPage} type="button">
               Xem thêm
