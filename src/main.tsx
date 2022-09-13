@@ -9,17 +9,18 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import "swiper/css";
 
-import ScreenLoading from "./components/loading/ScreenLoading";
 import { AuthProvider } from "./context/supabase-context";
+
+import ScreenLoading from "./components/loading/ScreenLoading";
 import PrivateRouter from "./components/layouts/PrivateRouter";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-// @ts-ignore
 const PostPage = lazy(() => import("./pages/PostPage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const CreatePostPage = lazy(() => import("./pages/CreatePostPage"));
 const PostDetailPage = lazy(() => import("./pages/PostDetailPage"));
+const SearchPostPage = lazy(() => import("./pages/SearchPostPage"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path={"/posts"} element={<PostPage />} />
               <Route path={"/signup"} element={<SignUpPage />} />
               <Route path={"/signin"} element={<SignInPage />} />
+              <Route path={"/search"} element={<SearchPostPage />} />
             </Routes>
             <ReactQueryDevtools />
           </QueryClientProvider>

@@ -40,6 +40,7 @@ const Header = () => {
         )}
       >
         <div className="flex flex-col gap-y-10 lg:flex-row lg:gap-x-5">
+          <NavItem to={"/search"}>Tìm Kiếm</NavItem>
           <NavItem to={"/posts"}>Bài viết</NavItem>
 
           {session ? (

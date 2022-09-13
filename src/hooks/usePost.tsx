@@ -7,13 +7,13 @@ interface IExtentPost extends IPost {
   user: { username: string };
 }
 
-export const useGetPosts = (skip: number, limit: number) => {
-  return useQuery<IPost[]>([`posts_from_${skip}_to_${limit}`], async () => {
+export const useGetPosts = (page: number, limit: number = 7) => {
+  return useQuery<IPost[]>([`posts_page_${page}`], async () => {
     const { data, error } = await supabase
       .from("posts")
       .select(`*, user:users(username)`)
       .order("created_at", { ascending: false })
-      .range(skip, limit);
+      .range((page - 1) * limit, limit * page);
 
     if (error) {
       throw new Error(error.message);
