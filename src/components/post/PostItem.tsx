@@ -11,7 +11,10 @@ interface IProps {
 
 const PostItem = ({ author, description, title, slug, thumbnail }: IProps) => {
   return (
-    <NavLink to={slug} className="block h-full shadow-2xl select-none">
+    <NavLink
+      to={slug}
+      className="block h-full duration-100 shadow-2xl select-none hover:opacity-60"
+    >
       <div className="bg-[#1C1C24] rounded-lg h-full flex flex-col">
         <div className="h-[250px] w-full rounded-lg overflow-hidden">
           <img

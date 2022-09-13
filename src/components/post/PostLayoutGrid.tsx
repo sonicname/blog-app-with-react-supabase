@@ -7,7 +7,7 @@ interface IPostLayoutProps {
 
 const PostLayoutGrid = ({ postList }: IPostLayoutProps) => {
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2 md:gap-x-5 lg:grid-cols-4 lg:gap-y-10 lg:gap-x-10">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-x-5 lg:grid-cols-4 lg:gap-10">
       {postList &&
         postList.map((post) => (
           <PostItem

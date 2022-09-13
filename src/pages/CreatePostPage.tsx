@@ -16,6 +16,7 @@ import { IPost } from "../types/IPost";
 import { useAuth } from "../context/supabase-context";
 import { supabase } from "../supabase/supabase";
 import { schemaCreatePost } from "../utils/schema";
+import useCreatePost from "../hooks/useCreatePost";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
@@ -40,7 +41,6 @@ const CreatePostPage = () => {
       content: editorRef.current.getContent(),
       author_id: session?.user?.id,
     });
-
     if (error) {
       toast.error(error.message);
     } else {
@@ -110,7 +110,7 @@ const CreatePostPage = () => {
 
             <PostEditor
               editorRef={editorRef}
-              initialValue={"<h1>Nhập nội dung bài viết</h1>"}
+              initialValue={"<h1>Hello world</h1>"}
               height={500}
               menubar={true}
             />
