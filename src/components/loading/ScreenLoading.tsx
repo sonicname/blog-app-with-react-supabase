@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 const ScreenLoading = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-70">
@@ -8,4 +6,4 @@ const ScreenLoading = () => {
   );
 };
 
-export default memo(ScreenLoading);
+export default ScreenLoading;
