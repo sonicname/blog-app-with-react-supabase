@@ -56,3 +56,18 @@ export const useGetPostById = (id: string) => {
     return data;
   });
 };
+
+export const getPostWithTitle = async (keyword: string) => {
+  try {
+    const { data } = await supabase
+      .from<IPost>("posts")
+      .select("title, slug")
+      .like("title", `%${keyword}%`)
+      .range(1, 5);
+
+    return data || [];
+  } catch (error) {
+    toast.error("Có lỗi xảy ra vui lòng thử lại!");
+    throw error;
+  }
+};

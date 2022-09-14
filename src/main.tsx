@@ -20,7 +20,6 @@ const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const CreatePostPage = lazy(() => import("./pages/CreatePostPage"));
 const PostDetailPage = lazy(() => import("./pages/PostDetailPage"));
-const SearchPostPage = lazy(() => import("./pages/SearchPostPage"));
 
 const queryClient = new QueryClient();
 
@@ -45,7 +44,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path={"/posts"} element={<PostPage />} />
               <Route path={"/signup"} element={<SignUpPage />} />
               <Route path={"/signin"} element={<SignInPage />} />
-              <Route path={"/search"} element={<SearchPostPage />} />
             </Routes>
             <ReactQueryDevtools />
           </QueryClientProvider>
