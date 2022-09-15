@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { Control, useController } from "react-hook-form";
 import classNames from "classnames";
+import { Control, useController } from "react-hook-form";
 import { withErrorBoundary } from "react-error-boundary";
 
 import ErrorComponent from "../errors/ErrorComponent";

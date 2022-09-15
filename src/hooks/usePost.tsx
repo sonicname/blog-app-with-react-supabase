@@ -1,36 +1,18 @@
+import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 
-import { IPost } from "../types/IPost";
+import { IFullPost } from "../types/IPost";
 import { supabase } from "../supabase/supabase";
-import { toast } from "react-toastify";
-
-interface IExtentPost extends IPost {
-  user: { username: string };
-}
 
 export const useGetPosts = (page: number, limit: number = 7) => {
-  return useQuery([`posts_page_${page}`], async () => {
+  return useQuery(["posts", { page, limit }], async () => {
+    const FROM = page > 1 ? (page - 1) * limit + 1 : (page - 1) * limit;
+    const LIMIT = limit * page;
     const { data, error } = await supabase
-      .from<IPost>("posts")
-      .select(`*, user:users(username)`)
+      .from<IFullPost>("posts")
+      .select(`title, description, id, slug, thumbnail, user:users(username)`)
       .order("created_at", { ascending: false })
-      .range((page - 1) * limit, limit * page);
-
-    if (error) {
-      toast.error("Có lỗi xảy ra vui lòng thử lại!");
-    }
-
-    return data;
-  });
-};
-
-export const useNewestPost = () => {
-  return useQuery(["newest_posts"], async () => {
-    const { data, error } = await supabase
-      .from<IExtentPost>("posts")
-      .select(`*, user:users(username)`)
-      .order("created_at", { ascending: false })
-      .limit(4);
+      .range(FROM, LIMIT);
 
     if (error) {
       toast.error("Có lỗi xảy ra vui lòng thử lại!");
@@ -41,9 +23,9 @@ export const useNewestPost = () => {
 };
 
 export const useGetPostById = (id: string) => {
-  return useQuery([`post_${id}`], async () => {
+  return useQuery(["post", { id }], async () => {
     const { data, error } = await supabase
-      .from<IExtentPost>("posts")
+      .from<IFullPost>("posts")
       .select("*, user:users(username)")
       .eq("slug", id)
       .limit(1)
@@ -55,19 +37,4 @@ export const useGetPostById = (id: string) => {
 
     return data;
   });
-};
-
-export const getPostWithTitle = async (keyword: string) => {
-  try {
-    const { data } = await supabase
-      .from<IPost>("posts")
-      .select("title, slug")
-      .like("title", `%${keyword}%`)
-      .range(1, 5);
-
-    return data || [];
-  } catch (error) {
-    toast.error("Có lỗi xảy ra vui lòng thử lại!");
-    throw error;
-  }
 };
