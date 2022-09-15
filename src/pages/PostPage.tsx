@@ -5,8 +5,6 @@ import PostPagination from "../components/post/PostPagination";
 
 import useNextPage from "../hooks/useNextPage";
 
-// TODO pagination
-
 const PostPage = () => {
   const { postList, isLoading, page, changePage, limit } = useNextPage("/posts");
 
@@ -19,12 +17,7 @@ const PostPage = () => {
           </h2>
 
           {!isLoading && postList && <PostLayoutGrid postList={postList} />}
-          <div className="max-w-[500px] w-full mx-auto">
-            {/* <Button onClick={nextPage} type="button">
-              Xem thêm
-            </Button> */}
-            <PostPagination perPage={limit} changePage={changePage} />
-          </div>
+          <PostPagination perPage={limit} changePage={changePage} />
         </section>
       </div>
     </CommonLayout>

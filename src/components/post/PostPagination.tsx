@@ -25,12 +25,12 @@ const PostPagination = ({ perPage = 7, changePage }: IPostPaginationProps) => {
       pageLinkClassName="p-2"
       pageClassName="p-2"
       breakLabel="..."
-      disabledClassName="opacity-60"
+      disabledClassName="opacity-70"
       pageCount={Math.ceil(countPosts / perPage)}
     />
   ) : (
     <div className="flex items-center justify-center">
-      <span className="border-2 rounded-full border-t-transparent animate-spin"></span>
+      <span className="border-2 rounded-full border-t-transparent animate-spin" />
     </div>
   );
 };
