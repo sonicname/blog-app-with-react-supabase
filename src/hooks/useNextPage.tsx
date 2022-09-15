@@ -21,9 +21,9 @@ const useNextPage = (slug: string = "", limit?: number) => {
     navigate(`${slug}?page=1`);
   }
 
-  const nextPage = () => navigate(`${slug}?page=${page + 1}`);
+  const changePage = (pageToChange: number) => navigate(`${slug}?page=${pageToChange}`);
 
-  return { postList, isLoading, page, nextPage };
+  return { postList, isLoading, page, changePage, limit };
 };
 
 export default useNextPage;

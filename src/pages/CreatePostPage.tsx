@@ -1,7 +1,5 @@
 import { useRef } from "react";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Field from "../components/field/Field";
@@ -9,17 +7,16 @@ import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
 import ErrorInput from "../components/errors/ErrorInput";
-import CommonLayout from "../components/layouts/CommonLayout";
 import PostEditor from "../components/editor/PostEditor";
+import CommonLayout from "../components/layouts/CommonLayout";
 
 import { IPost } from "../types/IPost";
-import { useAuth } from "../context/supabase-context";
-import { supabase } from "../supabase/supabase";
 import { schemaCreatePost } from "../utils/schema";
+import useCreatePost from "../hooks/useCreatePost";
+import { useAuth } from "../context/supabase-context";
 
 const CreatePostPage = () => {
   const { session } = useAuth();
-  const navigate = useNavigate();
   const editorRef = useRef(null);
 
   const {
@@ -31,21 +28,15 @@ const CreatePostPage = () => {
     resolver: yupResolver(schemaCreatePost),
   });
 
+  const postMutation = useCreatePost();
+
   const handleCreatePost = async (values: IPost) => {
-    const { error } = await supabase.from<IPost>("posts").insert({
-      title: values.title,
-      thumbnail: values.thumbnail,
-      description: values.description,
+    postMutation.mutate({
+      ...values,
       // @ts-ignore
       content: editorRef.current.getContent(),
-      author_id: session?.user?.id,
+      author_id: session?.user?.id as string,
     });
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Tạo bài viết thành công!");
-      navigate("/");
-    }
   };
 
   return (

@@ -38,3 +38,15 @@ export const useGetPostById = (id: string) => {
     return data;
   });
 };
+
+export const useCountPosts = () => {
+  return useQuery(["posts_count"], async () => {
+    const { count, error } = await supabase.from("posts").select("id", { count: "exact" });
+
+    if (error) {
+      toast.error("Có lỗi xảy ra khi lấy số lượng bài viết!");
+    }
+
+    return count;
+  });
+};
