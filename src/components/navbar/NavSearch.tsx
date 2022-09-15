@@ -1,19 +1,16 @@
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
-import { IPost } from "../../types/IPost";
+import Loading from "../loading/Loading";
 
 import useDebounce from "../../hooks/useDebounce";
+import useSearchPosts from "../../hooks/useSearchPosts";
 import useOnClickOutside from "../../hooks/useOnClickOutSide";
-import { getPostWithTitle } from "../../hooks/usePost";
-
-// TODO
 
 const NavSearch = () => {
   const [show, setShow] = useState(false);
   const [keyword, setKeyword] = useState("");
-  const [posts, setPosts] = useState<IPost[]>([]);
 
   const resultRef = useRef(null);
   useOnClickOutside(resultRef, () => setShow(false));
@@ -25,10 +22,7 @@ const NavSearch = () => {
 
   const debouncedVal = useDebounce(keyword, 1000);
 
-  useEffect(() => {
-    if (!debouncedVal) return;
-    getPostWithTitle(debouncedVal).then((result) => setPosts(result));
-  }, [debouncedVal]);
+  const { isFetching, data } = useSearchPosts(debouncedVal);
 
   return (
     <div className="relative z-30 flex-1">
@@ -41,13 +35,15 @@ const NavSearch = () => {
 
       <div
         className={classNames(
-          "absolute w-full rounded-md !top-full flex flex-col mt-2 bg-[#181818] duration-150 h-fit z-30",
+          "absolute w-full rounded-md !top-full flex flex-col mt-2 bg-[#181818c9] duration-150 h-fit",
           show ? "scale-100" : "scale-0",
         )}
         ref={resultRef}
       >
-        {posts &&
-          posts.map((post) => (
+        {isFetching && <Loading />}
+
+        {data &&
+          data.map((post) => (
             <NavLink
               key={post.slug}
               className="flex items-center justify-between p-2 rounded-md hover:bg-slate-500"

@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { IPost } from "../types/IPost";
@@ -18,13 +18,7 @@ const useCreatePost = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async ({
-      author_id,
-      content,
-      description,
-      thumbnail,
-      title,
-    }: IUseCreatePost) => {
+    async ({ author_id, content, description, thumbnail, title }: IUseCreatePost) => {
       const { error } = await supabase.from<IPost>("posts").insert({
         title,
         thumbnail,

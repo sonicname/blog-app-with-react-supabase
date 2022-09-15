@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import PostItem from "../components/post/PostItem";
 import CommonLayout from "../components/layouts/CommonLayout";
 
-import { useNewestPost } from "../hooks/usePost";
+import { useGetPosts } from "../hooks/usePost";
 
 const HomePage = () => {
-  const { data, isLoading } = useNewestPost();
+  const { data, isLoading } = useGetPosts(1, 3);
 
   return (
     <CommonLayout>

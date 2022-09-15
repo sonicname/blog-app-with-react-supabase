@@ -22,7 +22,7 @@ const PostDetailPage = () => {
             {data && (
               <>
                 <img src={data?.thumbnail} className="w-full h-[250px] object-cover rounded-md" alt="" />
-                <h1 className="text-3xl font-semibold">{data?.title}</h1>
+                <h1 className="text-3xl font-semibold text-center">{data?.title}</h1>
                 <div className="text-sm font-medium">
                   {new Date(data?.created_at as Date).toLocaleDateString()} - by -{" "}
                   <span className="font-bold !text-md text-purple-500">{data?.user.username}</span>
