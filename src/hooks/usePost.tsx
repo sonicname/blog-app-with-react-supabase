@@ -7,10 +7,10 @@ import { supabase } from "../supabase/supabase";
 export const useGetPosts = (page: number, limit: number = 7) => {
   return useQuery(["posts", { page, limit }], async () => {
     const FROM = page > 1 ? (page - 1) * limit + 1 : (page - 1) * limit;
-    const LIMIT = limit * page;
+    const LIMIT = page === 1 ? page * limit : limit * page + 1;
     const { data, error } = await supabase
       .from<IFullPost>("posts")
-      .select(`title, description, id, slug, thumbnail, user:users(username)`)
+      .select(`title, description, id, thumbnail, user:users(username)`)
       .order("created_at", { ascending: false })
       .range(FROM, LIMIT);
 
@@ -27,7 +27,7 @@ export const useGetPostById = (id: string) => {
     const { data, error } = await supabase
       .from<IFullPost>("posts")
       .select("*, user:users(username)")
-      .eq("slug", id)
+      .eq("id", id)
       .limit(1)
       .single();
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useQuery from "./useQuery";
 import { useGetPosts } from "./usePost";
 
-const useNextPage = (slug: string = "", limit?: number) => {
+const useChangePage = (slug: string = "", limit?: number) => {
   let query = useQuery();
   const navigate = useNavigate();
 
@@ -26,4 +26,4 @@ const useNextPage = (slug: string = "", limit?: number) => {
   return { postList, isLoading, page, changePage, limit };
 };
 
-export default useNextPage;
+export default useChangePage;

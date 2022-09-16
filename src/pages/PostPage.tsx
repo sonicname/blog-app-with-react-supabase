@@ -1,12 +1,11 @@
-import Button from "../components/button/Button";
 import CommonLayout from "../components/layouts/CommonLayout";
 import PostLayoutGrid from "../components/post/PostLayoutGrid";
 import PostPagination from "../components/post/PostPagination";
 
-import useNextPage from "../hooks/useNextPage";
+import useChangePage from "../hooks/useChangePage";
 
 const PostPage = () => {
-  const { postList, isLoading, page, changePage, limit } = useNextPage("/posts");
+  const { postList, isLoading, page, changePage, limit } = useChangePage("/posts");
 
   return (
     <CommonLayout>

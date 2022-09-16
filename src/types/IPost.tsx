@@ -7,7 +7,6 @@ export interface IPost {
   post_likes: number;
   created_at: Date;
   id?: string;
-  slug?: string;
 }
 
 export interface IFullPost extends IPost {
@@ -16,5 +15,5 @@ export interface IFullPost extends IPost {
 
 export interface IPostSearchItem {
   title: string;
-  slug?: string;
+  id: string;
 }

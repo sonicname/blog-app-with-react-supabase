@@ -17,8 +17,8 @@ const PostPagination = ({ perPage = 7, changePage }: IPostPaginationProps) => {
   return countPosts ? (
     <ReactPaginate
       className="flex items-center justify-center gap-x-5"
-      previousLabel="<"
       nextLabel=">"
+      previousLabel="<"
       pageRangeDisplayed={3}
       onPageChange={handleChangePage}
       activeClassName="bg-green-400 text-black rounded-md"
@@ -26,7 +26,7 @@ const PostPagination = ({ perPage = 7, changePage }: IPostPaginationProps) => {
       pageClassName="p-2"
       breakLabel="..."
       disabledClassName="opacity-70"
-      pageCount={Math.ceil(countPosts / perPage)}
+      pageCount={Math.round(countPosts / perPage)}
     />
   ) : (
     <div className="flex items-center justify-center">

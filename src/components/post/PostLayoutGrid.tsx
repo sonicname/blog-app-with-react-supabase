@@ -1,8 +1,8 @@
 import PostItem from "./PostItem";
-import { IPost } from "../../types/IPost";
+import { IFullPost } from "../../types/IPost";
 
 interface IPostLayoutProps {
-  postList: IPost[] | undefined;
+  postList: IFullPost[] | undefined;
 }
 
 const PostLayoutGrid = ({ postList }: IPostLayoutProps) => {
@@ -15,7 +15,7 @@ const PostLayoutGrid = ({ postList }: IPostLayoutProps) => {
             title={post.title}
             description={post.description}
             author={post.user.username}
-            slug={`/post/${post.slug}`}
+            id={post.id}
             thumbnail={post.thumbnail}
           />
         ))}

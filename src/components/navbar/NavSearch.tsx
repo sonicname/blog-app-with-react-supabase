@@ -45,9 +45,9 @@ const NavSearch = () => {
         {data &&
           data.map((post) => (
             <NavLink
-              key={post.slug}
+              key={post.id}
               className="flex items-center justify-between p-2 rounded-md hover:bg-slate-500"
-              to={`/post/${post.slug}`}
+              to={`/post/${post.id}`}
             >
               {post.title}
             </NavLink>
