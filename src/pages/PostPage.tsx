@@ -1,11 +1,11 @@
-import Button from "../components/button/Button";
 import CommonLayout from "../components/layouts/CommonLayout";
 import PostLayoutGrid from "../components/post/PostLayoutGrid";
+import PostPagination from "../components/post/PostPagination";
 
-import useNextPage from "../hooks/useNextPage";
+import useChangePage from "../hooks/useChangePage";
 
 const PostPage = () => {
-  const { postList, isLoading, page, nextPage } = useNextPage("/posts");
+  const { postList, isLoading, page, changePage, limit } = useChangePage("/posts");
 
   return (
     <CommonLayout>
@@ -16,11 +16,7 @@ const PostPage = () => {
           </h2>
 
           {!isLoading && postList && <PostLayoutGrid postList={postList} />}
-          <div className="max-w-[500px] w-full mx-auto">
-            <Button onClick={nextPage} type="button">
-              Xem thêm
-            </Button>
-          </div>
+          <PostPagination perPage={limit} changePage={changePage} />
         </section>
       </div>
     </CommonLayout>

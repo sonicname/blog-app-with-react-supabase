@@ -4,12 +4,12 @@ import { withErrorBoundary } from "react-error-boundary";
 import ErrorComponent from "../errors/ErrorComponent";
 
 interface IProps {
-  toggle: boolean;
+  toggle?: boolean;
   setToggle: (value: boolean) => void;
   className?: string;
 }
 
-const Overlay = ({ toggle, setToggle, className }: IProps) => {
+const Overlay = ({ toggle, setToggle = () => {}, className }: IProps) => {
   return (
     <div
       className={classNames(
