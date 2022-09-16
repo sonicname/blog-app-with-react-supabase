@@ -5,7 +5,11 @@ interface IProps {
 }
 
 const Field = ({ children }: IProps) => {
-  return <div className="flex flex-col gap-y-[10px] w-full">{children}</div>;
+  return (
+    <div className="flex flex-col gap-y-[10px] w-full">
+      {children}
+    </div>
+  );
 };
 
 export default Field;

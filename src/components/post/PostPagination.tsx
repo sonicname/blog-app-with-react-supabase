@@ -7,7 +7,10 @@ interface IPostPaginationProps {
   changePage: (pageToChange: number) => void;
 }
 
-const PostPagination = ({ perPage = 7, changePage }: IPostPaginationProps) => {
+const PostPagination = ({
+  perPage = 7,
+  changePage,
+}: IPostPaginationProps) => {
   const { data: countPosts } = useCountPosts();
 
   const handleChangePage = (e: { selected: number }) => {

@@ -52,7 +52,12 @@ const CreatePostPage = () => {
           <div className="flex flex-col gap-y-5 lg:flex-row lg:gap-x-10">
             <Field>
               <Label text={"Tiêu đề bài viết"} htmlFor={"title"} />
-              <Input type={"text"} control={control} placeholder={"Nhập tiêu đề bài viết"} name={"title"} />
+              <Input
+                type={"text"}
+                control={control}
+                placeholder={"Nhập tiêu đề bài viết"}
+                name={"title"}
+              />
               {errors.title && (
                 // @ts-ignore
                 <ErrorInput>{errors?.title?.message}</ErrorInput>
@@ -61,7 +66,12 @@ const CreatePostPage = () => {
 
             <Field>
               <Label text={"Thumbnail"} htmlFor={"thumbnail"} />
-              <Input type={"url"} control={control} placeholder={"Nhập thumbnail"} name={"thumbnail"} />
+              <Input
+                type={"url"}
+                control={control}
+                placeholder={"Nhập thumbnail"}
+                name={"thumbnail"}
+              />
               {errors.thumbnail && (
                 // @ts-ignore
                 <ErrorInput>{errors?.thumbnail?.message}</ErrorInput>
@@ -70,10 +80,17 @@ const CreatePostPage = () => {
 
             <Field>
               <Label text={"Mô tả"} htmlFor={"description"} />
-              <Input type={"text"} control={control} placeholder={"Nhập mô tả"} name={"description"} />
+              <Input
+                type={"text"}
+                control={control}
+                placeholder={"Nhập mô tả"}
+                name={"description"}
+              />
               {errors.description && (
-                // @ts-ignore
-                <ErrorInput>{errors?.description?.message}</ErrorInput>
+                <ErrorInput>
+                  {/* @ts-ignore */}
+                  {errors?.description?.message}
+                </ErrorInput>
               )}
             </Field>
           </div>
@@ -81,7 +98,12 @@ const CreatePostPage = () => {
           <Field>
             <Label text={"Nội dung"} htmlFor={"content"} />
 
-            <PostEditor editorRef={editorRef} initialValue={"<h1>Hello world</h1>"} height={500} menubar={true} />
+            <PostEditor
+              editorRef={editorRef}
+              initialValue={"<h1>Hello world</h1>"}
+              height={500}
+              menubar={true}
+            />
           </Field>
 
           <div className="max-w-[200px] flex items-center justify-center">

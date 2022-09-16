@@ -21,7 +21,11 @@ const PostDetailPage = () => {
           <Container className="flex flex-col gap-y-5">
             {data && (
               <>
-                <img src={data?.thumbnail} className="w-full h-[250px] object-cover rounded-md" alt="" />
+                <img
+                  src={data?.thumbnail}
+                  className="w-full h-[250px] object-cover rounded-md"
+                  alt=""
+                />
                 <h1 className="text-3xl font-semibold text-center">{data?.title}</h1>
                 <div className="text-sm font-medium">
                   {new Date(data?.created_at as Date).toLocaleDateString()} - by -{" "}

@@ -14,7 +14,10 @@ const HomePage = () => {
         <section className="flex flex-col gap-y-5">
           <h2 className="font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-4">
             Bài viết mới nhất{" "}
-            <NavLink to={"/posts"} className="font-semibold text-green-500 text-[14px] lg:text-[16px] hover:underline">
+            <NavLink
+              to={"/posts"}
+              className="font-semibold text-green-500 text-[14px] lg:text-[16px] hover:underline"
+            >
               xem thêm
             </NavLink>
           </h2>

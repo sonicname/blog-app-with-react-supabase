@@ -18,7 +18,13 @@ const useCreatePost = () => {
   const navigate = useNavigate();
 
   return useMutation(
-    async ({ author_id, content, description, thumbnail, title }: IUseCreatePost) => {
+    async ({
+      author_id,
+      content,
+      description,
+      thumbnail,
+      title,
+    }: IUseCreatePost) => {
       const { error } = await supabase.from<IPost>("posts").insert({
         title,
         thumbnail,
