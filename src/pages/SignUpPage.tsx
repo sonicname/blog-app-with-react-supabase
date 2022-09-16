@@ -51,16 +51,26 @@ const SignUpPage = () => {
         >
           <Field>
             <Label text={"Email"} htmlFor={"email"} />
-            <Input type={"email"} control={control} name={"email"} placeholder="Nhập địa chỉ email của bạn" />
-            {
+            <Input
+              type={"email"}
+              control={control}
+              name={"email"}
+              placeholder="Nhập địa chỉ email của bạn"
+            />
+            {errors.email && (
               // @ts-ignore
-              errors.email && <ErrorInput>{errors?.email?.message}</ErrorInput>
-            }
+              <ErrorInput>{errors?.email?.message}</ErrorInput>
+            )}
           </Field>
 
           <Field>
             <Label text={"Password"} htmlFor={"password"} />
-            <Input type={"password"} control={control} name={"password"} placeholder="Điền mật khẩu của bạn" />
+            <Input
+              type={"password"}
+              control={control}
+              name={"password"}
+              placeholder="Điền mật khẩu của bạn"
+            />
             {errors.password && (
               // @ts-ignore
               <ErrorInput>{errors?.password?.message}</ErrorInput>

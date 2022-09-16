@@ -9,7 +9,11 @@ interface IProps {
   className?: string;
 }
 
-const Overlay = ({ toggle, setToggle = () => {}, className }: IProps) => {
+const Overlay = ({
+  toggle,
+  setToggle = () => {},
+  className,
+}: IProps) => {
   return (
     <div
       className={classNames(

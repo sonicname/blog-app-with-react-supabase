@@ -6,7 +6,9 @@ interface IProps {
 
 const ErrorInput = ({ children }: IProps) => {
   return (
-    <span className="text-red-500 text-[14px] font-medium">{children}</span>
+    <span className="text-red-500 text-[14px] font-medium">
+      {children}
+    </span>
   );
 };
 
