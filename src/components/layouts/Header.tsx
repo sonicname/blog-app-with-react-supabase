@@ -11,6 +11,7 @@ import ErrorComponent from "../errors/ErrorComponent";
 
 import { useAuth } from "../../context/supabase-context";
 import NavSearch from "../navbar/NavSearch";
+import Button from "../button/Button";
 
 const Header = () => {
   const { session, signOut } = useAuth();
@@ -26,10 +27,7 @@ const Header = () => {
         />
       </NavLink>
       <NavSearch />
-      <IconMenu
-        className="w-10 h-10 lg:hidden"
-        onClick={() => setToggle(!toggle)}
-      />
+      <IconMenu className="w-10 h-10 lg:hidden" onClick={() => setToggle(!toggle)} />
       <Overlay toggle={toggle} setToggle={setToggle} />
       <div
         className={classNames(
@@ -46,19 +44,7 @@ const Header = () => {
           )}
         </div>
 
-        <div className="flex items-center">
-          {session && (
-            <p>
-              {session?.user?.email?.split("@")[0]},{" "}
-              <span
-                onClick={() => signOut()}
-                className="font-medium text-[#4ACD8D] underline cursor-pointer"
-              >
-                đăng xuất
-              </span>
-            </p>
-          )}
-        </div>
+        {session && <NavItem to={`/profile/${session.user?.id}`}>Tài Khoản</NavItem>}
       </div>
     </header>
   );

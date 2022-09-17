@@ -2,10 +2,13 @@ import CommonLayout from "../components/layouts/CommonLayout";
 import PostLayoutGrid from "../components/post/PostLayoutGrid";
 import PostPagination from "../components/post/PostPagination";
 
+import { useCountPosts, useGetPosts } from "../hooks/usePost";
 import useChangePage from "../hooks/useChangePage";
 
 const PostPage = () => {
-  const { postList, isLoading, page, changePage, limit } = useChangePage("/posts");
+  const { page, changePage, limit } = useChangePage("/posts");
+  const { data: postList, isLoading } = useGetPosts(page, limit);
+  const { data: countPost } = useCountPosts();
 
   return (
     <CommonLayout>
@@ -16,7 +19,9 @@ const PostPage = () => {
           </h2>
 
           {!isLoading && postList && <PostLayoutGrid postList={postList} />}
-          <PostPagination perPage={limit} changePage={changePage} />
+          {countPost && (
+            <PostPagination perPage={limit} changePage={changePage} count={countPost} />
+          )}
         </section>
       </div>
     </CommonLayout>
