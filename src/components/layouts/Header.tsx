@@ -11,7 +11,6 @@ import ErrorComponent from "../errors/ErrorComponent";
 
 import { useAuth } from "../../context/supabase-context";
 import NavSearch from "../navbar/NavSearch";
-import Button from "../button/Button";
 
 const Header = () => {
   const { session, signOut } = useAuth();
@@ -44,7 +43,17 @@ const Header = () => {
           )}
         </div>
 
-        {session && <NavItem to={`/profile/${session.user?.id}`}>Tài Khoản</NavItem>}
+        {session && (
+          <div className="flex flex-col lg:gap-x-5 lg:flex-row gap-y-10">
+            <NavItem to={`/profile`}>Tài khoản</NavItem>
+            <span
+              className="bg-[#8C6DFD] px-[20px] py-[10px] lg:px-[18px] rounded-md text-white font-semibold hover:opacity-75 duration-100 cursor-pointer"
+              onClick={() => signOut()}
+            >
+              Đăng xuất
+            </span>
+          </div>
+        )}
       </div>
     </header>
   );

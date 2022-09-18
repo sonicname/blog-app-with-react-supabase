@@ -1,9 +1,9 @@
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { IPost } from "../types/IPost";
-import { supabase } from "../supabase/supabase";
+import { IPost } from '../types/IPost';
+import { supabase } from '../supabase/supabase';
 
 interface IUseCreatePost {
   title: string;
@@ -25,7 +25,7 @@ const useCreatePost = () => {
       thumbnail,
       title,
     }: IUseCreatePost) => {
-      const { error } = await supabase.from<IPost>("posts").insert({
+      const { error } = await supabase.from<IPost>('posts').insert({
         title,
         thumbnail,
         description,
@@ -39,13 +39,14 @@ const useCreatePost = () => {
     },
     {
       onError: () => {
-        toast.error("Đăng bài viết thất bại!");
-        return navigate("/");
+        toast.error('Đăng bài viết thất bại!');
+        return navigate('/');
       },
       onSuccess: () => {
-        toast.success("Tạo bài viết thành công!");
-        queryClient.invalidateQueries(["newest_posts"]);
-        return navigate("/");
+        toast.success('Tạo bài viết thành công!');
+        queryClient.invalidateQueries(['posts']);
+        queryClient.invalidateQueries(['posts_count']);
+        return navigate('/');
       },
     },
   );

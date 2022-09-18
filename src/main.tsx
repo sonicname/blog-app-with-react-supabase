@@ -45,7 +45,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path={"/signin"} element={<SignInPage />} />
               <Route path={"/posts"} element={<PostPage />} />
               <Route path={"/post/:postID"} element={<PostDetailPage />} />
-              <Route path={"/profile/:profileID"} element={<ProfilePage />} />
+              <Route
+                path={"/profile"}
+                element={
+                  <PrivateRouter>
+                    <ProfilePage />
+                  </PrivateRouter>
+                }
+              />
             </Routes>
             <ReactQueryDevtools />
           </QueryClientProvider>
