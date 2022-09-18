@@ -1,23 +1,17 @@
 import ReactPaginate from "react-paginate";
 
-import { useCountPosts } from "../../hooks/usePost";
-
 interface IPostPaginationProps {
   perPage?: number;
+  count: number;
   changePage: (pageToChange: number) => void;
 }
 
-const PostPagination = ({
-  perPage = 7,
-  changePage,
-}: IPostPaginationProps) => {
-  const { data: countPosts } = useCountPosts();
-
+const PostPagination = ({ perPage = 7, changePage, count }: IPostPaginationProps) => {
   const handleChangePage = (e: { selected: number }) => {
     changePage(e.selected + 1);
   };
 
-  return countPosts ? (
+  return (
     <ReactPaginate
       className="flex items-center justify-center gap-x-5"
       nextLabel=">"
@@ -29,12 +23,8 @@ const PostPagination = ({
       pageClassName="p-2"
       breakLabel="..."
       disabledClassName="opacity-70"
-      pageCount={Math.round(countPosts / perPage)}
+      pageCount={Math.round(count / perPage)}
     />
-  ) : (
-    <div className="flex items-center justify-center">
-      <span className="border-2 rounded-full border-t-transparent animate-spin" />
-    </div>
   );
 };
 

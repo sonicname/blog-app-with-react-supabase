@@ -26,10 +26,7 @@ const Header = () => {
         />
       </NavLink>
       <NavSearch />
-      <IconMenu
-        className="w-10 h-10 lg:hidden"
-        onClick={() => setToggle(!toggle)}
-      />
+      <IconMenu className="w-10 h-10 lg:hidden" onClick={() => setToggle(!toggle)} />
       <Overlay toggle={toggle} setToggle={setToggle} />
       <div
         className={classNames(
@@ -46,19 +43,17 @@ const Header = () => {
           )}
         </div>
 
-        <div className="flex items-center">
-          {session && (
-            <p>
-              {session?.user?.email?.split("@")[0]},{" "}
-              <span
-                onClick={() => signOut()}
-                className="font-medium text-[#4ACD8D] underline cursor-pointer"
-              >
-                đăng xuất
-              </span>
-            </p>
-          )}
-        </div>
+        {session && (
+          <div className="flex flex-col lg:gap-x-5 lg:flex-row gap-y-10">
+            <NavItem to={`/profile`}>Tài khoản</NavItem>
+            <span
+              className="bg-[#8C6DFD] px-[20px] py-[10px] lg:px-[18px] rounded-md text-white font-semibold hover:opacity-75 duration-100 cursor-pointer"
+              onClick={() => signOut()}
+            >
+              Đăng xuất
+            </span>
+          </div>
+        )}
       </div>
     </header>
   );
