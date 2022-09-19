@@ -18,12 +18,11 @@ const ProfilePage = () => {
   const { session } = useAuth();
   const navigate = useNavigate();
   const postDeleteMutation = useDeletePost();
+  const { changePage, page } = useChangePage(`/profile`);
 
   const { data: postCount } = useCountPostsByAuthor(
     session?.user?.id as string,
   );
-  const { changePage, page, limit } = useChangePage(`/profile`);
-
   const { data: userInfo } = useGetUserByID(session?.user?.id as string);
   const { data: userPosts } = useGetPostsByAuthor(
     session?.user?.id as string,
@@ -48,37 +47,39 @@ const ProfilePage = () => {
 
         <div className='flex flex-col mt-5 gap-y-5 lg:gap-y-10'>
           {userPosts && (
-            <table className='w-full border-collapse'>
+            <table className='max-w-full overflow-x-scroll border-collapse'>
               <tbody>
                 <tr>
-                  <th className='hidden lg:block'>Thumbnail</th>
-                  <th>Tiêu đề</th>
-                  <th>Mô tả</th>
-                  <th>Thời gian</th>
-                  <th>Xoá</th>
+                  <th className='hidden lg:block lg:text-sm'>Image</th>
+                  <th className='text-xs lg:text-base'>Title</th>
+                  <th className='text-xs lg:text-base'>Description</th>
+                  <th className='text-xs lg:text-base'>Time</th>
+                  <th className='text-xs lg:text-base'>Modify</th>
                 </tr>
                 {userPosts.map((post) => (
                   <tr key={post.id}>
-                    <td className='hidden lg:block' colSpan={1}>
+                    <td className='hidden lg:block'>
                       <img
                         src={post.thumbnail}
-                        className='object-cover w-20 h-20 mx-auto rounded-lg'
+                        className='object-cover w-20 h-20 rounded-lg'
                         alt=''
                       />
                     </td>
                     <td>
                       <h4
                         onClick={() => navigate(`/post/${post.id}`)}
-                        className='text-lg font-semibold underline cursor-pointer'
+                        className='text-sm font-semibold text-green-300 cursor-pointer lg:text-base hover:underline'
                       >
                         {post.title}
                       </h4>
                     </td>
                     <td>
-                      <p className='text-md line-clamp-2'>{post.description}</p>
+                      <p className='text-base lg:text-base line-clamp-2'>
+                        {post.description}
+                      </p>
                     </td>
                     <td>
-                      <p className='text-center text-md'>
+                      <p className='text-base lg:text-base'>
                         {new Date(post.created_at).toLocaleString()}
                       </p>
                     </td>
@@ -88,7 +89,7 @@ const ProfilePage = () => {
                           postDeleteMutation.mutate(post.id as string)
                         }
                         type='button'
-                        className='px-2 py-1 lg:p-2'
+                        className='p-1 lg:p-2'
                       >
                         Xoá
                       </Button>
@@ -99,11 +100,7 @@ const ProfilePage = () => {
             </table>
           )}
           {postCount && (
-            <PostPagination
-              changePage={changePage}
-              count={postCount}
-              perPage={limit}
-            />
+            <PostPagination changePage={changePage} count={postCount} />
           )}
         </div>
       </Container>
