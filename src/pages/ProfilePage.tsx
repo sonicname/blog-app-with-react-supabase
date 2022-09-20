@@ -1,6 +1,7 @@
 import Container from '../components/layouts/Container';
 import CommonLayout from '../components/layouts/CommonLayout';
 import PostPagination from '../components/post/PostPagination';
+import PostTable from '../components/post/PostTable';
 
 import { useAuth } from '../context/supabase-context';
 
@@ -10,7 +11,6 @@ import {
   useCountPostsByAuthor,
   useGetPostsByAuthor,
 } from '../hooks/usePost';
-import PostTable from '../components/post/PostTable';
 
 const ProfilePage = () => {
   const { session } = useAuth();
@@ -31,19 +31,13 @@ const ProfilePage = () => {
       <Container className='min-h-full p-4 rounded-lg bg-[#3D3C42]'>
         {userInfo && (
           <div className='flex flex-col gap-y-5'>
-            <img
-              className='object-cover w-16 h-16 mx-auto rounded-full'
-              src={userInfo?.avatar}
-              alt=''
-            />
-
             <h2 className='font-semibold text-center text-md lg:text-xl'>
               {userInfo?.username}
             </h2>
           </div>
         )}
 
-        <div className='flex flex-col mt-5 gap-y-5 lg:gap-y-10'>
+        <div className='flex flex-col mt-10 gap-y-5 lg:gap-y-10'>
           <PostTable posts={userPosts} />
           {postCount && (
             <PostPagination
