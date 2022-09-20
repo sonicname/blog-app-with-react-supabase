@@ -6,6 +6,8 @@ interface IPostPaginationProps {
   changePage: (pageToChange: number) => void;
 }
 
+// FIXME
+
 const PostPagination = ({
   perPage = 7,
   changePage,

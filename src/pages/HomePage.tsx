@@ -1,28 +1,28 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import CommonLayout from "../components/layouts/CommonLayout";
-import PostLayoutGrid from "../components/post/PostLayoutGrid";
+import CommonLayout from '../components/layouts/CommonLayout';
+import PostLayoutGrid from '../components/post/PostLayoutGrid';
 
-import { useGetPosts } from "../hooks/usePost";
+import { useGetPosts } from '../hooks/usePost';
 
 const HomePage = () => {
-  const { data, isLoading } = useGetPosts(1, 3);
+  const { data } = useGetPosts(1, 3);
 
   return (
     <CommonLayout>
-      <div className="flex flex-col mt-4 gap-y-5 lg:gap-y-10">
-        <section className="flex flex-col gap-y-5">
-          <h2 className="font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-4">
-            Bài viết mới nhất{" "}
+      <div className='flex flex-col mt-4 gap-y-5 lg:gap-y-10'>
+        <section className='flex flex-col gap-y-5'>
+          <h2 className='font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-4'>
+            Bài viết mới nhất{' '}
             <NavLink
-              to={"/posts"}
-              className="font-semibold text-green-500 text-[14px] lg:text-[16px] hover:underline"
+              to={'/posts'}
+              className='font-semibold text-green-500 text-[14px] lg:text-[16px] hover:underline'
             >
               xem thêm
             </NavLink>
           </h2>
 
-          {data && <PostLayoutGrid postList={data} />}
+          <PostLayoutGrid postList={data} />
         </section>
       </div>
     </CommonLayout>
