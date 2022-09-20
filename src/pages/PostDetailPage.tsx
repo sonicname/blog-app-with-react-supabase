@@ -8,32 +8,34 @@ import { useGetPostById } from '../hooks/usePost';
 
 const PostDetailPage = () => {
   const { postID } = useParams<string>();
-  const { data } = useGetPostById(postID as string);
+  const { data: postInfo, isLoading } = useGetPostById(
+    postID as string,
+  );
 
   return (
     <CommonLayout>
       <Container className='flex flex-col gap-y-5'>
-        {data ? (
+        {!isLoading ? (
           <>
             <img
-              src={data?.thumbnail}
+              src={postInfo?.thumbnail}
               className='w-full h-[250px] object-cover rounded-md'
               alt=''
             />
             <h1 className='text-3xl font-semibold text-center'>
-              {data?.title}
+              {postInfo?.title}
             </h1>
             <div className='text-sm font-medium'>
               {new Date(
-                data?.created_at as Date,
+                postInfo?.created_at as Date,
               ).toLocaleDateString()}{' '}
               - by -{' '}
               <span className='font-bold !text-md text-purple-500'>
-                {data?.user.username}
+                {postInfo?.user.username}
               </span>
             </div>
             <div className='content-box'>
-              {parser(`${data?.content as string}`)}
+              {parser(`${postInfo?.content as string}`)}
             </div>
           </>
         ) : (

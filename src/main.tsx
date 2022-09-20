@@ -33,7 +33,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
             <Routes>
-              {/*{private route}*/}
               <Route path={'/'} element={<HomePage />} />
               <Route
                 path={'/create'}
