@@ -12,13 +12,15 @@ import CommonLayout from '../components/layouts/CommonLayout';
 
 import { IPost } from '../types/IPost';
 import { schemaCreatePost } from '../utils/schema';
+
+import useTitle from '../hooks/useTitle';
 import useCreatePost from '../hooks/useCreatePost';
 import { useAuth } from '../context/supabase-context';
-import useTitle from '../hooks/useTitle';
 
 const CreatePostPage = () => {
   const { session } = useAuth();
   const editorRef = useRef(null);
+  const postMutation = useCreatePost();
 
   const {
     control,
@@ -29,9 +31,7 @@ const CreatePostPage = () => {
     resolver: yupResolver(schemaCreatePost),
   });
 
-  const postMutation = useCreatePost();
-
-  const handleCreatePost = async (values: IPost) => {
+  const handleCreatePost = (values: IPost) => {
     postMutation.mutate({
       ...values,
       // @ts-ignore

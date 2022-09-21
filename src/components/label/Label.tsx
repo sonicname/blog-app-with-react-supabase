@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 interface IProps {
   text: string;
@@ -9,7 +9,7 @@ const Label = ({ text, htmlFor }: IProps) => {
   return (
     <label
       htmlFor={htmlFor}
-      className="text-[#808191] font-medium text-[14px] lg:text-md"
+      className='text-[#808191] font-medium text-[14px] lg:text-md'
     >
       {text}
     </label>
