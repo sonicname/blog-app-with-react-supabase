@@ -10,12 +10,14 @@ export const useGetPosts = (page: number, limit: number = 7) => {
   return useQuery(['posts', { page, limit }], async () => {
     const { data, error } = await supabase
       .from<IFullPost>('posts')
-      .select(`title, description, id, thumbnail, user:users(username)`)
+      .select(
+        `title, description, id, thumbnail, user:users(username)`,
+      )
       .order('created_at', { ascending: false })
       .range(FROM, LIMIT);
 
     if (error) {
-      toast.error('Có lỗi xảy ra vui lòng thử lại!');
+      toast.error('Lấy bài viết thất bại!');
     }
 
     return data;
@@ -32,7 +34,7 @@ export const useGetPostById = (id: string) => {
       .single();
 
     if (error) {
-      toast.error('Có lỗi xảy ra vui lòng thử lại!');
+      toast.error('Lấy thông tin bài đăng thất bại!');
     }
 
     return data;
@@ -55,7 +57,7 @@ export const useGetPostsByAuthor = (
       .range(FROM, LIMIT);
 
     if (error) {
-      toast.error('Có lỗi xảy ra vui lòng thử lại!');
+      toast.error('Lấy thông tin bài đăng thất bại!');
     }
 
     return data;

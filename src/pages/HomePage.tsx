@@ -8,7 +8,6 @@ import { useGetPosts } from '../hooks/usePost';
 
 const HomePage = () => {
   const { data } = useGetPosts(1, 3);
-
   useTitle('Trang chủ');
 
   return (

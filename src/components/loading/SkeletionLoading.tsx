@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { memo } from 'react';
 
 interface ISkeletonLoadingProps {
   className?: string;
@@ -10,4 +11,4 @@ const SkeletionLoading = ({
   <div className={classNames('skeleton', className)} />
 );
 
-export default SkeletionLoading;
+export default memo(SkeletionLoading);

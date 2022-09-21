@@ -1,6 +1,11 @@
+import { memo } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
+
 import PostItem from './PostItem';
-import { IFullPost } from '../../types/IPost';
 import PostItemSkeleton from './PostItemSkeleton';
+import ErrorComponent from '../errors/ErrorComponent';
+
+import { IFullPost } from '../../types/IPost';
 
 interface IPostLayoutProps {
   postList: IFullPost[] | undefined | null;
@@ -27,4 +32,8 @@ const PostLayoutGrid = ({ postList }: IPostLayoutProps) => {
   );
 };
 
-export default PostLayoutGrid;
+export default memo(
+  withErrorBoundary(PostLayoutGrid, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

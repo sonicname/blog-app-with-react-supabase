@@ -1,25 +1,35 @@
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { Session } from "@supabase/supabase-js";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { Session } from '@supabase/supabase-js';
 
-import { IUser } from "../types/IUser";
-import { supabase } from "../supabase/supabase";
-import { IAuthContext, IAuthValue } from "../types/IAuth";
+import { IUser } from '../types/IUser';
+import { supabase } from '../supabase/supabase';
+import { IAuthContext, IAuthValue } from '../types/IAuth';
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
-  signIn: () => new Promise((_, reject) => reject("Sign in method is empty!")),
-  signUp: () => new Promise((_, reject) => reject("Sign up method is empty!")),
+  signIn: () =>
+    new Promise((_, reject) => reject('Sign in method is empty!')),
+  signUp: () =>
+    new Promise((_, reject) => reject('Sign up method is empty!')),
   signOut: () =>
-    new Promise((_, reject) => reject("Sign out method is empty!")),
+    new Promise((_, reject) => reject('Sign out method is empty!')),
 });
 
 export const AuthProvider = (props: any) => {
   const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
 
-  const signIn = async ({ email, password }: IAuthValue): Promise<void> => {
+  const signIn = async ({
+    email,
+    password,
+  }: IAuthValue): Promise<void> => {
     const { error } = await supabase.auth.signIn({
       email,
       password,
@@ -28,28 +38,31 @@ export const AuthProvider = (props: any) => {
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success("Đăng nhập thành công!");
-      navigate("/");
+      toast.success('Đăng nhập thành công!');
+      navigate('/');
     }
   };
 
-  const signUp = async ({ email, password }: IAuthValue): Promise<void> => {
+  const signUp = async ({
+    email,
+    password,
+  }: IAuthValue): Promise<void> => {
     const { error, user } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    await supabase.from<IUser>("users").insert({
+    await supabase.from<IUser>('users').insert({
       id: user?.id,
       email: user?.email,
-      username: user?.email?.split("@")[0],
+      username: user?.email?.split('@')[0],
     });
 
     if (error) {
       toast.error(error.message);
     } else {
-      toast.success("Đăng nhập thành công!");
-      navigate("/");
+      toast.success('Đăng ký thành công!');
+      navigate('/');
     }
   };
 
@@ -86,8 +99,8 @@ export const AuthProvider = (props: any) => {
 
 export const useAuth = () => {
   const context = useContext(SupabaseContext);
-  if (typeof context === "undefined") {
-    throw new Error("useAuth must be used within AuthProvider!");
+  if (typeof context === 'undefined') {
+    throw new Error('useAuth must be used within AuthProvider!');
   }
 
   return context;
