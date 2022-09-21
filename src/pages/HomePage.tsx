@@ -3,12 +3,10 @@ import { NavLink } from 'react-router-dom';
 import CommonLayout from '../components/layouts/CommonLayout';
 import PostLayoutGrid from '../components/post/PostLayoutGrid';
 
-import useTitle from '../hooks/useTitle';
 import { useGetPosts } from '../hooks/usePost';
 
 const HomePage = () => {
-  const { data } = useGetPosts(1, 3);
-  useTitle('Trang chủ');
+  const { data: newestPost, isLoading } = useGetPosts(1, 3);
 
   return (
     <CommonLayout>
@@ -24,7 +22,16 @@ const HomePage = () => {
             </NavLink>
           </h2>
 
-          <PostLayoutGrid postList={data} />
+          {newestPost && newestPost.length > 0 ? (
+            <PostLayoutGrid
+              postList={newestPost}
+              isLoading={isLoading}
+            />
+          ) : (
+            <h4 className='mt-10 text-lg font-semibold text-center'>
+              Danh sách bài viết trống
+            </h4>
+          )}
         </section>
       </div>
     </CommonLayout>

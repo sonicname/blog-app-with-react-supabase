@@ -38,7 +38,13 @@ const ProfilePage = () => {
         )}
 
         <div className='flex flex-col mt-10 gap-y-5 lg:gap-y-10'>
-          <PostTable posts={userPosts} />
+          {userPosts && userPosts.length > 0 ? (
+            <PostTable posts={userPosts} />
+          ) : (
+            <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
+              Hiện tại bạn chưa có bài đăng nào!
+            </h4>
+          )}
           {postCount && (
             <PostPagination
               changePage={changePage}

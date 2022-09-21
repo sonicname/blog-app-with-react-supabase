@@ -15,7 +15,6 @@ import AuthLayout from '../components/layouts/AuthLayout';
 import { schema } from '../utils/schema';
 import { IAuthValue } from '../types/IAuth';
 import { useAuth } from '../context/supabase-context';
-import useTitle from '../hooks/useTitle';
 
 const SignInPage = () => {
   const { signIn, session } = useAuth();
@@ -39,8 +38,6 @@ const SignInPage = () => {
   };
 
   if (session?.user) return <Navigate to={'/'} />;
-
-  useTitle('Sign In');
 
   return (
     <AuthLayout>
