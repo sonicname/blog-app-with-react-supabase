@@ -2,16 +2,13 @@ import CommonLayout from '../components/layouts/CommonLayout';
 import PostLayoutGrid from '../components/post/PostLayoutGrid';
 import PostPagination from '../components/post/PostPagination';
 
-import useTitle from '../hooks/useTitle';
 import useChangePage from '../hooks/useChangePage';
 import { useCountPosts, useGetPosts } from '../hooks/usePost';
 
 const PostPage = () => {
   const { page, changePage, limit } = useChangePage('/posts');
-  const { data: postList } = useGetPosts(page, limit);
+  const { data: postList, isLoading } = useGetPosts(page, limit);
   const { data: countPost } = useCountPosts();
-
-  useTitle(`Danh sách bài đăng`);
 
   return (
     <CommonLayout>
@@ -21,7 +18,16 @@ const PostPage = () => {
             {`Danh sách bài đăng trang ${page}`}
           </h2>
 
-          <PostLayoutGrid postList={postList} />
+          {postList && postList.length > 0 ? (
+            <PostLayoutGrid
+              postList={postList}
+              isLoading={isLoading}
+            />
+          ) : (
+            <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
+              Danh sách bài viết trống
+            </h4>
+          )}
           {countPost && (
             <PostPagination
               perPage={limit}

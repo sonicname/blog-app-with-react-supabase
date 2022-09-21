@@ -13,7 +13,6 @@ import CommonLayout from '../components/layouts/CommonLayout';
 import { IPost } from '../types/IPost';
 import { schemaCreatePost } from '../utils/schema';
 
-import useTitle from '../hooks/useTitle';
 import useCreatePost from '../hooks/useCreatePost';
 import { useAuth } from '../context/supabase-context';
 
@@ -39,8 +38,6 @@ const CreatePostPage = () => {
       author_id: session?.user?.id as string,
     });
   };
-
-  useTitle('Tạo bài viết mới');
 
   return (
     <CommonLayout>
