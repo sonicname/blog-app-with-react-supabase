@@ -7,9 +7,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import './index.scss';
-import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
+import './index.scss';
 
 import { AuthProvider } from './context/supabase-context';
 

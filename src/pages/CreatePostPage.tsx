@@ -8,7 +8,7 @@ import Input from '../components/input/Input';
 import Button from '../components/button/Button';
 import ErrorInput from '../components/errors/ErrorInput';
 import PostEditor from '../components/editor/PostEditor';
-import CommonLayout from '../components/layouts/CommonLayout';
+import CommonLayout from '../components/layouts/CommonLayout';66
 
 import { IPost } from '../types/IPost';
 import { schemaCreatePost } from '../utils/schema';

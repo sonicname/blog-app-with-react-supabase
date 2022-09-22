@@ -11,7 +11,7 @@ import ErrorComponent from '../errors/ErrorComponent';
 
 import { useAuth } from '../../context/supabase-context';
 
-import logo from '../../../assets/ghost.png';
+import logo from '../../../assets/ghost.webp';
 
 const Header = () => {
   const { session, signOut } = useAuth();
