@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 import ErrorComponent from '../errors/ErrorComponent';
 
-import logo from '../../../assets/ghost.png';
+import logo from '../../../assets/ghost.webp';
 
 interface IProps {
   children: ReactNode;
