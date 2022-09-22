@@ -2,12 +2,12 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Field from '../components/field/Field';
-import Label from '../components/label/Label';
-import Input from '../components/input/Input';
-import Button from '../components/button/Button';
+import Field from '../components/Field';
+import Label from '../components/Label';
+import Input from '../components/Input';
+import Button from '../components/Button';
 import ErrorInput from '../components/errors/ErrorInput';
-import PostEditor from '../components/editor/PostEditor';
+import PostEditor from '../components/post/PostEditor';
 import CommonLayout from '../components/layouts/CommonLayout';
 
 import { IPost } from '../types/IPost';

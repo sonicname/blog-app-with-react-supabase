@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Control, useController } from 'react-hook-form';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from './errors/ErrorComponent';
 
 interface IProps {
   type: string;

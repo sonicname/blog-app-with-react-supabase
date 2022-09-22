@@ -7,9 +7,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import './index.scss';
-import 'swiper/css';
 import 'react-toastify/dist/ReactToastify.css';
+import './index.scss';
 
 import { AuthProvider } from './context/supabase-context';
 
@@ -27,41 +26,39 @@ const PostDetailPage = lazy(() => import('./pages/PostDetailPage'));
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <>
-    <Suspense fallback={<ScreenLoading />}>
-      <BrowserRouter>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path={'/'} element={<HomePage />} />
-              <Route
-                path={'/create'}
-                element={
-                  <PrivateRouter>
-                    <CreatePostPage />
-                  </PrivateRouter>
-                }
-              />
-              <Route path={'/signup'} element={<SignUpPage />} />
-              <Route path={'/signin'} element={<SignInPage />} />
-              <Route path={'/posts'} element={<PostPage />} />
-              <Route
-                path={'/post/:postID'}
-                element={<PostDetailPage />}
-              />
-              <Route
-                path={'/profile'}
-                element={
-                  <PrivateRouter>
-                    <ProfilePage />
-                  </PrivateRouter>
-                }
-              />
-            </Routes>
-          </QueryClientProvider>
-        </AuthProvider>
-      </BrowserRouter>
-      <ToastContainer pauseOnHover={false} position={'top-right'} />
-    </Suspense>
-  </>,
+  <Suspense fallback={<ScreenLoading />}>
+    <BrowserRouter>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path={'/'} element={<HomePage />} />
+            <Route
+              path={'/create'}
+              element={
+                <PrivateRouter>
+                  <CreatePostPage />
+                </PrivateRouter>
+              }
+            />
+            <Route path={'/signup'} element={<SignUpPage />} />
+            <Route path={'/signin'} element={<SignInPage />} />
+            <Route path={'/posts'} element={<PostPage />} />
+            <Route
+              path={'/post/:postID'}
+              element={<PostDetailPage />}
+            />
+            <Route
+              path={'/profile'}
+              element={
+                <PrivateRouter>
+                  <ProfilePage />
+                </PrivateRouter>
+              }
+            />
+          </Routes>
+        </QueryClientProvider>
+      </AuthProvider>
+    </BrowserRouter>
+    <ToastContainer pauseOnHover={false} position={'top-right'} />
+  </Suspense>,
 );

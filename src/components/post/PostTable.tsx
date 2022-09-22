@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import Button from '../button/Button';
+import Button from '../Button';
 import ErrorComponent from '../errors/ErrorComponent';
 
 import useDeletePost from '../../hooks/useDeletePost';

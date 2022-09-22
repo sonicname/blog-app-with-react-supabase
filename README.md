@@ -1,8 +1,17 @@
-# Project: Blog App
+# Project: Blog App (v1.0.0)
 
-## Frontend: React + Tailwindcss
+## Task List:
 
-## Backend: Supabase
+- [x] Basic account system
+- [x] Basic post system: upload, delete
+- [ ] Category post
+- [ ] Like, favorite post
+- [ ] User profile
+- [ ] Admin dashboard
+
+### Frontend: React + Tailwindcss
+
+### Backend: Supabase
 
 ### 1. Trang đăng nhập
 

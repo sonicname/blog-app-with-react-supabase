@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Field from '../components/field/Field';
-import Label from '../components/label/Label';
-import Input from '../components/input/Input';
-import Button from '../components/button/Button';
-import Heading from '../components/heading/Heading';
+import Field from '../components/Field';
+import Label from '../components/Label';
+import Input from '../components/Input';
+import Button from '../components/Button';
+import Heading from '../components/Heading';
 import ErrorInput from '../components/errors/ErrorInput';
-import SubHeading from '../components/heading/SubHeading';
+import SubHeading from '../components/SubHeading';
 import AuthLayout from '../components/layouts/AuthLayout';
 
 import { schema } from '../utils/schema';

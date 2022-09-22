@@ -2,7 +2,7 @@ import { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from './errors/ErrorComponent';
 
 interface IProps {
   type: 'button' | 'submit' | 'reset' | undefined;

@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import NavItem from '../navbar/NavItem';
-import IconMenu from '../icons/IconMenu';
-import Overlay from '../overlays/Overlay';
-import NavSearch from '../navbar/NavSearch';
+import NavItem from '../NavItem';
+import IconMenu from '../IconMenu';
+import Overlay from '../Overlay';
+import NavSearch from '../NavSearch';
 import ErrorComponent from '../errors/ErrorComponent';
 
 import { useAuth } from '../../context/supabase-context';
