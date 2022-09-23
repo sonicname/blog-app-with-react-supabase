@@ -16,6 +16,7 @@ const PostEditor = ({
 }: IProps) => {
   return (
     <Editor
+      apiKey={import.meta.env.VITE_TINY_MCE}
       // @ts-ignore
       onInit={(_, editor) => (editorRef.current = editor)}
       initialValue={initialValue}
@@ -23,15 +24,30 @@ const PostEditor = ({
         height,
         menubar,
         plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste code help wordcount',
+          'advlist',
+          'autolink',
+          'link',
+          'image',
+          'lists',
+          'charmap',
+          'preview',
+          'anchor',
+          'pagebreak',
+          'searchreplace',
+          'wordcount',
+          'visualblocks',
+          'visualchars',
+          'code',
+          'fullscreen',
+          'insertdatetime',
+          'media',
+          'table',
+          'emoticons',
+          'template',
+          'help',
         ],
         toolbar:
-          'undo redo | formatselect | ' +
-          'bold italic backcolor | alignleft aligncenter ' +
-          'alignright alignjustify | bullist numlist outdent indent | ' +
-          'removeformat | help',
+          'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | preview fullscreen | forecolor backcolor emoticons',
         content_style:
           'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
       }}

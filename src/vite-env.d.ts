@@ -2,7 +2,8 @@
 
 interface ImportMeta {
   readonly env: {
-    SUPBASE_URL: string;
-    SUPABASE_KEY: string;
+    VITE_SUPBASE_URL: string;
+    VITE_SUPABASE_KEY: string;
+    VITE_TINY_MCE: string;
   };
 }
