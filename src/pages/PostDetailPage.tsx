@@ -5,6 +5,7 @@ import Container from '../components/layouts/Container';
 import CommonLayout from '../components/layouts/CommonLayout';
 
 import { useGetPostById } from '../hooks/usePost';
+import Loading from '../components/loading/Loading';
 
 const PostDetailPage = () => {
   const { postID } = useParams<string>();
@@ -39,7 +40,7 @@ const PostDetailPage = () => {
             </div>
           </>
         ) : (
-          <div className='w-20 h-20 p-5 mx-auto border-4 rounded-full border-t-transparent animate-spin' />
+          <Loading />
         )}
       </Container>
     </CommonLayout>

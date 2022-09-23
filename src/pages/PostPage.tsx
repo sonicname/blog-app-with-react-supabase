@@ -18,15 +18,17 @@ const PostPage = () => {
             {`Danh sách bài đăng trang ${page}`}
           </h2>
 
-          {postList && postList.length > 0 ? (
+          {postList && postList.length === 0 && (
+            <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
+              Danh sách bài viết trống
+            </h4>
+          )}
+
+          {postList && postList.length > 0 && (
             <PostLayoutGrid
               postList={postList}
               isLoading={isLoading}
             />
-          ) : (
-            <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
-              Danh sách bài viết trống
-            </h4>
           )}
           {countPost && (
             <PostPagination

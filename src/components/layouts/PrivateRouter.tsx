@@ -9,8 +9,8 @@ interface IProps {
 
 const PrivateRouter = ({ children }: IProps) => {
   const { session } = useAuth();
+  if (!session || !session.user) return <Navigate to={'/signin'} />;
 
-  if (!session?.user) return <Navigate to={'/signin'} />;
   return <>{children}</>;
 };
 
