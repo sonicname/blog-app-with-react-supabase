@@ -12,7 +12,6 @@ import './index.scss';
 
 import { AuthProvider } from './context/supabase-context';
 
-import ScreenLoading from './components/loading/ScreenLoading';
 import PrivateRouter from './components/layouts/PrivateRouter';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -26,7 +25,13 @@ const PostDetailPage = lazy(() => import('./pages/PostDetailPage'));
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Suspense fallback={<ScreenLoading />}>
+  <Suspense
+    fallback={
+      <div className='fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-70'>
+        <div className='w-[35px] lg:w-[70px] h-[35px] lg:h-[70px] rounded-full border-4 border-t-transparent animate-spin' />
+      </div>
+    }
+  >
     <BrowserRouter>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>

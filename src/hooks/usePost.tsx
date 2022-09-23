@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 
-import { IFullPost } from '../types/IPost';
-import { supabase } from '../supabase/supabase';
+import { IFullPost } from '../typings';
+import { supabase } from '../config/supabase';
 
 export const useGetPosts = (page: number, limit: number = 7) => {
   const FROM = page > 1 ? (page - 1) * limit + 1 : (page - 1) * limit;

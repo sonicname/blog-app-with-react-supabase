@@ -1,5 +1,8 @@
 import { memo } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
 import { Control, useController } from 'react-hook-form';
+
+import ErrorComponent from './errors/ErrorComponent';
 
 interface IProps {
   name: string;
@@ -24,4 +27,8 @@ const TextArea = ({ name, control, row, placeholder }: IProps) => {
   );
 };
 
-export default memo(TextArea);
+export default memo(
+  withErrorBoundary(TextArea, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

@@ -5,7 +5,7 @@ import PostItem from './PostItem';
 import PostItemSkeleton from './PostItemSkeleton';
 import ErrorComponent from '../errors/ErrorComponent';
 
-import { IFullPost } from '../../types/IPost';
+import { IFullPost } from '../../typings';
 
 interface IPostLayoutProps {
   postList: IFullPost[] | undefined | null;

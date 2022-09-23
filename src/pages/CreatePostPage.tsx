@@ -6,11 +6,11 @@ import Field from '../components/Field';
 import Label from '../components/Label';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import ErrorInput from '../components/errors/ErrorInput';
 import PostEditor from '../components/post/PostEditor';
+import ErrorInput from '../components/errors/ErrorInput';
 import CommonLayout from '../components/layouts/CommonLayout';
 
-import { IPost } from '../types/IPost';
+import { IPost } from '../typings';
 import { schemaCreatePost } from '../utils/schema';
 
 import useCreatePost from '../hooks/useCreatePost';

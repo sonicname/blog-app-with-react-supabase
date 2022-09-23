@@ -1,13 +1,11 @@
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { withErrorBoundary } from 'react-error-boundary';
 
 import Button from '../Button';
-import ErrorComponent from '../errors/ErrorComponent';
 
 import useDeletePost from '../../hooks/useDeletePost';
 
-import { IFullPost } from '../../types/IPost';
+import { IFullPost } from '../../typings';
 
 interface IPostTableProps {
   posts: IFullPost[] | null | undefined;
@@ -81,8 +79,4 @@ const PostTable = ({ posts }: IPostTableProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(PostTable, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(PostTable);

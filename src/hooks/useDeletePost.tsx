@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { supabase } from '../supabase/supabase';
+import { supabase } from '../config/supabase';
 
 const useDeletePost = () => {
   const queryClient = useQueryClient();

@@ -2,8 +2,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { IPost } from '../types/IPost';
-import { supabase } from '../supabase/supabase';
+import { supabase } from '../config/supabase';
+import { IPost } from '../typings';
 
 interface IUseCreatePost {
   title: string;

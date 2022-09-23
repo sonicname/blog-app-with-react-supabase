@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 
-import { IUser } from '../types/IUser';
-import { supabase } from '../supabase/supabase';
+import { IUser } from '../typings';
+import { supabase } from '../config/supabase';
 
 export const useGetUserByID = (userID: string) => {
   return useQuery(['user', { userID }], async () => {

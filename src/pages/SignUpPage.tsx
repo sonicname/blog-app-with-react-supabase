@@ -12,9 +12,9 @@ import ErrorInput from '../components/errors/ErrorInput';
 import SubHeading from '../components/SubHeading';
 import AuthLayout from '../components/layouts/AuthLayout';
 
+import { IAuthValue } from '../typings';
 import { schema } from '../utils/schema';
 import { useAuth } from '../context/supabase-context';
-import { IAuthValue } from '../types/IAuth';
 
 const SignUpPage = () => {
   const { signUp, session } = useAuth();

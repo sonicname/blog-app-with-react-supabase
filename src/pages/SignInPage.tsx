@@ -12,8 +12,8 @@ import ErrorInput from '../components/errors/ErrorInput';
 import SubHeading from '../components/SubHeading';
 import AuthLayout from '../components/layouts/AuthLayout';
 
+import { IAuthValue } from '../typings';
 import { schema } from '../utils/schema';
-import { IAuthValue } from '../types/IAuth';
 import { useAuth } from '../context/supabase-context';
 
 const SignInPage = () => {

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { supabase } from '../supabase/supabase';
-import { IPostSearchItem } from '../types/IPost';
+import { IPostSearchItem } from '../typings';
+import { supabase } from '../config/supabase';
 
 const useSearchPosts = (keyword: string) => {
   return useQuery(

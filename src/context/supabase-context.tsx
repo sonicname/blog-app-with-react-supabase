@@ -8,9 +8,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Session } from '@supabase/supabase-js';
 
-import { IUser } from '../types/IUser';
-import { supabase } from '../supabase/supabase';
-import { IAuthContext, IAuthValue } from '../types/IAuth';
+import { supabase } from '../config/supabase';
+import { IAuthContext, IAuthValue, IUser } from '../typings';
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
