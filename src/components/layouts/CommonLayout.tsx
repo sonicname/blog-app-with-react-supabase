@@ -4,7 +4,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 
 import Header from './Header';
 import Footer from './Footer';
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 interface IProps {
   children: ReactNode;

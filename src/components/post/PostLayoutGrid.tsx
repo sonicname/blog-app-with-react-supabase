@@ -3,7 +3,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 
 import PostItem from './PostItem';
 import PostItemSkeleton from './PostItemSkeleton';
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 import { IFullPost } from '../../typings';
 

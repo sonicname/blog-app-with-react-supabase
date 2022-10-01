@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { memo } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import ErrorComponent from './errors/ErrorComponent';
+import ErrorComponent from './ErrorComponent';
 
 interface IProps {
   toggle?: boolean;

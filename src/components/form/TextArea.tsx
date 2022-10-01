@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { withErrorBoundary } from 'react-error-boundary';
 import { Control, useController } from 'react-hook-form';
 
-import ErrorComponent from './errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 interface IProps {
   name: string;

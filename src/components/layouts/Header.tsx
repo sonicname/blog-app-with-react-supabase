@@ -7,7 +7,7 @@ import NavItem from '../NavItem';
 import IconMenu from '../IconMenu';
 import Overlay from '../Overlay';
 import NavSearch from '../NavSearch';
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 import { useAuth } from '../../context/supabase-context';
 

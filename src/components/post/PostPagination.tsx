@@ -2,7 +2,7 @@ import { memo } from 'react';
 import ReactPaginate from 'react-paginate';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 interface IPostPaginationProps {
   perPage?: number;

@@ -2,7 +2,7 @@ import { memo, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 
-import ErrorComponent from '../errors/ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
 import logo from '../../../assets/ghost.png';
 

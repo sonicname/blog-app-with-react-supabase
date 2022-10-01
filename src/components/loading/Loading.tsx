@@ -1,21 +1,10 @@
-import classNames from 'classnames';
 import { memo } from 'react';
 
-interface ILoadingProps {
-  width?: string;
-  height?: string;
-  className?: string;
-}
-
-const Loading = ({ width, height, className }: ILoadingProps) => {
+const Loading = () => {
   return (
-    <div
-      className={classNames(
-        'p-2 mx-auto border-2 rounded-full border-t-transparent animate-spin',
-        width ? `w-[${width}px] h-[${height}px]` : 'w-20 h-20',
-        className,
-      )}
-    />
+    <div className='fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-70'>
+      <div className='w-[35px] lg:w-[70px] h-[35px] lg:h-[70px] rounded-full border-4 border-t-transparent animate-spin' />
+    </div>
   );
 };
 

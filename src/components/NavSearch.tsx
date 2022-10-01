@@ -4,7 +4,7 @@ import { withErrorBoundary } from 'react-error-boundary';
 import { ChangeEvent, memo, useRef, useState } from 'react';
 
 import Loading from './loading/Loading';
-import ErrorComponent from './errors/ErrorComponent';
+import ErrorComponent from './ErrorComponent';
 
 import useDebounce from '../hooks/useDebounce';
 import useSearchPosts from '../hooks/useSearchPosts';
