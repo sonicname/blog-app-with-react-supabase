@@ -1,34 +1,23 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Session } from '@supabase/supabase-js';
+import { createContext, SetStateAction, useContext, useEffect, useState } from 'react';
 
 import { supabase } from '../config/supabase';
 import { IAuthContext, IAuthValue, IUser } from '../typings';
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
-  signIn: () =>
-    new Promise((_, reject) => reject('Sign in method is empty!')),
-  signUp: () =>
-    new Promise((_, reject) => reject('Sign up method is empty!')),
-  signOut: () =>
-    new Promise((_, reject) => reject('Sign out method is empty!')),
+  signIn: () => new Promise((_, reject) => reject('Sign in method is empty!')),
+  signUp: () => new Promise((_, reject) => reject('Sign up method is empty!')),
+  signOut: () => new Promise((_, reject) => reject('Sign out method is empty!')),
 });
 
 export const AuthProvider = (props: any) => {
   const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
 
-  const signIn = async ({
-    email,
-    password,
-  }: IAuthValue): Promise<void> => {
+  const signIn = async ({ email, password }: IAuthValue): Promise<void> => {
     const { error } = await supabase.auth.signIn({
       email,
       password,
@@ -42,10 +31,7 @@ export const AuthProvider = (props: any) => {
     }
   };
 
-  const signUp = async ({
-    email,
-    password,
-  }: IAuthValue): Promise<void> => {
+  const signUp = async ({ email, password }: IAuthValue): Promise<void> => {
     const { error, user } = await supabase.auth.signUp({
       email,
       password,
@@ -76,7 +62,7 @@ export const AuthProvider = (props: any) => {
   useEffect(() => {
     setSession(supabase.auth.session());
     const { data: listener } = supabase.auth.onAuthStateChange(
-      async (_, session) => {
+      async (_: any, session: SetStateAction<Session | null>) => {
         setSession(session);
       },
     );

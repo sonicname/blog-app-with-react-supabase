@@ -1,5 +1,5 @@
-import { memo, ReactNode } from 'react';
 import classNames from 'classnames';
+import { memo, ReactNode } from 'react';
 
 interface IProps {
   type: 'button' | 'submit' | 'reset' | undefined;
@@ -9,13 +9,7 @@ interface IProps {
   onClick?: () => void;
 }
 
-const Button = ({
-  type,
-  children,
-  disabled,
-  className = '',
-  onClick,
-}: IProps) => {
+const Button = ({ type, children, disabled, className = '', onClick }: IProps) => {
   return (
     <button
       className={classNames(

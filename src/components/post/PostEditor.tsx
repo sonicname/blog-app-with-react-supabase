@@ -8,12 +8,7 @@ interface IProps {
   menubar: boolean;
 }
 
-const PostEditor = ({
-  editorRef,
-  initialValue,
-  height,
-  menubar,
-}: IProps) => {
+const PostEditor = ({ editorRef, initialValue, height, menubar }: IProps) => {
   return (
     <Editor
       apiKey={import.meta.env.VITE_TINY_MCE}
@@ -45,8 +40,7 @@ const PostEditor = ({
         ],
         toolbar:
           'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image preview emoticons',
-        content_style:
-          'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
       }}
     />
   );

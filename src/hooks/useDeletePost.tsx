@@ -7,10 +7,7 @@ const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (postID: string) => {
-      const { error, data } = await supabase
-        .from('posts')
-        .delete()
-        .match({ id: postID });
+      const { error, data } = await supabase.from('posts').delete().match({ id: postID });
 
       if (error) {
         throw error;

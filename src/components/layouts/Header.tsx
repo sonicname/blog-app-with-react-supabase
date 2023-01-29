@@ -27,10 +27,7 @@ const Header = () => {
         />
       </NavLink>
       <NavSearch />
-      <IconMenu
-        className='w-10 h-10 lg:hidden'
-        onClick={() => setToggle(!toggle)}
-      />
+      <IconMenu className='w-10 h-10 lg:hidden' onClick={() => setToggle(!toggle)} />
       <Overlay toggle={toggle} setToggle={setToggle} />
       <div
         className={classNames(

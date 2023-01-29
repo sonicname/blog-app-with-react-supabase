@@ -29,11 +29,7 @@ const PostTable = ({ posts }: IPostTableProps) => {
             {posts.map((post) => (
               <tr key={post.id}>
                 <td className='hidden lg:block'>
-                  <img
-                    src={post.thumbnail}
-                    className='object-cover w-20 h-20 rounded-lg'
-                    alt=''
-                  />
+                  <img src={post.thumbnail} className='object-cover w-20 h-20 rounded-lg' alt='' />
                 </td>
                 <td>
                   <h4
@@ -44,24 +40,16 @@ const PostTable = ({ posts }: IPostTableProps) => {
                   </h4>
                 </td>
                 <td>
-                  <p className='text-xs lg:text-base line-clamp-2'>
-                    {post.description}
-                  </p>
+                  <p className='text-xs lg:text-base line-clamp-2'>{post.description}</p>
                 </td>
                 <td>
                   <p className='text-xs lg:text-base'>
-                    {new Date(post.created_at)
-                      .toLocaleString()
-                      .split(',')
-                      .reverse()
-                      .join(', ')}
+                    {new Date(post.created_at).toLocaleString().split(',').reverse().join(', ')}
                   </p>
                 </td>
                 <td>
                   <Button
-                    onClick={() =>
-                      postDeleteMutation.mutate(post.id as string)
-                    }
+                    onClick={() => postDeleteMutation.mutate(post.id as string)}
                     type='button'
                     className='p-1 lg:p-2'
                   >

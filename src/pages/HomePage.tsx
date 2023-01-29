@@ -23,16 +23,11 @@ const HomePage = () => {
           </h2>
 
           {newestPost && newestPost.length === 0 && (
-            <h4 className='mt-10 text-lg font-semibold text-center'>
-              Danh sách bài viết trống
-            </h4>
+            <h4 className='mt-10 text-lg font-semibold text-center'>Danh sách bài viết trống</h4>
           )}
 
           {newestPost && newestPost.length > 0 && (
-            <PostLayoutGrid
-              postList={newestPost}
-              isLoading={isLoading}
-            />
+            <PostLayoutGrid postList={newestPost} isLoading={isLoading} />
           )}
         </section>
       </div>
