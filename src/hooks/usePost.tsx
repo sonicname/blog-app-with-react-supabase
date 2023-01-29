@@ -3,16 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import { IFullPost } from '../typings';
 import { supabase } from '../config/supabase';
+import pagination from '../utils/pagination';
 
 export const useGetPosts = (page: number, limit: number = 7) => {
-  const FROM = page > 1 ? (page - 1) * limit + 1 : (page - 1) * limit;
-  const LIMIT = page === 1 ? page * limit : limit * page + 1;
+  const { FROM, LIMIT } = pagination(page, limit);
+
   return useQuery(['posts', { page, limit }], async () => {
     const { data, error } = await supabase
       .from<IFullPost>('posts')
-      .select(
-        `title, description, id, thumbnail, user:users(username)`,
-      )
+      .select(`title, description, id, thumbnail, user:users(username)`)
       .order('created_at', { ascending: false })
       .range(FROM, LIMIT);
 
@@ -41,13 +40,8 @@ export const useGetPostById = (id: string) => {
   });
 };
 
-export const useGetPostsByAuthor = (
-  authorID: string,
-  page: number = 1,
-  limit: number = 7,
-) => {
-  const FROM = page > 1 ? (page - 1) * limit + 1 : (page - 1) * limit;
-  const LIMIT = page === 1 ? page * limit : limit * page + 1;
+export const useGetPostsByAuthor = (authorID: string, page: number = 1, limit: number = 7) => {
+  const { FROM, LIMIT } = pagination(page, limit);
 
   return useQuery(['posts', { authorID, page, limit }], async () => {
     const { data, error } = await supabase
@@ -66,9 +60,7 @@ export const useGetPostsByAuthor = (
 
 export const useCountPosts = () => {
   return useQuery(['posts_count'], async () => {
-    const { count, error } = await supabase
-      .from('posts')
-      .select('id', { count: 'exact' });
+    const { count, error } = await supabase.from('posts').select('id', { count: 'exact' });
 
     if (error) {
       toast.error('Có lỗi xảy ra khi lấy số lượng bài viết!');

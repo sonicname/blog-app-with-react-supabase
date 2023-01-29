@@ -10,11 +10,7 @@ interface IPostPaginationProps {
   changePage: (pageToChange: number) => void;
 }
 
-const PostPagination = ({
-  perPage = 7,
-  changePage,
-  count,
-}: IPostPaginationProps) => {
+const PostPagination = ({ perPage = 7, changePage, count }: IPostPaginationProps) => {
   return (
     <ReactPaginate
       className='flex items-center justify-center gap-x-2 lg:gap-x-5'
