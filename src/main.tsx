@@ -58,6 +58,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>
-    <ToastContainer pauseOnHover={false} position={'top-right'} />
+    <ToastContainer pauseOnHover={false} position={'top-right'} draggable={true} autoClose={1000} />
   </Suspense>,
 );

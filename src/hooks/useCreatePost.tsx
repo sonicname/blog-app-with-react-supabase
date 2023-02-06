@@ -38,8 +38,7 @@ const useCreatePost = () => {
       },
       onSuccess: () => {
         toast.success('Tạo bài viết thành công!');
-        queryClient.invalidateQueries(['posts']);
-        queryClient.invalidateQueries(['posts_count']);
+        queryClient.invalidateQueries(['posts', 'posts_count']);
         return navigate('/');
       },
     },

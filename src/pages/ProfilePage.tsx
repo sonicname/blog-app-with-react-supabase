@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const { data: postCount } = useCountPostsByAuthor(session?.user?.id as string);
   const { data: userInfo } = useGetUserByID(session?.user?.id as string);
   const { data: userPosts } = useGetPostsByAuthor(session?.user?.id as string, page);
+
   return (
     <CommonLayout>
       <Container className='min-h-full p-4 rounded-lg bg-[#3D3C42]'>
