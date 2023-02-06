@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 import { ChangeEvent, memo, useRef, useState } from 'react';
 
-import Loading from './loading/Loading';
 import ErrorComponent from './ErrorComponent';
 
 import useDebounce from '../hooks/useDebounce';
@@ -42,7 +41,11 @@ const NavSearch = () => {
         )}
         ref={resultRef}
       >
-        {isFetching && <Loading />}
+        {isFetching && (
+          <div className='flex items-center justify-center p-2 bg-gray-700 rounded-md bg-opacity-70 lg:p-4'>
+            <div className='w-4 h-4 border-4 rounded-full lg:w-6 lg:h-6 border-t-transparent animate-spin' />
+          </div>
+        )}
 
         {data &&
           data.map((post) => (

@@ -4,7 +4,20 @@ import { Session } from '@supabase/supabase-js';
 import { createContext, SetStateAction, useContext, useEffect, useState } from 'react';
 
 import { supabase } from '../config/supabase';
-import { IAuthContext, IAuthValue, IUser } from '../typings';
+
+import { IUser } from '../typings';
+
+interface IAuthValue {
+  email: string;
+  password: string;
+}
+
+interface IAuthContext {
+  session: Session | null;
+  signIn: (values: IAuthValue) => Promise<void>;
+  signUp: (values: IAuthValue) => Promise<void>;
+  signOut: () => Promise<void>;
+}
 
 const SupabaseContext = createContext<IAuthContext>({
   session: null,
@@ -17,7 +30,7 @@ export const AuthProvider = (props: any) => {
   const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
 
-  const signIn = async ({ email, password }: IAuthValue): Promise<void> => {
+  const signIn = async ({ email, password }: IAuthValue) => {
     const { error } = await supabase.auth.signIn({
       email,
       password,
@@ -31,13 +44,13 @@ export const AuthProvider = (props: any) => {
     }
   };
 
-  const signUp = async ({ email, password }: IAuthValue): Promise<void> => {
+  const signUp = async ({ email, password }: IAuthValue) => {
     const { error, user } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    await supabase.from<IUser>('users').insert({
+    await supabase.from('users').insert({
       id: user?.id,
       email: user?.email,
       username: user?.email?.split('@')[0],
@@ -51,12 +64,9 @@ export const AuthProvider = (props: any) => {
     }
   };
 
-  const signOut = async (): Promise<void> => {
+  const signOut = async () => {
     const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      toast.error(error.message);
-    }
+    if (error) toast.error(error.message);
   };
 
   useEffect(() => {
