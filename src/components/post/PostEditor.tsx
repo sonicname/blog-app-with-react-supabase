@@ -1,5 +1,8 @@
 import { MutableRefObject, memo } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { withErrorBoundary } from 'react-error-boundary';
+
+import ErrorComponent from '../ErrorComponent';
 
 interface IProps {
   editorRef: MutableRefObject<null>;
@@ -46,4 +49,8 @@ const PostEditor = ({ editorRef, initialValue, height, menubar }: IProps) => {
   );
 };
 
-export default memo(PostEditor);
+export default memo(
+  withErrorBoundary(PostEditor, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

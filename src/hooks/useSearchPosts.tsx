@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 
 import { IPostSearchItem } from '../typings';
@@ -16,6 +17,7 @@ const useSearchPosts = (keyword: string) => {
       return data || [];
     },
     {
+      onError: () => toast.error('Tìm kiếm thất bại!'),
       refetchOnWindowFocus: false,
     },
   );

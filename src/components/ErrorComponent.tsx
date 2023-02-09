@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 const ErrorComponent = () => {
   return (
     <div className='flex items-center justify-center w-full h-full p-2 text-white bg-red-500 rounded-md'>
@@ -6,4 +8,4 @@ const ErrorComponent = () => {
   );
 };
 
-export default ErrorComponent;
+export default memo(ErrorComponent);

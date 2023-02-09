@@ -32,8 +32,4 @@ const PostLayoutGrid = ({ postList, isLoading }: IPostLayoutProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(PostLayoutGrid, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(PostLayoutGrid);

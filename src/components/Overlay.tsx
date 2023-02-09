@@ -1,8 +1,5 @@
-import classNames from 'classnames';
 import { memo } from 'react';
-import { withErrorBoundary } from 'react-error-boundary';
-
-import ErrorComponent from './ErrorComponent';
+import classNames from 'classnames';
 
 interface IProps {
   toggle?: boolean;
@@ -10,11 +7,7 @@ interface IProps {
   className?: string;
 }
 
-const Overlay = ({
-  toggle,
-  setToggle = () => {},
-  className,
-}: IProps) => {
+const Overlay = ({ toggle, setToggle = () => {}, className }: IProps) => {
   return (
     <div
       className={classNames(
@@ -27,8 +20,4 @@ const Overlay = ({
   );
 };
 
-export default memo(
-  withErrorBoundary(Overlay, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(Overlay);

@@ -5,17 +5,21 @@ import { IUser } from '../typings';
 import { supabase } from '../config/supabase';
 
 export const useGetUserByID = (userID: string) => {
-  return useQuery(['user', { userID }], async () => {
-    const { data, error } = await supabase
-      .from<IUser>('users')
-      .select('*')
-      .eq('id', userID)
-      .single();
+  return useQuery(
+    ['user', { userID }],
+    async () => {
+      const { data, error } = await supabase
+        .from<IUser>('users')
+        .select('*')
+        .eq('id', userID)
+        .single();
 
-    if (error) {
-      toast.error('Lấy thông tin người dùng thất bại!');
-    }
+      if (error) throw error;
 
-    return data;
-  });
+      return data;
+    },
+    {
+      onError: () => toast.error('Lấy thông tin người dùng thất bại!'),
+    },
+  );
 };

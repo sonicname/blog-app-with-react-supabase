@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import SkeletionLoading from '../loading/SkeletionLoading';
 
 const PostItemSkeleton = () => {
@@ -22,4 +23,4 @@ const PostItemSkeleton = () => {
   );
 };
 
-export default PostItemSkeleton;
+export default memo(PostItemSkeleton);
