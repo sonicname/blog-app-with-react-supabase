@@ -19,17 +19,13 @@ const useCreatePost = () => {
 
   return useMutation(
     async ({ author_id, content, description, thumbnail, title }: IUseCreatePost) => {
-      const { error } = await supabase.from<IPost>('posts').insert({
+      await supabase.from<IPost>('posts').insert({
         title,
         thumbnail,
         description,
         content,
         author_id,
       });
-
-      if (error) {
-        throw error;
-      }
     },
     {
       onError: () => {

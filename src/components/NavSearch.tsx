@@ -23,7 +23,7 @@ const NavSearch = () => {
 
   const debouncedVal = useDebounce(keyword, 1000);
 
-  const { isFetching, data } = useSearchPosts(debouncedVal);
+  const { isLoading, data } = useSearchPosts(debouncedVal);
 
   return (
     <div className='relative z-30 flex-1'>
@@ -41,7 +41,7 @@ const NavSearch = () => {
         )}
         ref={resultRef}
       >
-        {isFetching && (
+        {isLoading && (
           <div className='flex items-center justify-center p-2 bg-gray-700 rounded-md bg-opacity-70 lg:p-4'>
             <div className='w-4 h-4 border-4 rounded-full lg:w-6 lg:h-6 border-t-transparent animate-spin' />
           </div>

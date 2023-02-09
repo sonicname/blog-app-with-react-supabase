@@ -19,6 +19,7 @@ const useSearchPosts = (keyword: string) => {
     {
       onError: () => toast.error('Tìm kiếm thất bại!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };
