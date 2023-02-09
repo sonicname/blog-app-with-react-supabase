@@ -1,8 +1,10 @@
 import { memo } from 'react';
+import { withErrorBoundary } from 'react-error-boundary';
 import { Control, DeepRequired, FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
 import Input from './Input';
 import Label from './Label';
+import ErrorComponent from '../ErrorComponent';
 
 interface IProps {
   labelText: string;
@@ -27,4 +29,8 @@ const Field = ({ error, control, labelText, name, placeholder, type }: IProps) =
   );
 };
 
-export default memo(Field);
+export default memo(
+  withErrorBoundary(Field, {
+    FallbackComponent: ErrorComponent,
+  }),
+);

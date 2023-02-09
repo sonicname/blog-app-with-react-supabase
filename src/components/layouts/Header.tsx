@@ -1,13 +1,11 @@
-import { memo, useState } from 'react';
 import classNames from 'classnames';
+import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { withErrorBoundary } from 'react-error-boundary';
 
 import NavItem from '../NavItem';
 import IconMenu from '../IconMenu';
 import Overlay from '../Overlay';
 import NavSearch from '../NavSearch';
-import ErrorComponent from '../ErrorComponent';
 
 import { useAuth } from '../../context/supabase-context';
 
@@ -28,7 +26,7 @@ const Header = () => {
       </NavLink>
       <NavSearch />
       <IconMenu className='w-10 h-10 lg:hidden' onClick={() => setToggle(!toggle)} />
-      <Overlay toggle={toggle} setToggle={setToggle} />
+      {toggle ? <Overlay toggle={toggle} setToggle={setToggle} /> : null}
       <div
         className={classNames(
           'flex gap-x-5 items-center fixed flex-col w-[60%] top-0 bottom-0 justify-between p-4 bg-black text-center -right-full duration-200 lg:static lg:bg-transparent lg:flex-row lg:gap-x-5 lg:max-w-full lg:justify-end z-30',
@@ -44,7 +42,7 @@ const Header = () => {
           )}
         </div>
 
-        {session && (
+        {session ? (
           <div className='flex flex-col lg:gap-x-5 lg:flex-row gap-y-10'>
             <NavItem to={`/profile`}>Tài khoản</NavItem>
             <span
@@ -54,14 +52,10 @@ const Header = () => {
               Đăng xuất
             </span>
           </div>
-        )}
+        ) : null}
       </div>
     </header>
   );
 };
 
-export default memo(
-  withErrorBoundary(Header, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(Header);

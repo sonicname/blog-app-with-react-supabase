@@ -6,7 +6,7 @@ import PostLayoutGrid from '../components/post/PostLayoutGrid';
 import { useGetPosts } from '../hooks/usePost';
 
 const HomePage = () => {
-  const { data: newestPost, isLoading } = useGetPosts(1, 3);
+  const { data: newestPost, isLoading } = useGetPosts(1, 7);
 
   return (
     <CommonLayout>

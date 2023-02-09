@@ -25,8 +25,4 @@ const AuthLayout = ({ children }: IProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(AuthLayout, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(AuthLayout);

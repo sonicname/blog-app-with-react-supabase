@@ -6,7 +6,9 @@ const useChangePage = (slug: string = '', limit?: number) => {
   const query = useQuery();
   const navigate = useNavigate();
 
-  const page = query.get('page') ? parseInt(query.get('page') as string) : 1;
+  const pageQuery = query.get('page');
+
+  const page = pageQuery ? parseInt(pageQuery) : 1;
 
   const changePage = (pageToChange: number) => navigate(`${slug}?page=${pageToChange}`);
   return { page, changePage, limit };

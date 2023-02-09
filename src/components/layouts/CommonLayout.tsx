@@ -26,8 +26,4 @@ const CommonLayout = ({ children, className }: IProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(CommonLayout, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default memo(CommonLayout);
