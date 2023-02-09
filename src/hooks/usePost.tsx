@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { IFullPost } from '../typings';
 import { supabase } from '../config/supabase';
+
 import pagination from '../utils/pagination';
 
 export const useGetPosts = (page: number, limit: number = 7) => {
@@ -24,6 +25,7 @@ export const useGetPosts = (page: number, limit: number = 7) => {
     {
       onError: () => toast.error('Lấy bài viết thất bại!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };
@@ -46,6 +48,7 @@ export const useGetPostById = (id: string) => {
     {
       onError: () => toast.error('Lấy thông tin bài đăng thất bại!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };
@@ -69,6 +72,7 @@ export const useGetPostsByAuthor = (authorID: string, page: number = 1, limit: n
     {
       onError: () => toast.error('Lấy thông tin bài đăng thất bại!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };
@@ -86,6 +90,7 @@ export const useCountPosts = () => {
     {
       onError: () => toast.error('Có lỗi xảy ra khi lấy số lượng bài viết!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };
@@ -106,6 +111,7 @@ export const useCountPostsByAuthor = (authorID: string) => {
     {
       onError: () => toast.error('Có lỗi xảy ra khi lấy số lượng bài viết!'),
       refetchOnWindowFocus: false,
+      staleTime: 2 * 60 * 1_000,
     },
   );
 };

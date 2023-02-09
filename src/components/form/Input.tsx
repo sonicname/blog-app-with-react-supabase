@@ -1,9 +1,5 @@
-import { memo } from 'react';
 import classNames from 'classnames';
 import { Control, useController } from 'react-hook-form';
-import { withErrorBoundary } from 'react-error-boundary';
-
-import ErrorComponent from '../ErrorComponent';
 
 interface IProps {
   type: string;
@@ -32,8 +28,4 @@ const Input = ({ type, control, name, placeholder }: IProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(Input, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default Input;

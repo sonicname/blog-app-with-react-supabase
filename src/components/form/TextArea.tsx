@@ -17,6 +17,7 @@ const TextArea = ({ name, control, row, placeholder }: IProps) => {
     name,
     defaultValue: '',
   });
+
   return (
     <textarea
       {...field}
@@ -27,8 +28,4 @@ const TextArea = ({ name, control, row, placeholder }: IProps) => {
   );
 };
 
-export default memo(
-  withErrorBoundary(TextArea, {
-    FallbackComponent: ErrorComponent,
-  }),
-);
+export default TextArea;
