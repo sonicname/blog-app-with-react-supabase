@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { memo, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { memo, useCallback, useState } from 'react';
 
 import Overlay from '../Overlay';
 import IconMenu from '../IconMenu';
@@ -14,6 +14,8 @@ import logo from '../../../assets/ghost.png';
 const Header = () => {
   const { session, signOut } = useAuth();
   const [toggle, setToggle] = useState(false);
+
+  const handleToggle = useCallback(() => setToggle(false), [toggle]);
 
   return (
     <header className='flex items-center justify-between gap-x-5 lg:gap-x-10'>
@@ -36,17 +38,25 @@ const Header = () => {
         )}
       >
         <div className='flex flex-col gap-y-10 lg:flex-row lg:gap-x-5'>
-          <NavItem to={'/posts'}>Bài viết</NavItem>
+          <NavItem to={'/posts'} handleToggleNavItem={handleToggle}>
+            Bài viết
+          </NavItem>
           {session ? (
-            <NavItem to={'/create'}>Tạo bài viết mới</NavItem>
+            <NavItem to={'/create'} handleToggleNavItem={handleToggle}>
+              Tạo bài viết mới
+            </NavItem>
           ) : (
-            <NavItem to={'/auth/signin'}>Đăng nhập</NavItem>
+            <NavItem to={'/auth/signin'} handleToggleNavItem={handleToggle}>
+              Đăng nhập
+            </NavItem>
           )}
         </div>
 
         {session ? (
           <div className='flex flex-col lg:gap-x-5 lg:flex-row gap-y-10'>
-            <NavItem to={`/profile`}>Tài khoản</NavItem>
+            <NavItem to={`/profile`} handleToggleNavItem={handleToggle}>
+              Tài khoản
+            </NavItem>
             <span
               className='bg-[#8C6DFD] px-[20px] py-[10px] lg:px-[18px] rounded-md text-white font-semibold hover:opacity-75 duration-100 cursor-pointer'
               onClick={() => signOut()}
