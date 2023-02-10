@@ -1,19 +1,28 @@
 import { memo, ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   to: string;
   children: ReactNode;
+  handleToggleNavItem?: () => void;
 }
 
-const NavItem = ({ children, to }: IProps) => {
+const NavItem = ({ children, to, handleToggleNavItem }: IProps) => {
+  const navigate = useNavigate();
+
   return (
-    <NavLink
-      className='bg-[#8C6DFD] px-5 py-3 lg:px-6 rounded-md text-white font-semibold hover:opacity-75 duration-100'
-      to={to}
+    <div
+      className='bg-[#8C6DFD] px-5 py-3 lg:px-6 rounded-md text-white font-semibold hover:opacity-75 duration-100 select-none cursor-pointer'
+      onClick={() => {
+        if (handleToggleNavItem) {
+          handleToggleNavItem();
+        }
+
+        navigate(to);
+      }}
     >
       {children}
-    </NavLink>
+    </div>
   );
 };
 
