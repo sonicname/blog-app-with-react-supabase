@@ -5,8 +5,6 @@ import { createContext, SetStateAction, useContext, useEffect, useState } from '
 
 import { supabase } from '../config/supabase';
 
-import { IUser } from '../typings';
-
 interface IAuthValue {
   email: string;
   password: string;

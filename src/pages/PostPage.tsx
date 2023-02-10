@@ -1,4 +1,3 @@
-import CommonLayout from '../components/layouts/CommonLayout';
 import PostLayoutGrid from '../components/post/PostLayoutGrid';
 import PostPagination from '../components/post/PostPagination';
 
@@ -11,35 +10,24 @@ const PostPage = () => {
   const { data: countPost } = useCountPosts();
 
   return (
-    <CommonLayout>
-      <div className='flex flex-col mt-4 gap-y-5 lg:gap-y-10'>
-        <section className='flex flex-col gap-y-5'>
-          <h2 className='font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-3'>
-            {`Danh sách bài đăng trang ${page}`}
-          </h2>
+    <div className='flex flex-col mt-4 gap-y-5 lg:gap-y-10'>
+      <section className='flex flex-col gap-y-5'>
+        <h2 className='font-semibold text-[16px] lg:text-[24px] flex items-baseline gap-x-3'>
+          {`Danh sách bài đăng trang ${page}`}
+        </h2>
 
-          {postList && postList.length === 0 && (
-            <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
-              Danh sách bài viết trống
-            </h4>
-          )}
+        {postList && postList.length === 0 && (
+          <h4 className='mt-10 mb-10 text-lg font-semibold text-center'>
+            Danh sách bài viết trống
+          </h4>
+        )}
 
-          {postList && postList.length > 0 && (
-            <PostLayoutGrid
-              postList={postList}
-              isLoading={isLoading}
-            />
-          )}
-          {countPost && (
-            <PostPagination
-              perPage={limit}
-              changePage={changePage}
-              count={countPost}
-            />
-          )}
-        </section>
-      </div>
-    </CommonLayout>
+        {postList && postList.length > 0 && (
+          <PostLayoutGrid postList={postList} isLoading={isLoading} />
+        )}
+        {countPost && <PostPagination perPage={limit} changePage={changePage} count={countPost} />}
+      </section>
+    </div>
   );
 };
 

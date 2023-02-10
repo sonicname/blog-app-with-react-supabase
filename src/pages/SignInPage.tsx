@@ -6,7 +6,6 @@ import Button from '../components/Button';
 import Heading from '../components/Heading';
 import Field from '../components/form/Field';
 import SubHeading from '../components/SubHeading';
-import AuthLayout from '../components/layouts/AuthLayout';
 
 import { schema } from '../config/schema';
 import { useAuth } from '../context/supabase-context';
@@ -25,41 +24,39 @@ const SignInPage = () => {
   });
 
   return (
-    <AuthLayout>
-      <div className='max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px] bg-[#1C1C24] rounded-lg'>
-        <Heading content={'Đăng Nhập'}>
-          <SubHeading content={'Chưa có tài khoản?'} hrefText={'Đăng ký ngay'} to={'/signup'} />
-        </Heading>
+    <div className='max-w-[556px] w-full shadow-md px-[30px] lg:px-[50px] py-[20px] lg:py-[63px] bg-[#1C1C24] rounded-lg'>
+      <Heading content={'Đăng Nhập'}>
+        <SubHeading content={'Chưa có tài khoản?'} hrefText={'Đăng ký ngay'} to={'/auth/signup'} />
+      </Heading>
 
-        <form
-          // @ts-ignore
-          onSubmit={handleSubmit(signIn)}
-          className='mt-[20px] flex flex-col gap-y-[20px] lg:gap-y-[20px]'
-        >
-          <Field
-            control={control}
-            error={errors?.email?.message}
-            labelText='Email'
-            name='email'
-            placeholder='Nhập địa chỉ email của bạn'
-            type='email'
-          />
+      <form
+        // @ts-ignore
+        onSubmit={handleSubmit(signIn)}
+        className='mt-[20px] flex flex-col gap-y-[20px] lg:gap-y-[20px]'
+      >
+        <Field
+          control={control}
+          error={errors?.email?.message}
+          labelText='Email'
+          name='email'
+          placeholder='Nhập địa chỉ email của bạn'
+          type='email'
+        />
 
-          <Field
-            control={control}
-            error={errors?.password?.message}
-            labelText='Password'
-            name='password'
-            placeholder='Điền mật khẩu của bạn'
-            type='password'
-          />
+        <Field
+          control={control}
+          error={errors?.password?.message}
+          labelText='Password'
+          name='password'
+          placeholder='Điền mật khẩu của bạn'
+          type='password'
+        />
 
-          <Button className='duration-75 active:scale-90' type={'submit'} disabled={isSubmitting}>
-            Đăng Nhập
-          </Button>
-        </form>
-      </div>
-    </AuthLayout>
+        <Button className='duration-75 active:scale-90' type={'submit'} disabled={isSubmitting}>
+          Đăng Nhập
+        </Button>
+      </form>
+    </div>
   );
 };
 

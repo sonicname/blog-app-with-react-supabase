@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import NavItem from '../NavItem';
+import NavItem from '../nav/NavItem';
 import IconMenu from '../IconMenu';
 import Overlay from '../Overlay';
-import NavSearch from '../NavSearch';
+import NavSearch from '../nav/NavSearch';
 
 import { useAuth } from '../../context/supabase-context';
 
@@ -38,7 +38,7 @@ const Header = () => {
           {session ? (
             <NavItem to={'/create'}>Tạo bài viết mới</NavItem>
           ) : (
-            <NavItem to={'/signin'}>Đăng nhập</NavItem>
+            <NavItem to={'/auth/signin'}>Đăng nhập</NavItem>
           )}
         </div>
 

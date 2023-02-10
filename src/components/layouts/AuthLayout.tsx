@@ -1,13 +1,9 @@
-import { memo, ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { memo } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 import logo from '../../../assets/ghost.png';
 
-interface IProps {
-  children: ReactNode;
-}
-
-const AuthLayout = ({ children }: IProps) => {
+const AuthLayout = () => {
   return (
     <div className='p-6 lg-[40px] relative w-full h-screen flex items-center justify-center'>
       <NavLink to={'/'}>
@@ -17,7 +13,7 @@ const AuthLayout = ({ children }: IProps) => {
           alt='logo blog'
         />
       </NavLink>
-      {children}
+      <Outlet />
     </div>
   );
 };
