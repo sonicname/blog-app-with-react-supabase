@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import NavItem from '../nav/NavItem';
-import IconMenu from '../IconMenu';
 import Overlay from '../Overlay';
+import IconMenu from '../IconMenu';
+import NavItem from '../nav/NavItem';
 import NavSearch from '../nav/NavSearch';
 
 import { useAuth } from '../../context/supabase-context';
@@ -26,7 +26,9 @@ const Header = () => {
       </NavLink>
       <NavSearch />
       <IconMenu className='w-10 h-10 lg:hidden' onClick={() => setToggle(!toggle)} />
+
       {toggle ? <Overlay toggle={toggle} setToggle={setToggle} /> : null}
+
       <div
         className={classNames(
           'flex gap-x-5 items-center fixed flex-col w-[60%] top-0 bottom-0 justify-between p-4 bg-black text-center -right-full duration-200 lg:static lg:bg-transparent lg:flex-row lg:gap-x-5 lg:max-w-full lg:justify-end z-30',

@@ -9,7 +9,7 @@ interface IProps {
 const NavItem = ({ children, to }: IProps) => {
   return (
     <NavLink
-      className='bg-[#8C6DFD] px-[20px] py-[10px] lg:px-[18px] rounded-md text-white font-semibold hover:opacity-75 duration-100'
+      className='bg-[#8C6DFD] px-5 py-3 lg:px-6 rounded-md text-white font-semibold hover:opacity-75 duration-100'
       to={to}
     >
       {children}

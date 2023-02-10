@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { Session } from '@supabase/supabase-js';
-import { createContext, SetStateAction, useContext, useEffect, useState } from 'react';
+import { Session, User } from '@supabase/supabase-js';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { supabase } from '../config/supabase';
 
@@ -69,11 +69,10 @@ export const AuthProvider = (props: any) => {
 
   useEffect(() => {
     setSession(supabase.auth.session());
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (_: any, session: SetStateAction<Session | null>) => {
-        setSession(session);
-      },
-    );
+
+    const { data: listener } = supabase.auth.onAuthStateChange(async (_: any, session) => {
+      setSession(session);
+    });
 
     return () => {
       listener?.unsubscribe();

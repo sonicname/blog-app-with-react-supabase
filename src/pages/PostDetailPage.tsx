@@ -2,10 +2,10 @@ import { memo } from 'react';
 import parser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
 
-import Loading from '../components/loading/Loading';
 import Container from '../components/layouts/Container';
 
 import { useGetPostById } from '../hooks/usePost';
+import LoadingPostDetailSkeleton from '../components/loading/LoadingPostDetailSkeleton';
 
 const PostDetailPage = () => {
   const { postID } = useParams<string>();
@@ -28,7 +28,7 @@ const PostDetailPage = () => {
           <div className='content-box'>{parser(`${postInfo?.content as string}`)}</div>
         </>
       ) : (
-        <Loading />
+        <LoadingPostDetailSkeleton />
       )}
     </Container>
   );

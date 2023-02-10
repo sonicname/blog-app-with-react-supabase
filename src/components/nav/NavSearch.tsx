@@ -41,22 +41,23 @@ const NavSearch = () => {
         )}
         ref={resultRef}
       >
-        {isLoading && (
+        {isLoading ? (
           <div className='flex items-center justify-center p-2 bg-gray-700 rounded-md bg-opacity-70 lg:p-4'>
             <div className='w-4 h-4 border-4 rounded-full lg:w-6 lg:h-6 border-t-transparent animate-spin' />
           </div>
-        )}
+        ) : null}
 
-        {data &&
-          data.map((post) => (
-            <NavLink
-              key={post.id}
-              className='flex items-center justify-between p-2 rounded-md hover:bg-slate-500'
-              to={`/post/${post.id}`}
-            >
-              {post.title}
-            </NavLink>
-          ))}
+        {data
+          ? data.map((post) => (
+              <NavLink
+                key={post.id}
+                className='flex items-center justify-between p-2 rounded-md hover:bg-slate-500'
+                to={`/post/${post.id}`}
+              >
+                {post.title}
+              </NavLink>
+            ))
+          : null}
       </div>
     </div>
   );
