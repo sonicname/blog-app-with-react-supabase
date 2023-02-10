@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '../Button';
 
-import useDeletePost from '../../hooks/useDeletePost';
-
 import { IFullPost } from '../../typings';
+
+import { useDeletePost } from '../../hooks/usePost';
 
 interface IPostTableProps {
   posts: IFullPost[] | null | undefined;
@@ -14,6 +14,7 @@ interface IPostTableProps {
 const PostTable = ({ posts }: IPostTableProps) => {
   const navigate = useNavigate();
   const postDeleteMutation = useDeletePost();
+
   return (
     <>
       {posts ? (

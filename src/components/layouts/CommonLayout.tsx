@@ -1,15 +1,15 @@
+import { memo } from 'react';
 import classNames from 'classnames';
-import { memo, ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
 
 interface IProps {
-  children: ReactNode;
   className?: string;
 }
 
-const CommonLayout = ({ children, className }: IProps) => {
+const CommonLayout = ({ className }: IProps) => {
   return (
     <div
       className={classNames(
@@ -18,7 +18,9 @@ const CommonLayout = ({ children, className }: IProps) => {
       )}
     >
       <Header />
-      <div className='flex-1'>{children}</div>
+      <div className='flex-1'>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

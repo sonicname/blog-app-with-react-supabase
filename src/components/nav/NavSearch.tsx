@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { withErrorBoundary } from 'react-error-boundary';
 import { ChangeEvent, memo, useRef, useState } from 'react';
 
-import ErrorComponent from './ErrorComponent';
+import ErrorComponent from '../ErrorComponent';
 
-import useDebounce from '../hooks/useDebounce';
-import useSearchPosts from '../hooks/useSearchPosts';
-import useOnClickOutside from '../hooks/useOnClickOutSide';
+import useDebounce from '../../hooks/useDebounce';
+import { useSearchPosts } from '../../hooks/usePost';
+import useOnClickOutside from '../../hooks/useOnClickOutSide';
 
 const NavSearch = () => {
   const [show, setShow] = useState(false);
