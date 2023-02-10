@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useQuery from './useQuery';
@@ -10,7 +11,11 @@ const useChangePage = (slug: string = '', limit?: number) => {
 
   const page = pageQuery ? parseInt(pageQuery) : 1;
 
-  const changePage = (pageToChange: number) => navigate(`${slug}?page=${pageToChange}`);
+  const changePage = useCallback(
+    (pageToChange: number) => navigate(`${slug}?page=${pageToChange}`),
+    [slug, limit],
+  );
+
   return { page, changePage, limit };
 };
 
