@@ -11,7 +11,7 @@ const PrivateRouter = ({ children }: IProps) => {
   const { session } = useAuth();
   if (!session || !session.user) return <Navigate to={'/auth/signin'} />;
 
-  return <>{children}</>;
+  return children;
 };
 
 export default PrivateRouter;

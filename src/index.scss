@@ -43,7 +43,6 @@ a {
 .content-box {
   display: flex;
   flex-direction: column;
-  gap: 20px 0;
 
   h1 {
     font-weight: bold;
@@ -71,19 +70,24 @@ a {
     color: #a2a2a8;
     line-height: 24px;
     text-align: justify;
+    margin-bottom: 20px;
   }
 
   img {
     max-width: 100%;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
   }
 
-  pre.highlight {
-    overflow-x: scroll;
+  .highlight {
+    background-color: #08090a;
+    color: #f8f8f2;
+    padding: 8px;
+    overflow-x: auto;
   }
 
-  code {
-    overflow-x: scroll;
+  .highlight__panel {
+    display: none;
   }
 
   th {

@@ -9,9 +9,11 @@ import SubHeading from '../components/SubHeading';
 
 import { schema } from '../config/schema';
 import { useAuth } from '../context/supabase-context';
+import useSupabaseAuth from '../hooks/useSupabaseAuth';
 
 const SignUpPage = () => {
-  const { signUp, session } = useAuth();
+  const { session } = useAuth();
+  const { signUp } = useSupabaseAuth();
   if (session?.user) return <Navigate to={'/'} />;
 
   const {
