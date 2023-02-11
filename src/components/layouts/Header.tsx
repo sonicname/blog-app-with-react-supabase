@@ -1,6 +1,6 @@
+import { memo } from 'react';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { memo, useCallback, useState } from 'react';
 
 import Overlay from '../Overlay';
 import IconMenu from '../IconMenu';
@@ -10,12 +10,11 @@ import NavSearch from '../nav/NavSearch';
 import { useAuth } from '../../context/supabase-context';
 
 import logo from '../../../assets/ghost.png';
+import useToggle from '../../hooks/useToggle';
 
 const Header = () => {
   const { session, signOut } = useAuth();
-  const [toggle, setToggle] = useState(false);
-
-  const handleToggle = useCallback(() => setToggle(false), [toggle]);
+  const { toggle, handleToggle } = useToggle();
 
   return (
     <header className='flex items-center justify-between gap-x-5 lg:gap-x-10'>
@@ -27,9 +26,9 @@ const Header = () => {
         />
       </NavLink>
       <NavSearch />
-      <IconMenu className='w-10 h-10 lg:hidden' onClick={() => setToggle(!toggle)} />
+      <IconMenu className='w-10 h-10 lg:hidden' onClick={() => handleToggle(!toggle)} />
 
-      {toggle ? <Overlay toggle={toggle} setToggle={setToggle} /> : null}
+      {toggle ? <Overlay toggle={toggle} setToggle={() => handleToggle(false)} /> : null}
 
       <div
         className={classNames(
@@ -38,15 +37,15 @@ const Header = () => {
         )}
       >
         <div className='flex flex-col gap-y-10 lg:flex-row lg:gap-x-5'>
-          <NavItem to={'/posts'} handleToggleNavItem={handleToggle}>
+          <NavItem to={'/posts'} handleToggleNavItem={() => handleToggle(false)}>
             Bài viết
           </NavItem>
           {session ? (
-            <NavItem to={'/create'} handleToggleNavItem={handleToggle}>
+            <NavItem to={'/create'} handleToggleNavItem={() => handleToggle(false)}>
               Tạo bài viết mới
             </NavItem>
           ) : (
-            <NavItem to={'/auth/signin'} handleToggleNavItem={handleToggle}>
+            <NavItem to={'/auth/signin'} handleToggleNavItem={() => handleToggle(false)}>
               Đăng nhập
             </NavItem>
           )}
@@ -54,7 +53,7 @@ const Header = () => {
 
         {session ? (
           <div className='flex flex-col lg:gap-x-5 lg:flex-row gap-y-10'>
-            <NavItem to={`/profile`} handleToggleNavItem={handleToggle}>
+            <NavItem to={`/profile`} handleToggleNavItem={() => handleToggle(false)}>
               Tài khoản
             </NavItem>
             <span

@@ -77,10 +77,28 @@ a {
     max-width: 100%;
     object-fit: cover;
   }
-}
 
-pre.highlight {
-  overflow-x: scroll;
+  pre.highlight {
+    overflow-x: scroll;
+  }
+
+  code {
+    overflow-x: scroll;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  td,
+  th {
+    padding: 8px;
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 }
 
 #article-body {
@@ -88,19 +106,6 @@ pre.highlight {
   display: flex;
   flex-direction: column;
   gap: 1.2rem 0;
-}
-
-code {
-  overflow-x: scroll;
-}
-
-th {
-  text-align: left;
-}
-
-td,
-th {
-  padding: 8px;
 }
 
 .skeleton {

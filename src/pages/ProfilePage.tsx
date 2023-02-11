@@ -10,19 +10,23 @@ import { useCountPostsByAuthor, useGetPostsByAuthor, useGetUserByID } from '../h
 
 const ProfilePage = () => {
   const { session } = useAuth();
-  if (!session) return <Navigate to={'/auth/signin'} />;
+  if (!session || !session.user) return <Navigate to={'/auth/signin'} />;
 
   const { changePage, page } = useChangePage(`/profile`);
 
-  const { data: postCount } = useCountPostsByAuthor(session.user?.id as string);
-  const { data: userInfo, isLoading } = useGetUserByID(session.user?.id as string);
-  const { data: userPosts } = useGetPostsByAuthor(session.user?.id as string, page);
+  const userID = session.user.id;
+
+  const { data: postCount } = useCountPostsByAuthor(userID);
+  const { data: userInfo, isLoading } = useGetUserByID(userID);
+  const { data: userPosts } = useGetPostsByAuthor(userID, page);
 
   return (
     <Container className='min-h-full p-4 rounded-lg bg-[#3D3C42]'>
       {userInfo ? (
         <div className='flex flex-col gap-y-5'>
-          <h2 className='font-semibold text-center text-md lg:text-xl'>{userInfo?.username}</h2>
+          <h2 className='font-semibold text-center text-md lg:text-xl'>
+            Bài viết của {userInfo?.username}
+          </h2>
         </div>
       ) : null}
 
