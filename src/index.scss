@@ -43,7 +43,6 @@ a {
 .content-box {
   display: flex;
   flex-direction: column;
-  gap: 20px 0;
 
   h1 {
     font-weight: bold;
@@ -71,16 +70,39 @@ a {
     color: #a2a2a8;
     line-height: 24px;
     text-align: justify;
+    margin-bottom: 20px;
   }
 
   img {
     max-width: 100%;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
   }
-}
 
-pre.highlight {
-  overflow-x: scroll;
+  .highlight {
+    background-color: #08090a;
+    color: #f8f8f2;
+    padding: 8px;
+    overflow-x: auto;
+  }
+
+  .highlight__panel {
+    display: none;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  td,
+  th {
+    padding: 8px;
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 }
 
 #article-body {
@@ -88,19 +110,6 @@ pre.highlight {
   display: flex;
   flex-direction: column;
   gap: 1.2rem 0;
-}
-
-code {
-  overflow-x: scroll;
-}
-
-th {
-  text-align: left;
-}
-
-td,
-th {
-  padding: 8px;
 }
 
 .skeleton {

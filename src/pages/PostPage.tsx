@@ -5,8 +5,8 @@ import useChangePage from '../hooks/useChangePage';
 import { useCountPosts, useGetPosts } from '../hooks/usePost';
 
 const PostPage = () => {
-  const { page, changePage, limit } = useChangePage('/posts');
-  const { data: postList, isLoading } = useGetPosts(page, limit);
+  const { page, changePage } = useChangePage('/posts');
+  const { data: postList, isLoading } = useGetPosts(page);
   const { data: countPost } = useCountPosts();
 
   return (
@@ -24,9 +24,7 @@ const PostPage = () => {
 
         <PostLayoutGrid postList={postList} isLoading={isLoading} />
 
-        {countPost ? (
-          <PostPagination perPage={limit} changePage={changePage} count={countPost} />
-        ) : null}
+        {countPost ? <PostPagination changePage={changePage} count={countPost} /> : null}
       </section>
     </div>
   );
